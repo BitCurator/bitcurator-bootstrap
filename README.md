@@ -1,4 +1,4 @@
-BitCurator: Tools for Digital Forensics Methods and Workflows in Real-World Collecting Institutions
+bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurator Environment
 ---------------------------------------------------------------------------------------------------
 <http://wiki.bitcurator.net>
 
