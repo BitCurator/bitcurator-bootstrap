@@ -6,4 +6,4 @@ bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurat
 
 The bootstrap script is in development. Do not use it in production environments!
 
-
+http://wiki.bitcurator.net/
