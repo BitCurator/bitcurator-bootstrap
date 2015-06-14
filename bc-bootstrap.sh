@@ -1,7 +1,14 @@
 #!/bin/bash -
 
 #
-# Modified for use with BitCurator, post-1.3.7
+# bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurator Environment
+# ----------------------------------------------------------------------------------------------
+# <http://wiki.bitcurator.net>
+#
+# WARNING! The bootstrap script is in development. Do not use it in production environments!
+#
+#
+# Modified from sift-bootstrap for use with BitCurator, post-1.3.7
 #
 
 #===============================================================================
