@@ -633,6 +633,34 @@ install_source_packages() {
         rm hfsutils-3.2.6.tar.gz
         rm -rf hfsutils-3.2.6
 
+  # Install disktype (not packaged for 14.04LTS, use KW fork)
+  echoinfo "BitCurator environment: Building and installing disktype"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/kamwoods/disktype >> $HOME/bitcurator-install.log 2>&1
+        cd disktype
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf disktype
+
+  # Install dumpfloppy (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing dumpfloppy"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone http://offog.org/git/dumpfloppy.git >> $HOME/bitcurator-install.log 2>&1
+        cd dumpfloppy
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf dumpfloppy
+
 }
 
 configure_ubuntu() {
