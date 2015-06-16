@@ -661,6 +661,24 @@ install_source_packages() {
         cd /tmp
         rm -rf dumpfloppy
 
+  # CHECK - DFXML, others from build doc
+  # Remove when completed
+
+  # Install sdhash (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing sdhash"
+	CDIR=$(pwd)
+        cd /tmp
+        wget -q https://github.com/sdhash/sdhash/archive/v3.4.tar.gz
+	tar -zxf v3.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd sdhash-3.4
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf sdhash-3.4
+
 }
 
 configure_ubuntu() {
