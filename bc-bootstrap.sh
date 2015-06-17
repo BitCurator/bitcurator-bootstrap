@@ -5,16 +5,19 @@
 # ----------------------------------------------------------------------------------------------
 # <http://wiki.bitcurator.net>
 #
-# WARNING! The bootstrap script is in development. Do not use it in production environments!
+# This script should be run using Ubuntu 14.04LTS or later. If you are building the
+# environment as a VirtualBox virtual machine, please install the VirtualBox extension pack
+# and reboot prior to running this script.
 #
+# WARNING! The bootstrap script is in development. Do not use it in production environments!
 #
 # Modified from sift-bootstrap for use with BitCurator, post-1.3.7
 #
-
+#
 #===============================================================================
 # vim: softtabstop=4 shiftwidth=4 expandtab fenc=utf-8 spell spelllang=en cc=81
 #===============================================================================
-
+#
 
 #--- FUNCTION ----------------------------------------------------------------
 # NAME: __function_defined
