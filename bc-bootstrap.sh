@@ -312,9 +312,26 @@ mediainfo
 libav-tools 
 plymouth-theme-script 
 mplayer 
-tree"
+tree
+gstreamer0.10-plugins-ugly 
+libxine1-ffmpeg 
+gxine 
+mencoder 
+libdvdread4 
+totem-mozilla 
+icedax 
+tagtool 
+easytag 
+id3tool 
+lame 
+nautilus-script-audio-convert 
+libmad0 
+mpg321 
+libavcodec-extra"
 
-#ubuntu-restricted-extras 
+# ubuntu-restricted-extras 
+# Added to above list. May be removed depending on deployment.
+#
 #gstreamer0.10-plugins-ugly libxine1-ffmpeg gxine mencoder libdvdread4 totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 libavcodec-extra
 
     if [ "$@" = "dev" ]; then
