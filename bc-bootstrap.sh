@@ -901,14 +901,17 @@ configure_ubuntu_bitcurator_vm() {
         #			sudo -u $SUDO_USER ln -s $file /home/$SUDO_USER/Desktop/$base
         #		fi
         #	done
+  
+  echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
 
   echoinfo "BitCurator VM: Setting Desktop background image"
         #cd /usr/share/bitcurator/resources/images
-        gsettings set org.gnome.desktop.background primary-color '#3464A2'
-        gsettings set org.gnome.desktop.background secondary-color '#3464A2'
-        gsettings set org.gnome.desktop.background color-shading-type 'solid'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background primary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
-        gsettings set org.gnome.desktop.background draw-background false && gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/bc400px-1280full.png && gsettings set org.gnome.desktop.background draw-background true
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/bc400px-1280full.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
 
   if [ ! -L /sbin/iscsiadm ]; then
     ln -s /usr/bin/iscsiadm /sbin/iscsiadm
