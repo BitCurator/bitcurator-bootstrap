@@ -905,6 +905,13 @@ configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
 
+
+  echoinfo "BitCurator VM: Setting some useful icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
+        #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop trash-icon-visible true
+        #gsettings set org.gnome.nautilus.desktop network-icon-visible true
+
   echoinfo "BitCurator VM: Setting Desktop background image"
         #cd /usr/share/bitcurator/resources/images
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background primary-color '#3464A2'
