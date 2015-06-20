@@ -307,7 +307,8 @@ libevent-dev
 python-pip 
 python3-pip 
 antiword 
-openssh-server 
+openssh-server
+maven
 mediainfo 
 libav-tools 
 plymouth-theme-script 
@@ -681,6 +682,21 @@ install_source_packages() {
         cd /tmp
         rm -rf dumpfloppy
 
+  # Install bagit (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing bagit"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/LibraryOfCongress/bagit-java >> $HOME/bitcurator-install.log 2>&1
+        cd bagit-java
+        mvn package >> $HOME/bitcurator-install.log 2>&1
+        cd target
+        unzip bagit-4.10.0-SNAPSHOT-bin.zip 2>&1
+        cd bagit-4.10.0-SNAPSHOT
+        # NEED INSTALL INSTRUCTIONS HERE
+	# Now clean up
+        cd /tmp
+        # ???
+
   # CHECK - DFXML, others from build doc
   # Remove when completed
 
@@ -710,33 +726,33 @@ configure_ubuntu() {
   #		chmod g+s /cases
   #	fi
 
-  echoinfo "BitCurator VM: Creating Mount Folders"
-	for dir in usb vss shadow windows_mount e01 aff ewf bde iscsi
-	do
-		if [ ! -d /mnt/$dir ]; then
-			mkdir -p /mnt/$dir
-		fi
-	done
-
-	for NUM in 1 2 3 4 5
-	do
-		if [ ! -d /mnt/windows_mount$NUM ]; then
-			mkdir -p /mnt/windows_mount$NUM
-		fi
-		if [ ! -d /mnt/ewf_mount$NUM ]; then
-			mkdir -p /mnt/ewf_mount$NUM
-		fi
-	done
- 
-	for NUM in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-	do
-		if [ ! -d /mnt/shadow/vss$NUM ]; then
-			mkdir -p /mnt/shadow/vss$NUM
-		fi
-		if [ ! -d /mnt/shadow_mount/vss$NUM ]; then
-			mkdir -p /mnt/shadow_mount/vss$NUM
-		fi
-	done
+  #echoinfo "BitCurator VM: Creating Mount Folders"
+  #	for dir in usb vss shadow windows_mount e01 aff ewf bde iscsi
+  #	do
+  #		if [ ! -d /mnt/$dir ]; then
+  #			mkdir -p /mnt/$dir
+  #		fi
+  #	done
+  #
+  #	for NUM in 1 2 3 4 5
+  #	do
+  #		if [ ! -d /mnt/windows_mount$NUM ]; then
+  #			mkdir -p /mnt/windows_mount$NUM
+  #		fi
+  #		if [ ! -d /mnt/ewf_mount$NUM ]; then
+  #			mkdir -p /mnt/ewf_mount$NUM
+  #		fi
+  #	done
+  # 
+  #	for NUM in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+  #	do
+  #		if [ ! -d /mnt/shadow/vss$NUM ]; then
+  #			mkdir -p /mnt/shadow/vss$NUM
+  #		fi
+  #		if [ ! -d /mnt/shadow_mount/vss$NUM ]; then
+  #			mkdir -p /mnt/shadow_mount/vss$NUM
+  #		fi
+  #	done
 
   echoinfo "BitCurator VM: Setting up symlinks to useful scripts"
   if [ ! -L /usr/bin/vol.py ] && [ ! -e /usr/bin/vol.py ]; then
