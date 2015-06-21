@@ -827,7 +827,11 @@ configure_ubuntu_bitcurator_vm() {
 #
 #  chmod 775 /usr/share/regripper/rip.pl
 #  chmod -R 755 /usr/share/regripper/plugins
-    
+   
+  echoinfo "BitCurator VM: Fixing i2c_piix4 boot error:"
+        # Edit /etc/modprobe.d/blacklist.conf
+        # Add line: blacklist i2c_piix4
+ 
   echoinfo "BitCurator VM: Setting noclobber for $SUDO_USER"
 	if ! grep -i "set -o noclobber" $HOME/.bashrc > /dev/null 2>&1
 	then
