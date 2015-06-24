@@ -1011,7 +1011,8 @@ if [ $ARCH != "64" ]; then
     exit 2
 fi
 
-if [ $VER != "12.04" ] && [ $VER != "14.04" ]; then
+#if [ $VER != "12.04" ] && [ $VER != "14.04" ]; then
+if [ $VER != "14.04" ]; then
     echo "BitCurator is only installable on Ubuntu 14.04 at this time."
     exit 3
 fi
