@@ -462,6 +462,8 @@ install_bitcurator_files() {
 	fi
         # We'll be transfering desktop-folders contents later...
         cp -r /tmp/bitcurator/env/desktop-folders /usr/share/bitcurator/resources
+        # We'll also be transfering plymouth contents later...
+        cp -r /tmp/bitcurator/env/lib/plymouth /usr/share/bitcurator/resources
  
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
@@ -868,6 +870,15 @@ configure_ubuntu_bitcurator_vm() {
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnvLogo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
+
+  echoinfo "BitCurator VM: Updating plymouth theme"
+        cp -r /usr/share/bitcurator/resources/plymouth/themes/* /lib/plymouth/themes/
+        echoinfo "CHECK ME"
+        apt-get install plymouth-theme-script
+        update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
+        update-alternatives --config default.plymouth
+        update-intramfs -u
+
 
   if [ ! -L /sbin/iscsiadm ]; then
     ln -s /usr/bin/iscsiadm /sbin/iscsiadm
