@@ -667,10 +667,9 @@ install_source_packages() {
 	CDIR=$(pwd)
         cd /tmp
         git clone https://github.com/kamwoods/disktype >> $HOME/bitcurator-install.log 2>&1
-        cd disktype
-        ./configure >> $HOME/bitcurator-install.log 2>&1
+        cd disktype/src
         make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
+        cp disktype /usr/local/bin
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
