@@ -452,6 +452,11 @@ install_bitcurator_files() {
         cp -r bitcurator /usr/share/icons
         cd /tmp/bitcurator/env/usr/share/pixmaps
         cp -r * /usr/share/pixmaps
+  
+  echoinfo "BitCurator environment: Updating grub configuration"
+        cd /tmp/bitcurator/env/etc/default
+        cp grub /etc/default/grub
+        update-grub
  
   echoinfo "BitCurator environment: Moving desktop support files to /usr/share/bitcurator/resources"
         if [ ! -d /usr/share/bitcurator ]; then
