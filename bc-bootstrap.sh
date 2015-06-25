@@ -867,7 +867,7 @@ configure_ubuntu_bitcurator_vm() {
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnvLogo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
 
   if [ ! -L /sbin/iscsiadm ]; then
     ln -s /usr/bin/iscsiadm /sbin/iscsiadm
@@ -940,7 +940,7 @@ complete_message_skin() {
 UPGRADE_ONLY=0
 CONFIGURE_ONLY=0
 SKIN=0
-INSTALL=1
+INSTALL=0
 YESTOALL=0
 
 OS=$(lsb_release -si)
@@ -1051,7 +1051,7 @@ echoinfo "Version: $VER"
 
 if [ "$SKIN" -eq 1 ] && [ "$YESTOALL" -eq 0 ]; then
     echo
-    echo "You have chosen to apply the BitCurator skin to your ubuntu system."
+    echo "You have chosen to apply the BitCurator skin to the Ubuntu system."
     echo 
     echo "You did not choose to say YES to all, so we are going to exit."
     echo
