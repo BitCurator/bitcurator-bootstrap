@@ -334,6 +334,7 @@ libavcodec-extra"
 # Added to above list. May be removed depending on deployment.
 #
 #gstreamer0.10-plugins-ugly libxine1-ffmpeg gxine mencoder libdvdread4 totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 libavcodec-extra
+#
 
     if [ "$@" = "dev" ]; then
         packages="$packages"
@@ -733,26 +734,6 @@ configure_ubuntu() {
   #			mkdir -p /mnt/$dir
   #		fi
   #	done
-  #
-  #	for NUM in 1 2 3 4 5
-  #	do
-  #		if [ ! -d /mnt/windows_mount$NUM ]; then
-  #			mkdir -p /mnt/windows_mount$NUM
-  #		fi
-  #		if [ ! -d /mnt/ewf_mount$NUM ]; then
-  #			mkdir -p /mnt/ewf_mount$NUM
-  #		fi
-  #	done
-  # 
-  #	for NUM in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-  #	do
-  #		if [ ! -d /mnt/shadow/vss$NUM ]; then
-  #			mkdir -p /mnt/shadow/vss$NUM
-  #		fi
-  #		if [ ! -d /mnt/shadow_mount/vss$NUM ]; then
-  #			mkdir -p /mnt/shadow_mount/vss$NUM
-  #		fi
-  #	done
 
   echoinfo "BitCurator VM: Setting up symlinks to useful scripts"
   if [ ! -L /usr/bin/vol.py ] && [ ! -e /usr/bin/vol.py ]; then
@@ -768,26 +749,12 @@ configure_ubuntu() {
 		ln -s /usr/bin/ewfmount /usr/bin/mount_ewf.py
 	fi
 
-#  # Fix for https://github.com/sans-dfir/sift/issues/10
-#  if [ ! -L /usr/bin/icat-sleuthkit ] && [ ! -e /usr/bin/icat-sleuthkit ]; then
-#    ln -s /usr/bin/icat /usr/bin/icat-sleuthkit 
-#  fi
-#
-#  # Fix for https://github.com/sans-dfir/sift/issues/23
-#  if [ ! -L /usr/local/bin/l2t_process ] && [ ! -e /usr/local/bin/l2t_process ]; then
-#    ln -s /usr/bin/l2t_process_old.pl /usr/local/bin/l2t_process
-#  fi
-#
 #  if [ ! -L /usr/local/etc/foremost.conf ]; then
 #    ln -s /etc/foremost.conf /usr/local/etc/foremost.conf
 #  fi
-#
-#  # Fix for https://github.com/sans-dfir/sift/issues/41
-#  if [ ! -L /usr/local/bin/mactime-sleuthkit ] && [ ! -e /usr/local/bin/mactime-sleuthkit ]; then
-#    ln -s /usr/bin/mactime /usr/local/bin/mactime-sleuthkit
-#  fi
-#
 #  sed -i "s/APT::Periodic::Update-Package-Lists \"1\"/APT::Periodic::Update-Package-Lists \"0\"/g" /etc/apt/apt.conf.d/10periodic
+
+  echoinfo "BitCurator VM: Finished basic configuration"
 }
 
 # Global: Ubuntu BitCurator VM Configuration Function
@@ -869,34 +836,12 @@ configure_ubuntu_bitcurator_vm() {
 
   echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
 
-        files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
-        directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
+        #files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
+        #directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
 
-        # Process desktop directories - FINISH ME!
-        echo "$directories" | while read LINK_OR_DIR; do
-            echo "$LINK_OR_DIR"
-
-            # Create desktop dirs if they don't already exist
-            if [ -d "$LINK_OR_DIR" ]; then 
-              if [ -L "$LINK_OR_DIR" ]; then
-                # It is a symlink!
-                # Symbolic link specific commands go here.
-                #rm "$LINK_OR_DIR"
-                echo "$LINK_OR_DIR"
-              else
-                # It's a directory!
-                # Directory command goes here.
-                #rmdir "$LINK_OR_DIR"
-                echo "$LINK_OR_DIR"
-              fi
-            fi
-        done
-
-        # Process desktop files - FINISH ME!
-        echo "Count: $(echo -n "$files" | wc -l)"
-        echo "$files" | while read file; do
-            echo "$file"
-        done
+        # Copy over necessary directories and files without clobbering
+        # This will need to be modified to accommodate changes to existing files!
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
 
         #	for file in /usr/share/bitcurator/resources/*.pdf
         #	do
@@ -942,7 +887,7 @@ configure_ubuntu_bitcurator_vm() {
 # 14.04 BitCurator VM Configuration Function
 configure_ubuntu_14.04_bitcurator_vm() {
 
-  echoinfo "More config needed here..."
+  echoinfo "BitCurator VM: More config needed here..."
 
 #  sudo -u $SUDO_USER gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'application://gnome-screenshot.desktop', 'application://gcalctool.desktop', 'application://bless.desktop', 'application://autopsy.desktop', 'application://wireshark.desktop']" >> $HOME/bitcurator-install.log 2>&1
 
@@ -971,6 +916,7 @@ configure_ubuntu_14.04_bitcurator_vm() {
   # Setup the login background image
   #cp /usr/share/sift/images/forensics_blue.jpg /usr/share/backgrounds/warty-final-ubuntu.png
   
+  echoinfo "BitCurator VM: Fixing permissions in user's home directory"
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
 }
 
@@ -1074,9 +1020,9 @@ if [ "$UPGRADE_ONLY" -eq 1 ]; then
   install_ubuntu_${VER}_packages $ITYPE || echoerror "Updating Packages Failed"
   install_ubuntu_${VER}_pip_packages $ITYPE || echoerror "Updating Python Packages Failed"
   install_perl_modules || echoerror "Updating Perl Packages Failed"
-#  install_kibana || echoerror "Installing/Updating Kibana Failed"
   install_bitcurator_files || echoerror "Installing/Updating BitCurator Files Failed"
   install_source_packages || echoerror "Installing/Updating BitCurator Source Packages Failed"
+  #install_kibana || echoerror "Installing/Updating Kibana Failed"
 
   echo ""
   echoinfo "BitCurator Upgrade Complete"
