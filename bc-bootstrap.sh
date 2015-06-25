@@ -183,9 +183,9 @@ install_ubuntu_14.04_deps() {
     add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding Guymager Repository"
-    wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list     
-    wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add -
-    apt-get update
+    wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
+    wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
+    apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
     #apt-get install guymager-beta
 
     echoinfo "Adding BitCurator Repository: $@"
