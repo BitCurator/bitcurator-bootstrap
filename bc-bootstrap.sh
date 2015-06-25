@@ -99,7 +99,7 @@ __apt_get_upgrade_noinput() {
 #   DESCRIPTION:  (DRY)
 #-------------------------------------------------------------------------------
 __pip_install_noinput() {
-    pip install --upgrade $@; return $?
+    pip3 install --upgrade $@; return $?
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
@@ -107,7 +107,7 @@ __pip_install_noinput() {
 #   DESCRIPTION:  (DRY)
 #-------------------------------------------------------------------------------
 __pip_pre_install_noinput() {
-    pip install --pre --upgrade $@; return $?
+    pip3 install --pre --upgrade $@; return $?
 }
 
 __check_apt_lock() {
