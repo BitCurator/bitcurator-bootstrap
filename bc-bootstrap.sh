@@ -874,11 +874,14 @@ configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Updating plymouth theme"
         cp -r /usr/share/bitcurator/resources/plymouth/themes/* /lib/plymouth/themes/
         echoinfo "CHECK ME"
+        # Already installed in initial setup
         apt-get install plymouth-theme-script
         update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
         update-alternatives --config default.plymouth
-        update-intramfs -u
-
+        update-initramfs -u
+  
+  # To fix: piix4_smbus
+  #         rapl_domains no package found
 
   if [ ! -L /sbin/iscsiadm ]; then
     ln -s /usr/bin/iscsiadm /sbin/iscsiadm
