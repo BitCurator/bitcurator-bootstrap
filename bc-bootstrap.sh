@@ -780,6 +780,19 @@ install_source_packages() {
         cd /tmp
         rm -rf ssdeep-2.13
         rm ssdeep-2.13.tar.gz
+  
+  # Install openpyxl (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing openpyxl"
+	CDIR=$(pwd)
+        cd /tmp
+        hg clone https://bitbucket.org/openpyxl/openpyxl
+        cd openpyxl
+        python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
+        python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf openpyxl
 
 }
 
