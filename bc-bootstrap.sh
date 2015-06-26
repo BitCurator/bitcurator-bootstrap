@@ -691,13 +691,14 @@ install_source_packages() {
 
   # Install bagit (not packaged for 14.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing bagit"
+        echoinfo "FIX ME"
 	CDIR=$(pwd)
         cd /tmp
         git clone https://github.com/LibraryOfCongress/bagit-java >> $HOME/bitcurator-install.log 2>&1
         cd bagit-java
         mvn package >> $HOME/bitcurator-install.log 2>&1
         cd target
-        unzip bagit-4.10.0-SNAPSHOT-bin.zip 2>&1
+        unzip bagit-4.10.0-SNAPSHOT-bin.zip >> $HOME/bitcurator-install.log 2>&1
         cd bagit-4.10.0-SNAPSHOT
         # NEED INSTALL INSTRUCTIONS HERE
 	# Now clean up
