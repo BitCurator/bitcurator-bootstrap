@@ -736,6 +736,18 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
         rm -rf hashdeep
+  
+  # Install pyExifToolGUI (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing pyExifToolGUI"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/hvdwolf/pyExifToolGUI >> $HOME/bitcurator-install.log 2>&1
+        cd pyExifToolGUI
+        sudo ./install_remove.py install
+        ldconfig
+	# Now clean up
+        cd /tmp
+        rm -rf pyExifToolGUI
 
 }
 
