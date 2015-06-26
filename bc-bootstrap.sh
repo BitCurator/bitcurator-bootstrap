@@ -743,8 +743,8 @@ install_source_packages() {
         cd /tmp
         git clone https://github.com/hvdwolf/pyExifToolGUI >> $HOME/bitcurator-install.log 2>&1
         cd pyExifToolGUI
-        sudo ./install_remove.py install
-        ldconfig
+        sudo ./install_remove.py install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
         rm -rf pyExifToolGUI
@@ -753,17 +753,33 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing testdisk and photorec"
 	CDIR=$(pwd)
         cd /tmp
-        wget -q http://www.cgsecurity.org/testdisk-7.0.tar.bz2
-        bunzip2 testdisk-7.0.tar.bz2
-        tar xvf testdisk-7.0.tar
+        wget -q http://www.cgsecurity.org/testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
+        bunzip2 testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
+        tar xvf testdisk-7.0.tar >> $HOME/bitcurator-install.log 2>&1
         cd testdisk-7.0
-        ./configure
-        make
-        make install
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
         rm -rf testdisk-7.0
+  
+  # Install ssdeep (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing ssdeep"
+	CDIR=$(pwd)
+        cd /tmp
+        wget -q http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
+        tar zxvf ssdeep-2.13.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd ssdeep-2.13
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf ssdeep-2.13
+        rm ssdeep-2.13.tar.gz
 
 }
 
