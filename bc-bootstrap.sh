@@ -638,7 +638,7 @@ install_source_packages() {
 	git clone --recursive https://github.com/simsong/bulk_extractor /tmp/bulk_extractor >> $HOME/bitcurator-install.log 2>&1
 	cd /tmp/bulk_extractor
         chmod 755 bootstrap.sh
-        ./bootstrap.sh >> $HOME/bitcurator-install.log 1>&1
+        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
         ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
