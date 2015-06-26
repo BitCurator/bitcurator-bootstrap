@@ -721,6 +721,21 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
         rm -rf sdhash-3.4
+  
+  # Install md5deep (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing md5deep"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/jessek/hashdeep >> $HOME/bitcurator-install.log 2>&1
+        cd hashdeep
+        ./bootstrap.sh
+        ./configure
+        make
+        make install
+        ldconfig
+	# Now clean up
+        cd /tmp
+        rm -rf hashdeep
 
 }
 
