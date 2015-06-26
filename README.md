@@ -25,6 +25,12 @@ sudo ./bc-bootstrap.sh -s -i -y
 This will tell the script to skin the environment, install all packages, and continue
 without prompting the user (even if failures are encountered).
 
+# Time to build
+
+The BitCurator environment depends on hundreds of libraries and software tools, some of
+which must be compiled from source. Be patient! For reference, the build process takes
+nearly 45 minutes on a circa-2015 Macbook Pro.
+
 # WARNING!
 
 The bootstrap script is in development. Do not use it in production environments!
