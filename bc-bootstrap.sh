@@ -749,6 +749,22 @@ install_source_packages() {
         cd /tmp
         rm -rf pyExifToolGUI
 
+  # Install testdisk and photorec (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing testdisk and photorec"
+	CDIR=$(pwd)
+        cd /tmp
+        wget -q http://www.cgsecurity.org/testdisk-7.0.tar.bz2
+        bunzip2 testdisk-7.0.tar.bz2
+        tar xvf testdisk-7.0.tar
+        cd testdisk-7.0
+        ./configure
+        make
+        make install
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf testdisk-7.0
+
 }
 
 configure_ubuntu() {
