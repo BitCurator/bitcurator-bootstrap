@@ -427,6 +427,11 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Moving BitCurator configuration files to /etc/bitcurator"
         cd /tmp/bitcurator/env/etc
         cp -r bitcurator /etc
+  
+  echoinfo "BitCurator environment: Moving BitCurator sudoers file to /etc/sudoers"
+        cd /tmp/bitcurator/env/etc
+        cp sudoers /etc
+        chmod 440 /etc/sudoers
 
   echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
         cd /tmp/bitcurator/env/.config
