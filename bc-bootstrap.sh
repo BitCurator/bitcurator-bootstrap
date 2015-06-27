@@ -435,12 +435,12 @@ install_bitcurator_files() {
 
   echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
         cd /tmp/bitcurator/env/.config
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
         chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
   
   echoinfo "BitCurator environment: Moving BitCurator nautilus files to $HOME/.local/share/nautilus/"
         cd /tmp/bitcurator/env/.local/share/nautilus
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing scripts $HOME/.local/share/nautilus
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing scripts $HOME/.local/share/nautilus >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
         cd /tmp/bitcurator/env/etc
