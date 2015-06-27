@@ -583,13 +583,14 @@ install_source_packages() {
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	#bash install.sh >> $HOME/bitcurator-install.log 2>&1
-  echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
-        cd framework
-        ./bootstrap >> $HOME/bitcurator-install.log 2>&1
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make -s >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
+  # NOTE: Framework is not currently needed. Maybe in a future version.
+  #echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
+  #      cd framework
+  #      ./bootstrap >> $HOME/bitcurator-install.log 2>&1
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make -s >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
         rm -rf sleuthkit
