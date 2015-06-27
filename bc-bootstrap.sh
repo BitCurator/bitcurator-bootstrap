@@ -428,6 +428,12 @@ install_bitcurator_files() {
         cd /tmp/bitcurator/env/etc
         cp -r bitcurator /etc
 
+  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
+        cd /tmp/bitcurator/env/.config
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/
+        chmod 755 $HOME/.config/autostart/bc_policyapp.py.desktop
+
+
   echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
         cd /tmp/bitcurator/env/etc
         cp cron.weekly/fstrim /etc/cron.weekly/fstrim
