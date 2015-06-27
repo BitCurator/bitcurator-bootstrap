@@ -549,6 +549,13 @@ install_source_packages() {
         cd /tmp
         rm -rf AFFLIBv3
 
+  # Pull DFXML tools from GitHub. No installer for now, place in /usr/share
+  echoinfo "BitCurator environment: Adding DFXML tools and libraries"
+	CDIR=$(pwd)
+	git clone https://github.com/simsong/dfxml /usr/share/dfxml >> $HOME/bitcurator-install.log 2>&1
+	# No cleanup needed
+        cd /tmp
+
   # Install POCO
   echoinfo "BitCurator environment: Building and installing POCO C++ libraries"
   echoinfo " -- Please be patient. This may take several minutes..."
