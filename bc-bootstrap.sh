@@ -936,6 +936,10 @@ configure_ubuntu_bitcurator_vm() {
         # This will need to be modified to accommodate changes to existing files!
         sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
 
+  echoinfo "BitCurator VM: Symlinking media directory"
+        cd /home/$SUDO_USER/Desktop
+        sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
+
         #	for file in /usr/share/bitcurator/resources/*.pdf
         #	do
         #		base=`basename $file`
