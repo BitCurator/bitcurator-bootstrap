@@ -772,6 +772,11 @@ install_source_packages() {
         git clone https://github.com/hvdwolf/pyExifToolGUI >> $HOME/bitcurator-install.log 2>&1
         cd pyExifToolGUI
         ./install_remove.py install >> $HOME/bitcurator-install.log 2>&1
+        # pyExifToolGUI doesn't always create the .pyexiftoolgui direcotry needed to
+        # run. Check and create manually, just in case.
+        if [ ! -d $HOME/.pyexiftoolgui ]; then
+            mkdir -p $HOME/.pyexiftoolgui
+        fi
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
