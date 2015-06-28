@@ -328,7 +328,15 @@ lame
 nautilus-script-audio-convert 
 libmad0 
 mpg321 
-libavcodec-extra"
+libavcodec-extra
+squashfs-tools 
+casper 
+libdebian-installer4 
+ubiquity-frontend-debconf 
+user-setup 
+discover 
+xresprobe 
+aufs-tools"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -486,6 +494,9 @@ install_bitcurator_files() {
  
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
+  
+  echoinfo "BitCurator environment: Installing LiveCD imager"
+        dpkg -i /tmp/bitcurator/livecd/blacklabimager15.deb
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
@@ -670,8 +681,14 @@ install_source_packages() {
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator environment: Moving identify_filenames and bulk_extractor_reader to /usr/share/dfxml/python"
+        cp python/identify_filenames.py /usr/share/dfxml/python
+        chmod 755 /usr/share/dfxml/python/identify_filenames.py
+        cp python/bulk_extractor_reader.py /usr/share/dfxml/python
+        chmod 755 /usr/share/dfxml/python/bulk_extractor_reader.py
         # Now clean up
-        # KEEP FOR TIME BEING	
+        cd /tmp
+        rm -rf bulk_extractor
 
   # Install HFSUtils (not packaged for 14.04LTS)
   echoinfo "BitCurator environment: Building and installing hfsutils"
@@ -688,6 +705,20 @@ install_source_packages() {
         cd /tmp
         rm hfsutils-3.2.6.tar.gz
         rm -rf hfsutils-3.2.6
+  
+  # Install HFS Explorer (not packaged for 14.04LTS)
+  echoinfo "BitCurator environment: Building and installing HFS Explorer"
+	CDIR=$(pwd)
+        cd /tmp
+        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23/hfsexplorer-0.23-bin.zip
+        mkdir /usr/share/hfsexplorer
+        mv hfsexplorer-0.23-bin.zip /usr/share/hfsexplorer
+        cd /usr/share/hfsexplorer
+	unzip -zxf hfsexplorer-0.23-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        rm hfsexplorer-0.23-bin.zip
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
 
   # Install disktype (not packaged for 14.04LTS, use KW fork)
   echoinfo "BitCurator environment: Building and installing disktype"
