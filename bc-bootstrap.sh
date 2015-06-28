@@ -749,7 +749,7 @@ install_source_packages() {
 
   # Install bagit (not packaged for 14.04LTS, use author source)
   # Bagit doesn't have an installer, and is weirdly packaged. For now,
-  # put it in a .bagit direcotry in $HOME
+  # put it in a .bagit directory in $HOME
   echoinfo "BitCurator environment: Building and installing bagit"
 	CDIR=$(pwd)
         cd $HOME
@@ -766,6 +766,21 @@ install_source_packages() {
         rm -rf bagit-java
         cd /tmp
         # Check me
+  
+  # Install loc-bagger (not packaged for 14.04LTS, use author source)
+  # Bagger doesn't have an installer, and is weirdly packaged. For now,
+  # put it in a .bagger directory in $HOME
+  echoinfo "BitCurator environment: Building and installing bagit"
+	CDIR=$(pwd)
+        cd $HOME
+        sudo -u $SUDO_USER mkdir .bagger
+        cd .bagger
+        sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.1.3
+	# Now clean up
+        cd $HOME/.bagger
+        rm bagger-2.1.3.zip
+        cd /tmp
 
   # Install sdhash (not packaged for 14.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
