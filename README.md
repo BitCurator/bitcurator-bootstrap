@@ -25,6 +25,14 @@ sudo ./bc-bootstrap.sh -s -i -y
 This will tell the script to skin the environment, install all packages, and continue
 without prompting the user (even if failures are encountered).
 
+The script requires one interaction from the user (near the end of the build) to
+select the correct Plymouth theme to "skin" then environment for BitCurator. When
+you see the line:
+
+"There are 4 choices for the alternative default.plymouth (providing /lib/plymouth/themes/default.plymouth)."
+
+and a list of choices, type the "1" key and hit enter. The script should now complete.
+
 # Upgarding existing BitCurator VMs or Installs
 
 More info on this soon...
