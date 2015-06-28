@@ -583,7 +583,6 @@ install_source_packages() {
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
-	#bash install.sh >> $HOME/bitcurator-install.log 2>&1
   # NOTE: Framework is not currently needed. Maybe in a future version.
   #echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
   #      cd framework
@@ -718,23 +717,24 @@ install_source_packages() {
         rm -rf dumpfloppy
 
   # Install bagit (not packaged for 14.04LTS, use author source)
+  # Bagit doesn't have an installer, and is weirdly packaged. For now,
+  # put it in a .bagit direcotry in $HOME
   echoinfo "BitCurator environment: Building and installing bagit"
-        echoinfo "FIX ME"
 	CDIR=$(pwd)
-        cd /tmp
-        git clone https://github.com/LibraryOfCongress/bagit-java >> $HOME/bitcurator-install.log 2>&1
+        cd $HOME
+        sudo -u $SUDO_USER mkdir .bagit
+        cd .bagit
+        sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagit-java >> $HOME/bitcurator-install.log 2>&1
         cd bagit-java
-        mvn package >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mvn package >> $HOME/bitcurator-install.log 2>&1
         cd target
-        unzip bagit-4.10.0-SNAPSHOT-bin.zip >> $HOME/bitcurator-install.log 2>&1
-        cd bagit-4.10.0-SNAPSHOT
-        # NEED INSTALL INSTRUCTIONS HERE
+        sudo -u $SUDO_USER unzip bagit-4.10.0-SNAPSHOT-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagit-4.10.0-SNAPSHOT $HOME/.bagit/bagit-4.10.0 >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
+        cd $HOME/.bagit
+        rm -rf bagit-java
         cd /tmp
-        # ???
-
-  # CHECK - DFXML, others from build doc
-  # Remove when completed
+        # Check me
 
   # Install sdhash (not packaged for 14.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
@@ -827,6 +827,18 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
         rm -rf openpyxl
+
+  # Install FIDO (not packaged for 14.04LTS, use openpreserve source)
+  echoinfo "BitCurator environment: Building and installing FIDO"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/openpreserve/fido >> $HOME/bitcurator-install.log 2>&1
+        cd fido
+        python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
+        python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf fido
 
 }
 
