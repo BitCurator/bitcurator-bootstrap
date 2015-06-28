@@ -757,10 +757,10 @@ install_source_packages() {
         cd /tmp
         git clone https://github.com/jessek/hashdeep >> $HOME/bitcurator-install.log 2>&1
         cd hashdeep
-        ./bootstrap.sh >> $HOME/bicurator-install.log 2>&1
-        ./configure >> $HOME/bicurator-install.log 2>&1
-        make >> $HOME/bicurator-install.log 2>&1
-        make install >> $HOME/bicurator-install.log 2>&1
+        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig
 	# Now clean up
         cd /tmp
