@@ -840,6 +840,16 @@ install_source_packages() {
         cd /tmp
         rm -rf fido
 
+  # Install FITS (not packaged for 14.04LTS, use Harvard GitHub source)
+  echoinfo "BitCurator environment: Building and installing FITS"
+	CDIR=$(pwd)
+        cd $HOME
+        sudo -u $SUDO_USER mkdir .fits
+        cd .fits
+        sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
+	# No cleanup needed
+        cd /tmp
+
 }
 
 configure_ubuntu() {
