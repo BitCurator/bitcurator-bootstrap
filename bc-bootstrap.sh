@@ -1075,6 +1075,10 @@ configure_ubuntu_bitcurator_vm() {
         echo 'vm.swappiness=10' >> /etc/sysctl.conf
         echo '# Improve cache management' >> /etc/sysctl.conf
         echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
+  
+  echoinfo "BitCurator VM: Reenable AffLib for Guymager"
+        # NOTE! The spaces matter here!
+        sed -i 's/AffEnabled              = false/AffEnabled              = TRUE/' /etc/guymager/guymager.cfg
 
   # To fix: piix4_smbus
   #         rapl_domains no package found
