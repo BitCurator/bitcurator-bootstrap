@@ -768,7 +768,7 @@ install_source_packages() {
   # Install loc-bagger (not packaged for 14.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
-  echoinfo "BitCurator environment: Building and installing bagit"
+  echoinfo "BitCurator environment: Building and installing bagger"
 	CDIR=$(pwd)
         cd $HOME
         sudo -u $SUDO_USER mkdir .bagger
