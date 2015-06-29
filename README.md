@@ -33,20 +33,20 @@ you see the line:
 
 and a list of choices, type the "1" key and hit enter. The script should now complete.
 
-# Upgarding existing BitCurator VMs or Installs
+# Upgrading existing BitCurator VMs or Installs
 
-More info on this soon...
+More info on this soon.
 
 # Additional Notes
 
 The BitCurator environment depends on hundreds of libraries and software tools, some of
 which must be compiled from source. Be patient! For reference, the build process takes
-nearly 45 minutes on a circa-2015 Macbook Pro.
+approximately 45 minutes on a Core i7 machine with an SSD.
 
-# WARNING!
+# WARNINGS
 
-The bootstrap script is in active development. We recommend that you do not use it to upgrade
-production environments at this time.
+The bootstrap script is in active development. Do not use this script to upgrade or modify
+any BitCurator environment with release number 1.3.7 or prior.
 
 For general project information, please visit:
 
