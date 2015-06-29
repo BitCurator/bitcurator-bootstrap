@@ -1,0 +1,10 @@
+Postinstall Guidelines for Preparing the BitCurator Environment
+---------------------------------------------------------------
+Additional optional manual steps:
+- Rearrange desktop icons for LiveCD/VM release
+- Update theme to "Radiance" (better QT menu visuals)
+- Disable screenlock
+- Disable online search results
+- Adjust terminal settings (font size, window size)
+- Adjust user groups and permissions in "Users and Groups"
+
