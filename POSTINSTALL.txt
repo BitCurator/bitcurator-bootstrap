@@ -7,4 +7,5 @@ Additional optional manual steps:
 - Disable online search results
 - Adjust terminal settings (font size, window size)
 - Adjust user groups and permissions in "Users and Groups"
-
+- Add usb_storage to end of /etc/modules and remove any duplicate entries
+- Remove all previous kernels
