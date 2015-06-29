@@ -957,7 +957,7 @@ configure_ubuntu_bitcurator_vm() {
   #echoinfo "BitCurator VM: Setting Timezone to UTC" >> $HOME/bitcurator-install.log 2>&1
   #echo "Etc/UTC" > /etc/timezone >> $HOME/bitcurator-install.log 2>&1
     
-  #echoinfo "SIFT VM: Fixing Regripper Files"
+  #echoinfo "BitCurator VM: Fixing Regripper Files"
 #	# Make sure to remove all ^M from regripper plugins
 #	# Not sure why they are there in the first place ...
 #	dos2unix -ascii /usr/share/regripper/* >> $HOME/sift-install.log 2>&1
@@ -1062,6 +1062,12 @@ configure_ubuntu_bitcurator_vm() {
   
   echoinfo "BitCurator VM: Adding primary user to vboxsf group"
         usermod -a -G vboxsf $SUDO_USER
+
+  echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
 
   # To fix: piix4_smbus
   #         rapl_domains no package found
