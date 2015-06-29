@@ -1069,6 +1069,13 @@ configure_ubuntu_bitcurator_vm() {
         sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
         sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
 
+  echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
+        echo '' >> /etc/sysctl.conf
+        echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
+        echo 'vm.swappiness=10' >> /etc/sysctl.conf
+        echo '# Improve cache management' >> /etc/sysctl.conf
+        echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
+
   # To fix: piix4_smbus
   #         rapl_domains no package found
 
