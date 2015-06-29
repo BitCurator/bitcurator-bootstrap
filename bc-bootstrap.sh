@@ -454,6 +454,9 @@ install_bitcurator_files() {
         cd /tmp/bitcurator/env/etc
         cp cron.weekly/fstrim /etc/cron.weekly/fstrim
 
+  echoinfo "BitCurator environment: Updating sudoers"
+        echoinfo "(not implemented currently)"
+
   echoinfo "BitCurator environment: Copying fmount support scripts to /usr/local/bin"
         cd /tmp/bitcurator/env/usr/local/bin
         cp * /usr/local/bin
@@ -706,12 +709,10 @@ install_source_packages() {
   # Install HFS Explorer (not packaged for 14.04LTS)
   echoinfo "BitCurator environment: Building and installing HFS Explorer"
 	CDIR=$(pwd)
-        cd /tmp
-        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23/hfsexplorer-0.23-bin.zip
         mkdir /usr/share/hfsexplorer
-        mv hfsexplorer-0.23-bin.zip /usr/share/hfsexplorer
         cd /usr/share/hfsexplorer
-	unzip -zxf hfsexplorer-0.23-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23/hfsexplorer-0.23-bin.zip
+	unzip hfsexplorer-0.23-bin.zip >> $HOME/bitcurator-install.log 2>&1
         rm hfsexplorer-0.23-bin.zip
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
@@ -773,7 +774,7 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
         sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.1.3
+        sudo -u $SUDO_USER unzip bagger-2.1.3 >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd $HOME/.bagger
         rm bagger-2.1.3.zip
@@ -953,8 +954,8 @@ configure_ubuntu_bitcurator_vm() {
 	service smbd restart >> $HOME/bitcurator-install.log 2>&1
 	service nmbd restart >> $HOME/bitcurator-install.log 2>&1
 
-  echoinfo "BitCurator VM: Setting Timezone to UTC" >> $HOME/bitcurator-install.log 2>&1
-  echo "Etc/UTC" > /etc/timezone >> $HOME/bitcurator-install.log 2>&1
+  #echoinfo "BitCurator VM: Setting Timezone to UTC" >> $HOME/bitcurator-install.log 2>&1
+  #echo "Etc/UTC" > /etc/timezone >> $HOME/bitcurator-install.log 2>&1
     
   #echoinfo "SIFT VM: Fixing Regripper Files"
 #	# Make sure to remove all ^M from regripper plugins
@@ -1059,6 +1060,9 @@ configure_ubuntu_bitcurator_vm() {
         update-alternatives --config default.plymouth
         update-initramfs -u
   
+  echoinfo "BitCurator VM: Adding primary user to vboxsf group"
+        usermod -a -G vboxsf $SUDO_USER
+
   # To fix: piix4_smbus
   #         rapl_domains no package found
 
