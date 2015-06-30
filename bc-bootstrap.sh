@@ -1042,7 +1042,10 @@ configure_ubuntu_bitcurator_vm() {
         sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
         #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
         sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop trash-icon-visible true
-        #gsettings set org.gnome.nautilus.desktop network-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop network-icon-visible true
+  
+  echoinfo "BitCurator VM: Enabling mount visibility for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop volumes-visible true
 
   echoinfo "BitCurator VM: Setting Desktop background image"
         #cd /usr/share/bitcurator/resources/images
