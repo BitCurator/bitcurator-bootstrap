@@ -265,7 +265,8 @@ libboost-test-dev
 libboost-program-options-dev 
 libboost-system-dev 
 libboost-filesystem-dev 
-bison python3-pyqt4 
+bison 
+python3-pyqt4 
 python3-sip-dev 
 mysql-client 
 libmyodbc 
