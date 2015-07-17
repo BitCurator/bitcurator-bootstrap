@@ -414,7 +414,7 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Installing BitCurator Tools"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/kamwoods/bitcurator /tmp/bitcurator >> $HOME/bitcurator-install.log 2>&1
+	git clone --recursive https://github.com/bitcurator/bitcurator /tmp/bitcurator >> $HOME/bitcurator-install.log 2>&1
 	cd /tmp/bitcurator/bctools
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
