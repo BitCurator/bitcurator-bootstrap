@@ -903,7 +903,8 @@ install_source_packages() {
         git clone https://github.com/keydet89/RegRipper2.8 >> $HOME/bitcurator-install.log 2>&1
         mv RegRipper2.8 /usr/share/regripper
         # Install needed CPAN modules
-        perl -MCPAN -e 'install Parse::Win32Registry' >> $HOME/bitcurator-install.log 2>&1
+        # Use Ubuntu package
+        #perl -MCPAN -e 'install Parse::Win32Registry' >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
 
