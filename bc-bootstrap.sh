@@ -310,6 +310,7 @@ python3-pip
 antiword 
 openssh-server
 maven
+libparse-win32registry-perl
 mediainfo 
 libav-tools 
 plymouth-theme-script 
@@ -893,6 +894,17 @@ install_source_packages() {
         cd .fits
         sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
 	# No cleanup needed
+        cd /tmp
+
+  # Install regripper (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing regripper"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/keydet89/RegRipper2.8 >> $HOME/bitcurator-install.log 2>&1
+        mv RegRipper2.8 /usr/share/regripper
+        # Install needed CPAN modules
+        perl -MCPAN -e 'install Parse::Win32Registry' >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
         cd /tmp
 
 }
