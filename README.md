@@ -35,6 +35,7 @@ you see the line:
 "There are 4 choices for the alternative default.plymouth (providing /lib/plymouth/themes/default.plymouth)."
 
 and a list of choices, type the "1" key and hit enter. The script should now complete.
+Type "sudo reboot" and hit enter to reboot.
 
 # Upgrading existing BitCurator VMs or Installs
 
