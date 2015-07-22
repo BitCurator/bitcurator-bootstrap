@@ -3,22 +3,25 @@ bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurat
 
 # Building the BitCurator Environment
 
-The bc-boostrap.sh shell script assists in building the BitCurator environment from scratch.
-It may also be used to upgrade an existing instance of a BitCurator environment, although this
-is subject to ongoing testing.
+The bc-boostrap.sh shell script assists in building releases of the BitCurator environment.
+It may be used in two ways, described in the sections below: (1) As a full bootstrap on top of
+a clean Ubuntu 14.04.2LTS install, and (2) to upgrade existing BitCurator environments (post-1.5.1 release).
+The upgrade functionality is subject to ongoing testing.
 
 # Clean Installation
 
-The bc-bootstap.sh assumes a Ubuntu 14.04LTS environment. It has not been tested on any other
-versions of Ubuntu. The environment must have the "git" package installed to checkout this
-repository. When running in a VM, any extensions (for example, the VirtualBox extensions) should
-be installed prior to running this script.
+The bc-bootstap.sh script expects to find itself in a Ubuntu 14.04LTS environment. It has not 
+been tested on any other versions of Ubuntu. The environment must have the "git" package installed 
+to checkout this repository. When running in a VM, any extensions (for example, the 
+VirtualBox extensions) should be installed prior to running this script.
 
-To checkout, enter the following in a terminal.
+To check out this code, make sure you have git installed. Enter the following in a terminal:
+
+sudo apt-get install git
 
 git clone https://github.com/bitcurator/bitcurator-bootstrap
 
-To run, enter the following in the bitcurator-bootstrap directory:
+To run, enter the following inside the bitcurator-bootstrap directory:
 
 sudo ./bc-bootstrap.sh -s -i -y
 
