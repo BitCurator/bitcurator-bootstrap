@@ -908,6 +908,23 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
 
+  # Install NSRLlookup (not packaged for 14.04LTS, use author source)
+  echoinfo "BitCurator environment: Building and installing nsrllookup"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/rjhansen/nsrllookup >> $HOME/bitcurator-install.log 2>&1
+        cd nsrllookup
+        # Fix AM version
+        # sed -i "s/am__api_version='1.13'/am__api_version='1.14'/g" configure
+        aclocal >> $HOME/bitcurator-install.log 2>&1
+        automake --add-missing >> $HOME/bitcurator-install.log 2>&1
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf nsrllookup
+
 }
 
 configure_ubuntu() {
