@@ -437,7 +437,16 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Moving BitCurator configuration files to /etc/bitcurator"
         cd /tmp/bitcurator/env/etc
         cp -r bitcurator /etc
-  
+ 
+  echoinfo "BitCurator environment: Copying .vimrc and editor refinements to home"
+        cd /tmp/bitcurator/env
+        cp .vimrc $HOME
+        cp -r .vim $HOME
+        cd $HOME/.vim
+        mkdir backups
+        mkdir swap
+        cd /tmp
+ 
   echoinfo "BitCurator environment: Moving BitCurator sudoers file to /etc/sudoers"
         cd /tmp/bitcurator/env/etc
         cp sudoers /etc
