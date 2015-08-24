@@ -192,11 +192,6 @@ install_ubuntu_14.04_deps() {
     echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding Classic Menu Repository: $@"
-    add-apt-repository -y ppa:diesch/testing  >> $HOME/bitcurator-install.log 2>&1 || return 1
-    # Install later: classicmenu-indicator
-    #                alacarte
-
     echoinfo "Updating Repository Package List ..."
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
 
@@ -347,9 +342,7 @@ ubiquity-frontend-debconf
 user-setup 
 discover 
 xresprobe 
-aufs-tools
-classicmenu-indicator
-alacarte"
+aufs-tools"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
