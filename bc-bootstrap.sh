@@ -343,7 +343,9 @@ ubiquity-frontend-debconf
 user-setup 
 discover 
 xresprobe 
-aufs-tools"
+aufs-tools
+classicmenu-indicator
+alacarte"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
