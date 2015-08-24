@@ -1081,7 +1081,6 @@ configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
 
-
   echoinfo "BitCurator VM: Setting some useful icons for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
         #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
@@ -1090,6 +1089,10 @@ configure_ubuntu_bitcurator_vm() {
   
   echoinfo "BitCurator VM: Enabling mount visibility for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop volumes-visible true
+
+  echoinfo "BitCurator VM: Disabling automount and automount-open for $SUDO_USER"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount false
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount-open false
 
   echoinfo "BitCurator VM: Setting Desktop background image"
         #cd /usr/share/bitcurator/resources/images
