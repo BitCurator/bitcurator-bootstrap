@@ -166,6 +166,7 @@ usage() {
 }
 
 install_ubuntu_14.04_deps() {
+
     echoinfo "Updating your APT Repositories ... "
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
 
@@ -201,6 +202,9 @@ install_ubuntu_14.04_deps() {
 
     echoinfo "Upgrading all packages to latest version ..."
     __apt_get_upgrade_noinput >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Fixing swqppiness for build"
+    sysctl vm.swappiness = 10
 
     return 0
 }
