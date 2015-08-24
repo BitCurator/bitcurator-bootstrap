@@ -444,7 +444,7 @@ install_bitcurator_files() {
         cp -r .vim $HOME
         cd $HOME/.vim
         mkdir backups
-        mkdir swap
+        mkdir swaps
         cd /tmp
  
   echoinfo "BitCurator environment: Moving BitCurator sudoers file to /etc/sudoers"
