@@ -590,17 +590,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.6.0/poco-1.6.0.tar.gz
-	tar -zxf poco-1.6.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.6.0
+        wget -q pocoproject.org/releases/poco-1.6.1/poco-1.6.1.tar.gz
+	tar -zxf poco-1.6.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.6.1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm poco-1.6.0.tar.gz
-        rm -rf poco-1.6.0
+        rm poco-1.6.1.tar.gz
+        rm -rf poco-1.6.1
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -660,17 +660,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q download.zeromq.org/zeromq-4.1.1.tar.gz
-	tar -zxf zeromq-4.1.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.1.1
+        wget -q download.zeromq.org/zeromq-4.1.3.tar.gz
+	tar -zxf zeromq-4.1.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd zeromq-4.1.3
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm zeromq-4.1.1.tar.gz
-        rm -rf zeromq-4.1.1
+        rm zeromq-4.1.3.tar.gz
+        rm -rf zeromq-4.1.3
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
