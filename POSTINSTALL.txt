@@ -5,6 +5,7 @@ Additional optional manual steps:
 - Update theme to "Radiance" (better QT menu visuals)
 - Disable screenlock
 - Disable online search results
+- Enable workspaces in Appearance (Behavior tab)
 - Adjust terminal settings (font size, window size)
 - Adjust user groups and permissions in "Users and Groups"
 - Add usb_storage to end of /etc/modules and remove any duplicate entries
