@@ -342,7 +342,8 @@ ubiquity-frontend-debconf
 user-setup 
 discover 
 xresprobe 
-aufs-tools"
+aufs-tools 
+grsync"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
