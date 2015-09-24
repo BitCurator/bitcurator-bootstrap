@@ -607,8 +607,8 @@ install_source_packages() {
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/sleuthkit/sleuthkit /tmp/sleuthkit >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/sleuthkit
+	git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
+	cd /usr/share/sleuthkit
         ./bootstrap >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
@@ -623,8 +623,8 @@ install_source_packages() {
   #      make install >> $HOME/bitcurator-install.log 2>&1
   #      ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
-        cd /tmp
-        rm -rf sleuthkit
+        # cd /tmp
+        # rm -rf sleuthkit
 
   # Install PyTSK
   echoinfo "BitCurator environment: Building and installing PyTSK (Python bindings for TSK)"
