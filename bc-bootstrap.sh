@@ -183,6 +183,9 @@ install_ubuntu_14.04_deps() {
     echoinfo "Adding Ubuntu Tweak Repository"
     add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
+    echoinfo "Adding Oracle JDK Repository"
+    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+
     echoinfo "Adding Guymager Repository"
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
@@ -225,7 +228,7 @@ libcppunit-1.13-0
 libcppunit-dev 
 libtool 
 automake 
-openjdk-7-jdk 
+oracle-java8-installer
 expect 
 ghex 
 gnome-system-tools 
@@ -241,7 +244,8 @@ xmount
 mercurial-common 
 python-sphinx 
 vim 
-git 
+git
+git-svn 
 equivs 
 python2.7-dev 
 python3 
