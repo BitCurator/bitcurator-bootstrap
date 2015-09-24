@@ -2,6 +2,7 @@
 
 # Sample autopsy build script for Ubuntu 14.04LTS / Ubuntu 15.04
 # Reference only - do not use in conjunction with main build script
+# Silent install: http://askubuntu.com/questions/190582/installing-java-automatically-with-silent-option
 
 workingdir=`pwd`
 
