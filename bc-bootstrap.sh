@@ -183,6 +183,10 @@ install_ubuntu_14.04_deps() {
     echoinfo "Adding Ubuntu Tweak Repository"
     add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
+    echoinfo "Adding Oracle Java Repository"
+    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # Need oracle-java8-installer to replace openjdk in package list below (future)
+
     echoinfo "Adding Guymager Repository"
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
@@ -207,7 +211,6 @@ install_ubuntu_14.04_deps() {
 install_ubuntu_14.04_packages() {
     packages="dkms 
 g++ 
-ant 
 guymager-beta
 libcrypto++9 
 libssl-dev 
@@ -225,7 +228,8 @@ libcppunit-1.13-0
 libcppunit-dev 
 libtool 
 automake 
-openjdk-7-jdk 
+openjdk-7-jdk
+ant 
 expect 
 ghex 
 gnome-system-tools 
@@ -241,7 +245,8 @@ xmount
 mercurial-common 
 python-sphinx 
 vim 
-git 
+git
+git-svn 
 equivs 
 python2.7-dev 
 python3 
@@ -603,8 +608,8 @@ install_source_packages() {
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/sleuthkit/sleuthkit /tmp/sleuthkit >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/sleuthkit
+	git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
+	cd /usr/share/sleuthkit
         ./bootstrap >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
@@ -619,8 +624,8 @@ install_source_packages() {
   #      make install >> $HOME/bitcurator-install.log 2>&1
   #      ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
-        cd /tmp
-        rm -rf sleuthkit
+        # cd /tmp
+        # rm -rf sleuthkit
 
   # Install PyTSK
   echoinfo "BitCurator environment: Building and installing PyTSK (Python bindings for TSK)"
