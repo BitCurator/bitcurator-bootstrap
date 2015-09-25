@@ -183,8 +183,9 @@ install_ubuntu_14.04_deps() {
     echoinfo "Adding Ubuntu Tweak Repository"
     add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding Oracle JDK Repository"
+    echoinfo "Adding Oracle Java Repository"
     add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # Need oracle-java8-installer to replace openjdk in package list below (future)
 
     echoinfo "Adding Guymager Repository"
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
@@ -210,7 +211,6 @@ install_ubuntu_14.04_deps() {
 install_ubuntu_14.04_packages() {
     packages="dkms 
 g++ 
-ant 
 guymager-beta
 libcrypto++9 
 libssl-dev 
@@ -228,7 +228,8 @@ libcppunit-1.13-0
 libcppunit-dev 
 libtool 
 automake 
-oracle-java8-installer
+openjdk-7-jdk
+ant 
 expect 
 ghex 
 gnome-system-tools 
