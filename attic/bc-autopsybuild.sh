@@ -56,6 +56,6 @@ mkdir -p $workingdir/tsk/bindings/java/dist
 mkdir -p $workingdir/tsk/bindings/java/lib
 cp $workingdir/tsk/share/java/Tsk_DataModel.jar $workingdir/tsk/bindings/java/dist/
 cd $workingdir/tsk/bindings/java/lib
-wget -c https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.7.15-M1/sqlite-jdbc-3.7.15-M1.jar
+wget -c https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.8.11/sqlite-jdbc-3.8.11.jar
 cd $workingdir/autopsy
 ant build
