@@ -348,7 +348,8 @@ user-setup
 discover 
 xresprobe 
 aufs-tools 
-grsync"
+grsync 
+gadmin-rsync"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
