@@ -15,3 +15,6 @@ Additional optional manual steps:
 - Clean up /tmp
 - Clear .bash_history
 - Set pyExifToolGUI initial config (by running)
+- Run:
+  sudo apt-get clean
+  sudo apt-get autoclean
