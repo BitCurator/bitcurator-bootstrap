@@ -47,7 +47,8 @@ Type "sudo reboot" and hit enter to reboot.
 
 # Upgrading existing BitCurator VMs or Installs
 
-More info on this soon.
+Future versions of this script may support upgrade paths for previous Virtual Machine releases.
+At present, please use this script only to create fresh environment instances.
 
 # Additional Notes
 
