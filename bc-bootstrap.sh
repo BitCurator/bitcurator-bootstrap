@@ -571,7 +571,12 @@ install_source_packages() {
   # Install AFFLIBv3 (may remove this in future - deprecated)
   echoinfo "BitCurator environment: Building and installing AFFLIBv3"
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/simsong/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
+	# git clone --recursive https://github.com/simsong/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
+  #
+  # Note: The repo above is still available, but AFFLIBv3 is now being
+  # maintained by Phillip Hellewell. Use his fork instead.
+  #
+	git clone --recursive https://github.com/sshock/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
 	cd /tmp/AFFLIBv3
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
