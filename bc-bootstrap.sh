@@ -568,7 +568,7 @@ install_source_packages() {
         cd /tmp
         rm -rf libewf	
 
-  # Install AFFLIBv3 (may remove this in future - deprecated)
+  # Install AFFLIBv3 (may remove this in future, for now use sshock fork)
   echoinfo "BitCurator environment: Building and installing AFFLIBv3"
 	CDIR=$(pwd)
 	# git clone --recursive https://github.com/simsong/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
@@ -949,6 +949,18 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
         rm -rf nsrllookup
+
+  # FUTURE - need fix for automated VeraPDF install
+  # Install VeraPDF (not packaged for 14.04LTS, use author source)
+  # echoinfo "BitCurator environment: Building and installing VeraPDF"
+	# CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q downloads.verapdf.org/rel/verapdf-installer.zip
+  #      unzip verapdf-installer.zip >> $HOME/bitcurator-install.log 2>&1
+  #      rm verapdf-installer.zip
+  #      mv verapdf* verapdf
+  #      cd verapdf
+  #      ./verapdf-install >> $HOME/bitcurator-install.log 2>&1
 
 }
 
