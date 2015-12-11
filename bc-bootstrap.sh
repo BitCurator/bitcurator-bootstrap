@@ -180,6 +180,9 @@ install_ubuntu_14.04_deps() {
     #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
     #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
 
+    echoinfo "Adding SystemBack Repository"
+    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+
     echoinfo "Adding Ubuntu Tweak Repository"
     add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
@@ -349,7 +352,8 @@ discover
 xresprobe 
 aufs-tools 
 grsync 
-gadmin-rsync"
+gadmin-rsync
+systemback"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
