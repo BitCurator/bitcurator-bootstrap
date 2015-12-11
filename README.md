@@ -19,19 +19,19 @@ Once you have a "clean" Ubuntu 14.04LTS environment running as a VM, install dkm
 this step in order for the VirtualBox extensions to be automatically built for all future kernels
 that may be automatically downloaded and installed by Ubunut:
 
-  sudo apt-get install dkms
+  * sudo apt-get install dkms
 
 Now, install the VirtualBox extensions using the "Insert Guest Additions CD Image..." entry
 in the VirtualBox "Devices" menu.
 
 To check out the code, make sure you have git installed. Enter the following in a terminal:
 
-  sudo apt-get install git
-  git clone https://github.com/bitcurator/bitcurator-bootstrap
+  * sudo apt-get install git
+  * git clone https://github.com/bitcurator/bitcurator-bootstrap
 
 To run, enter the following inside the bitcurator-bootstrap directory:
 
-  sudo ./bc-bootstrap.sh -s -i -y
+  * sudo ./bc-bootstrap.sh -s -i -y
 
 This will tell the script to skin the environment, install all packages, and continue
 without prompting the user (even if failures are encountered).
