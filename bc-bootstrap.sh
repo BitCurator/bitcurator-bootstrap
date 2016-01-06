@@ -211,6 +211,53 @@ install_ubuntu_14.04_deps() {
     return 0
 }
 
+install_ubuntu_16.04_deps() {
+
+    echoinfo "Updating your APT Repositories ... "
+    apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Installing Python Software Properies ... "
+    __apt_get_install_noinput software-properties-common >> $HOME/bitcurator-install.log 2>&1  || return 1
+
+    echoinfo "Enabling Universal Repository ... "
+    __enable_universe_repository >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    #echoinfo "Enabling Elastic Repository ... "
+    #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
+    #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
+
+    echoinfo "Adding SystemBack Repository"
+    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Adding Ubuntu Tweak Repository"
+    add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Adding Oracle Java Repository"
+    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # Need oracle-java8-installer to replace openjdk in package list below (future)
+
+    echoinfo "Adding Guymager Repository"
+    wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
+    wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
+    apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
+    #apt-get install guymager-beta
+
+    echoinfo "Adding BitCurator Repository: $@"
+    #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Updating Repository Package List ..."
+    apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Upgrading all packages to latest version ..."
+    __apt_get_upgrade_noinput >> $HOME/bitcurator-install.log 2>&1 || return 1
+
+    echoinfo "Fixing swqppiness for build"
+    sysctl vm.swappiness=10 >> $HOME/bitcurator-install.log 2>&1
+
+    return 0
+}
+
+
 install_ubuntu_14.04_packages() {
     packages="dkms 
 g++ 
@@ -380,6 +427,176 @@ systemback"
     return 0
 }
 
+install_ubuntu_16.04_packages() {
+    packages="dkms 
+g++ 
+guymager-beta
+libcrypto++9 
+libssl-dev 
+expat 
+libexpat1-dev 
+libfuse-dev 
+libncurses5-dev 
+libcurl4-openssl-dev 
+libreadline-dev 
+libmagic-dev 
+flex 
+gawk 
+libpthread-stubs0-dev 
+libcppunit-1.13-0 
+libcppunit-dev 
+libtool 
+automake 
+openjdk-7-jdk
+ant 
+expect 
+ghex 
+gnome-system-tools 
+gnome-panel 
+gnome-search-tool 
+hfsutils 
+hfsutils-tcltk 
+hfsplus 
+hfsprogs 
+dconf-tools 
+libgtk2.0-dev 
+xmount 
+mercurial-common 
+python-sphinx 
+vim 
+git
+git-svn 
+equivs 
+python2.7-dev 
+python3 
+python3-setuptools 
+python3-dev 
+python3-numpy 
+uuid-dev 
+libncursesw5-dev 
+libbz2-dev 
+clamav 
+clamav-daemon 
+clamtk 
+sharutils 
+smartmontools 
+hdparm 
+fdutils 
+cifs-utils 
+winbind 
+subversion 
+libarchive-dev 
+nautilus-actions 
+libxml2-dev 
+libboost-dev 
+libboost-test-dev 
+libboost-program-options-dev 
+libboost-system-dev 
+libboost-filesystem-dev 
+bison 
+python3-pyqt4 
+python3-sip-dev 
+mysql-client 
+libmyodbc 
+unixodbc 
+unixodbc-dev 
+libmysqlclient-dev 
+libexif-dev 
+readpst 
+recoll 
+cdrdao 
+dcfldd 
+bchunk 
+libimage-exiftool-perl 
+python-tk 
+python3-tk 
+python-pyside 
+python-compizconfig 
+udisks 
+libappindicator1 
+unity-tweak-tool 
+gnome-tweak-tool 
+compizconfig-settings-manager 
+gtkhash 
+nautilus-scripts-manager 
+fslint 
+libgnomeui-0 
+libgnomeui-dev 
+cmake 
+swig 
+python-magic 
+libtre-dev 
+libtre5 
+libudev-dev 
+gddrescue 
+gnome-sushi 
+vlc 
+autopoint 
+libevent-dev 
+python-pip 
+python3-pip 
+antiword 
+openssh-server
+maven
+libparse-win32registry-perl
+mediainfo 
+libav-tools 
+plymouth-theme-script 
+mplayer 
+tree
+gstreamer0.10-plugins-ugly 
+libxine1-ffmpeg 
+gxine 
+mencoder 
+libdvdread4 
+totem-mozilla 
+icedax 
+tagtool 
+easytag 
+id3tool 
+lame 
+nautilus-script-audio-convert 
+libmad0 
+mpg321 
+libavcodec-extra
+squashfs-tools 
+casper 
+libdebian-installer4 
+ubiquity-frontend-debconf 
+user-setup 
+discover 
+xresprobe 
+aufs-tools 
+grsync 
+gadmin-rsync
+systemback"
+
+# ubuntu-restricted-extras 
+# Added to above list. May be removed depending on deployment.
+#
+#gstreamer0.10-plugins-ugly libxine1-ffmpeg gxine mencoder libdvdread4 totem-mozilla icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 libavcodec-extra
+#
+
+    if [ "$@" = "dev" ]; then
+        packages="$packages"
+    elif [ "$@" = "stable" ]; then
+        packages="$packages"
+    fi
+
+    for PACKAGE in $packages; do
+        __apt_get_install_noinput $PACKAGE >> $HOME/bitcurator-install.log 2>&1
+        ERROR=$?
+        if [ $ERROR -ne 0 ]; then
+            echoerror "Install Failure: $PACKAGE (Error Code: $ERROR)"
+        else
+            echoinfo "Installed Package: $PACKAGE"
+        fi
+    done
+
+    return 0
+}
+
+
 install_ubuntu_14.04_pip_packages() {
     #pip_packages="rekall docopt python-evtx python-registry six construct pyv8 pefile analyzeMFT python-magic argparse unicodecsv"
     pip_packages="docopt python-evtx python-registry six configobj construct pyv8 pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
@@ -418,7 +635,45 @@ install_ubuntu_14.04_pip_packages() {
     return 0
 }
 
-# Global: Works on 12.04 and 14.04
+install_ubuntu_16.04_pip_packages() {
+    #pip_packages="rekall docopt python-evtx python-registry six construct pyv8 pefile analyzeMFT python-magic argparse unicodecsv"
+    pip_packages="docopt python-evtx python-registry six configobj construct pyv8 pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
+    pip_pre_packages="bitstring"
+
+    if [ "$@" = "dev" ]; then
+        pip_packages="$pip_packages"
+    elif [ "$@" = "stable" ]; then
+        pip_packages="$pip_packages"
+    fi
+
+    ERROR=0
+    for PACKAGE in $pip_pre_packages; do
+        CURRENT_ERROR=0
+        echoinfo "Installed Python (pre) Package: $PACKAGE"
+        __pip_pre_install_noinput $PACKAGE >> $HOME/bitcurator-install.log 2>&1 || (let ERROR=ERROR+1 && let CURRENT_ERROR=1)
+        if [ $CURRENT_ERROR -eq 1 ]; then
+            echoerror "Python Package Install Failure: $PACKAGE"
+        fi
+    done
+
+    for PACKAGE in $pip_packages; do
+        CURRENT_ERROR=0
+        echoinfo "Installed Python Package: $PACKAGE"
+        __pip_install_noinput $PACKAGE >> $HOME/bitcurator-install.log 2>&1 || (let ERROR=ERROR+1 && let CURRENT_ERROR=1)
+        if [ $CURRENT_ERROR -eq 1 ]; then
+            echoerror "Python Package Install Failure: $PACKAGE"
+        fi
+    done
+
+    if [ $ERROR -ne 0 ]; then
+        echoerror
+        return 1
+    fi
+
+    return 0
+}
+
+# Global: Works on 14.04 and 16.04
 install_perl_modules() {
 	# Required by macl.pl script
 	#perl -MCPAN -e "install Net::Wigle" >> $HOME/bitcurator-install.log 2>&1
@@ -540,7 +795,7 @@ install_source_packages() {
 #  cd $CDIR
 #}
 
-  # Install Apache Thrift - packaged version too old in 14.04LTS
+  # Install Apache Thrift - packaged version too old in 14.04LTS and 16.04LTS
   echoinfo "BitCurator environment: Building and installing Apache Thrift"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -651,7 +906,7 @@ install_source_packages() {
         cd /tmp
         rm -rf pytsk	
   
-  # Install libsodium (not packaged version in 14.04LTS, needed for ZeroMQ)
+  # Install libsodium (not packaged version in 14.04LTS or 16.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -668,7 +923,7 @@ install_source_packages() {
         rm libsodium-1.0.3.tar.gz
         rm -rf libsodium-1.0.3	
 
-  # Install ZeroMQ (packaged version in 14.04LTS out of date)
+  # Install ZeroMQ (packaged version in 14.04LTS and 16.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -721,7 +976,7 @@ install_source_packages() {
         cd /tmp
         rm -rf bulk_extractor
 
-  # Install HFSUtils (not packaged for 14.04LTS)
+  # Install HFSUtils (not packaged for 14.04LTS or 16.04LTS)
   echoinfo "BitCurator environment: Building and installing hfsutils"
 	CDIR=$(pwd)
         cd /tmp
@@ -737,7 +992,7 @@ install_source_packages() {
         rm hfsutils-3.2.6.tar.gz
         rm -rf hfsutils-3.2.6
   
-  # Install HFS Explorer (not packaged for 14.04LTS)
+  # Install HFS Explorer (not packaged for 14.04LTS or 16.04LTS)
   echoinfo "BitCurator environment: Building and installing HFS Explorer"
 	CDIR=$(pwd)
         mkdir /usr/share/hfsexplorer
@@ -749,7 +1004,7 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
 
-  # Install disktype (not packaged for 14.04LTS, use KW fork)
+  # Install disktype (not packaged for 14.04LTS or 16.04LTS, use KW fork)
   echoinfo "BitCurator environment: Building and installing disktype"
 	CDIR=$(pwd)
         cd /tmp
@@ -762,7 +1017,7 @@ install_source_packages() {
         cd /tmp
         rm -rf disktype
 
-  # Install dumpfloppy (not packaged for 14.04LTS, use author source)
+  # Install dumpfloppy (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing dumpfloppy"
 	CDIR=$(pwd)
         cd /tmp
@@ -776,7 +1031,7 @@ install_source_packages() {
         cd /tmp
         rm -rf dumpfloppy
 
-  # Install bagit (not packaged for 14.04LTS, use author source)
+  # Install bagit (not packaged for 14.04LTS or 16.04LTS, use author source)
   # Bagit doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagit directory in $HOME
   echoinfo "BitCurator environment: Building and installing bagit"
@@ -796,7 +1051,7 @@ install_source_packages() {
         cd /tmp
         # Check me
   
-  # Install loc-bagger (not packaged for 14.04LTS, use author source)
+  # Install loc-bagger (not packaged for 14.04LTS or 16.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
   echoinfo "BitCurator environment: Building and installing bagger"
@@ -811,7 +1066,7 @@ install_source_packages() {
         rm bagger-2.1.3.zip
         cd /tmp
 
-  # Install sdhash (not packaged for 14.04LTS, use author source)
+  # Install sdhash (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
 	CDIR=$(pwd)
         cd /tmp
@@ -826,7 +1081,7 @@ install_source_packages() {
         cd /tmp
         rm -rf sdhash-3.4
   
-  # Install md5deep (not packaged for 14.04LTS, use author source)
+  # Install md5deep (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing md5deep"
 	CDIR=$(pwd)
         cd /tmp
@@ -841,7 +1096,7 @@ install_source_packages() {
         cd /tmp
         rm -rf hashdeep
   
-  # Install pyExifToolGUI (not packaged for 14.04LTS, use author source)
+  # Install pyExifToolGUI (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing pyExifToolGUI"
 	CDIR=$(pwd)
         cd /tmp
@@ -858,7 +1113,7 @@ install_source_packages() {
         cd /tmp
         rm -rf pyExifToolGUI
 
-  # Install testdisk and photorec (not packaged for 14.04LTS, use author source)
+  # Install testdisk and photorec (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing testdisk and photorec"
 	CDIR=$(pwd)
         cd /tmp
@@ -874,7 +1129,7 @@ install_source_packages() {
         cd /tmp
         rm -rf testdisk-7.0
   
-  # Install ssdeep (not packaged for 14.04LTS, use author source)
+  # Install ssdeep (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing ssdeep"
 	CDIR=$(pwd)
         cd /tmp
@@ -890,7 +1145,7 @@ install_source_packages() {
         rm -rf ssdeep-2.13
         rm ssdeep-2.13.tar.gz
   
-  # Install openpyxl (not packaged for 14.04LTS, use author source)
+  # Install openpyxl (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing openpyxl"
 	CDIR=$(pwd)
         cd /tmp
@@ -903,7 +1158,7 @@ install_source_packages() {
         cd /tmp
         rm -rf openpyxl
 
-  # Install FIDO (not packaged for 14.04LTS, use openpreserve source)
+  # Install FIDO (not packaged for 14.04LTS or 16.04LTS, use openpreserve source)
   echoinfo "BitCurator environment: Building and installing FIDO"
 	CDIR=$(pwd)
         cd /tmp
@@ -915,7 +1170,7 @@ install_source_packages() {
         cd /tmp
         rm -rf fido
 
-  # Install FITS (not packaged for 14.04LTS, use Harvard GitHub source)
+  # Install FITS (not packaged for 14.04LTS or 16.04LTS, use Harvard GitHub source)
   echoinfo "BitCurator environment: Building and installing FITS"
 	CDIR=$(pwd)
         cd $HOME
@@ -925,7 +1180,7 @@ install_source_packages() {
 	# No cleanup needed
         cd /tmp
 
-  # Install regripper (not packaged for 14.04LTS, use author source)
+  # Install regripper (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing regripper"
 	CDIR=$(pwd)
         cd /tmp
@@ -937,7 +1192,7 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
 
-  # Install NSRLlookup (not packaged for 14.04LTS, use author source)
+  # Install NSRLlookup (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing nsrllookup"
 	CDIR=$(pwd)
         cd /tmp
@@ -955,7 +1210,7 @@ install_source_packages() {
         rm -rf nsrllookup
 
   # FUTURE - need fix for automated VeraPDF install
-  # Install VeraPDF (not packaged for 14.04LTS, use author source)
+  # Install VeraPDF (not packaged for 14.04LTS or 16.04LTS, use author source)
   # echoinfo "BitCurator environment: Building and installing VeraPDF"
 	# CDIR=$(pwd)
   #      cd /tmp
@@ -1008,7 +1263,7 @@ configure_ubuntu() {
 }
 
 # Global: Ubuntu BitCurator VM Configuration Function
-# Works with 12.04 and 14.04 Versions
+# Works with 14.04 and 16.04 Versions
 configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Setting Hostname: bitcurator"
 	OLD_HOSTNAME=$(hostname)
@@ -1212,6 +1467,42 @@ configure_ubuntu_14.04_bitcurator_vm() {
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
 }
 
+# 16.04 BitCurator VM Configuration Function
+configure_ubuntu_16.04_bitcurator_vm() {
+
+  echoinfo "BitCurator VM: More config needed here..."
+
+#  sudo -u $SUDO_USER gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'application://gnome-screenshot.desktop', 'application://gcalctool.desktop', 'application://bless.desktop', 'application://autopsy.desktop', 'application://wireshark.desktop']" >> $HOME/bitcurator-install.log 2>&1
+
+#  # Works in 14.04 and 16.04
+#  sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/sift/images/forensics_blue.jpg >> $HOME/bitcurator-install.log 2>&1
+
+#  # Works in 16.04 
+#	if [ ! -d /home/$SUDO_USER/.config/autostart ]; then
+#		sudo -u $SUDO_USER mkdir -p /home/$SUDO_USER/.config/autostart
+#	fi
+
+#  # Works in 16.04 too.
+#	if [ ! -L /home/$SUDO_USER/.config/autostart ]; then
+#		sudo -u $SUDO_USER cp /usr/share/sift/other/gnome-terminal.desktop /home/$SUDO_USER/.config/autostart
+#	fi
+    
+#  # Works in 16.04 too
+#	#if [ ! -e /usr/share/unity-greeter/logo.png.ubuntu ]; then
+#	#	sudo cp /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.ubuntu
+#	#	sudo cp /usr/share/sift/images/login_logo.png /usr/share/unity-greeter/logo.png
+#	#fi
+
+  # Setup user favorites (only for 12.04)
+  #sudo -u $SUDO_USER dconf write /desktop/unity/launcher/favorites "['nautilus.desktop', 'gnome-terminal.desktop', 'firefox.desktop', 'gnome-screenshot.desktop', 'gcalctool.desktop', 'bless.desktop', 'autopsy.desktop', 'wireshark.desktop']" >> $HOME/sift-install.log 2>&1
+
+  # Setup the login background image
+  #cp /usr/share/sift/images/forensics_blue.jpg /usr/share/backgrounds/warty-final-ubuntu.png
+  
+  echoinfo "BitCurator VM: Fixing permissions in user's home directory"
+  chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
+}
+
 complete_message() {
     echo
     echo "Installation Complete!"
@@ -1250,8 +1541,8 @@ if [ $ARCH != "64" ]; then
 fi
 
 #if [ $VER != "12.04" ] && [ $VER != "14.04" ]; then
-if [ $VER != "14.04" ]; then
-    echo "BitCurator is only installable on Ubuntu 14.04 at this time."
+if [ $VER != "14.04" ]; && [ $VER != "16.04" ]; then
+    echo "BitCurator is only installable on Ubuntu 14.04 and 16.04 at this time."
     exit 3
 fi
 
