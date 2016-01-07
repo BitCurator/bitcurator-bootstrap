@@ -775,7 +775,10 @@ install_bitcurator_files() {
  
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
-  
+ 
+  echoinfo "BitCurator environment: Installing legay xresprobe dependency"
+        dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb
+ 
   echoinfo "BitCurator environment: Installing LiveCD imager"
         dpkg -i /tmp/bitcurator/livecd/blacklabimager15.deb
 
