@@ -431,7 +431,7 @@ install_ubuntu_16.04_packages() {
     packages="dkms 
 g++ 
 guymager-beta
-libcrypto++9 
+libcrypto++9v5 
 libssl-dev 
 expat 
 libexpat1-dev 
@@ -443,7 +443,7 @@ libmagic-dev
 flex 
 gawk 
 libpthread-stubs0-dev 
-libcppunit-1.13-0 
+libcppunit-1.13-0v5
 libcppunit-dev 
 libtool 
 automake 
@@ -512,7 +512,7 @@ python-tk
 python3-tk 
 python-pyside 
 python-compizconfig 
-udisks 
+udisks2 
 libappindicator1 
 unity-tweak-tool 
 gnome-tweak-tool 
@@ -541,7 +541,7 @@ maven
 libparse-win32registry-perl
 mediainfo 
 libav-tools 
-plymouth-theme-script 
+plymouth-themes 
 mplayer 
 tree
 gstreamer0.10-plugins-ugly 
@@ -1541,7 +1541,7 @@ if [ $ARCH != "64" ]; then
 fi
 
 #if [ $VER != "12.04" ] && [ $VER != "14.04" ]; then
-if [ $VER != "14.04" ]; && [ $VER != "16.04" ]; then
+if [ $VER != "14.04" ] && [ $VER != "16.04" ]; then
     echo "BitCurator is only installable on Ubuntu 14.04 and 16.04 at this time."
     exit 3
 fi
