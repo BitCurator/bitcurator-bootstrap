@@ -1,20 +1,38 @@
 Postinstall Guidelines for Preparing the BitCurator Environment
 ---------------------------------------------------------------
 Additional optional manual steps:
+
 - Rearrange desktop icons for LiveCD/VM release
+
 - Update theme to "Radiance" (better QT menu visuals)
+
 - Disable screenlock
+
 - Disable online search results
+
 - Enable workspaces in Appearance (Behavior tab)
+
 - Adjust terminal settings (font size, window size)
+
 - Adjust user groups and permissions in "Users and Groups"
+
 - Add usb_storage to end of /etc/modules and remove any duplicate entries
+
 - Add blacklist i2c_piix4 to /etc/modprobe.d/blacklist.conf
+
 - Remove all previous kernels
+
 - Add http://wiki.bitcurator.net/ as Firefox homepage
+
 - Clean up /tmp
+
 - Clear .bash_history
+
 - Set pyExifToolGUI initial config (by running)
+
 - Run:
   sudo apt-get clean
   sudo apt-get autoclean
+
+- Disabling USB automount when using udisks2: 
+  http://askubuntu.com/questions/652905/how-to-disable-usb-automount-in-xubuntu-14-04
