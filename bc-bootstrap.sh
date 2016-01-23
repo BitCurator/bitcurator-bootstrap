@@ -343,7 +343,7 @@ python-tk
 python3-tk 
 python-pyside 
 python-compizconfig 
-udisks 
+udisks2 
 libappindicator1 
 unity-tweak-tool 
 gnome-tweak-tool 
