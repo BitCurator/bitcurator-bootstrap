@@ -447,7 +447,7 @@ libcppunit-1.13-0v5
 libcppunit-dev 
 libtool 
 automake 
-openjdk-7-jdk
+openjdk-8-jdk
 ant 
 expect 
 ghex 
@@ -803,17 +803,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q mirror.cogentco.com/pub/apache/thrift/0.9.2/thrift-0.9.2.tar.gz
-	tar -zxf thrift-0.9.2.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd thrift-0.9.2
+        wget -q mirror.cogentco.com/pub/apache/thrift/0.9.3/thrift-0.9.3.tar.gz
+	tar -zxf thrift-0.9.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd thrift-0.9.3
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm thrift-0.9.2.tar.gz
-        rm -rf thrift-0.9.2
+        rm thrift-0.9.3.tar.gz
+        rm -rf thrift-0.9.3
 
   # Install libewf from current sources
   echoinfo "BitCurator environment: Building and installing libewf"
@@ -861,17 +861,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.6.1/poco-1.6.1.tar.gz
-	tar -zxf poco-1.6.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.6.1
+        wget -q pocoproject.org/releases/poco-1.7.0/poco-1.7.0.tar.gz
+	tar -zxf poco-1.7.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.0
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm poco-1.6.1.tar.gz
-        rm -rf poco-1.6.1
+        rm poco-1.7.0.tar.gz
+        rm -rf poco-1.7.0
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -914,34 +914,34 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
-	tar -zxf libsodium-1.0.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd libsodium-1.0.3
+        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.8.tar.gz
+	tar -zxf libsodium-1.0.8.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd libsodium-1.0.8
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm libsodium-1.0.3.tar.gz
-        rm -rf libsodium-1.0.3	
+        rm libsodium-1.0.8.tar.gz
+        rm -rf libsodium-1.0.8	
 
   # Install ZeroMQ (packaged version in 14.04LTS and 16.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q download.zeromq.org/zeromq-4.1.3.tar.gz
-	tar -zxf zeromq-4.1.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.1.3
+        wget -q download.zeromq.org/zeromq-4.1.4.tar.gz
+	tar -zxf zeromq-4.1.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd zeromq-4.1.4
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm zeromq-4.1.3.tar.gz
-        rm -rf zeromq-4.1.3
+        rm zeromq-4.1.4.tar.gz
+        rm -rf zeromq-4.1.4
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
@@ -1000,9 +1000,9 @@ install_source_packages() {
 	CDIR=$(pwd)
         mkdir /usr/share/hfsexplorer
         cd /usr/share/hfsexplorer
-        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23/hfsexplorer-0.23-bin.zip
-	unzip hfsexplorer-0.23-bin.zip >> $HOME/bitcurator-install.log 2>&1
-        rm hfsexplorer-0.23-bin.zip
+        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1/hfsexplorer-0.23.1-bin.zip
+	unzip hfsexplorer-0.23.1-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        rm hfsexplorer-0.23.1-bin.zip
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
