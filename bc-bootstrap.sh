@@ -1040,7 +1040,8 @@ install_source_packages() {
         cd /tmp
         git clone https://github.com/LibraryOfCongress/bagit-python >> $HOME/bitcurator-install.log 2>&1
         cd bagit-python
-        sudo -u $SUDO_USER pip install bagit >> $HOME/bitcurator-install.log 2>&1
+        pip install bagit >> $HOME/bitcurator-install.log 2>&1
+        # sudo -u $SUDO_USER pip install bagit >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
         rm -rf bagit-python
@@ -1089,7 +1090,7 @@ install_source_packages() {
         wget -q https://github.com/sdhash/sdhash/archive/v3.4.tar.gz
 	tar -zxf v3.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
         cd sdhash-3.4
-        ./configure >> $HOME/bitcurator-install.log 2>&1
+        # ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
@@ -1402,9 +1403,9 @@ configure_ubuntu_bitcurator_vm() {
 
   echoinfo "BitCurator VM: Updating plymouth theme"
         cp -r /usr/share/bitcurator/resources/plymouth/themes/* /lib/plymouth/themes/
-        echoinfo "CHECK ME"
+        # echoinfo "CHECK ME"
         # Already installed in initial setup
-        apt-get install plymouth-theme-script
+        apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
         update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
         update-alternatives --config default.plymouth
         update-initramfs -u
