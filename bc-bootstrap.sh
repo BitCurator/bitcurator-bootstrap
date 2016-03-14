@@ -1166,7 +1166,7 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing openpyxl"
 	CDIR=$(pwd)
         cd /tmp
-        hg clone https://bitbucket.org/openpyxl/openpyxl
+        hg clone https://bitbucket.org/openpyxl/openpyxl >> $HOME/bitcurator-install.log 2>&1
         cd openpyxl
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
