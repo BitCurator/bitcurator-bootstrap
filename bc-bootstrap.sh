@@ -544,12 +544,9 @@ libav-tools
 plymouth-themes 
 mplayer 
 tree
-gstreamer0.10-plugins-ugly 
-libxine1-ffmpeg 
 gxine 
 mencoder 
 libdvdread4 
-totem-mozilla 
 icedax 
 tagtool 
 easytag 
@@ -565,7 +562,6 @@ libdebian-installer4
 ubiquity-frontend-debconf 
 user-setup 
 discover 
-xresprobe 
 aufs-tools 
 grsync 
 gadmin-rsync
