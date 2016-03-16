@@ -759,16 +759,23 @@ install_bitcurator_files() {
  
   echoinfo "BitCurator environment: Moving desktop support files to /usr/share/bitcurator/resources"
         if [ ! -d /usr/share/bitcurator ]; then
-		mkdir -p /usr/share/bitcurator
-	fi
+           mkdir -p /usr/share/bitcurator
+        fi
         if [ ! -d /usr/share/bitcurator/resources ]; then
-		mkdir -p /usr/share/bitcurator/resources
-	fi
+           mkdir -p /usr/share/bitcurator/resources
+           mkdir -p /usr/share/bitcurator/resources/xenial
+        fi
+
         # We'll be transfering desktop-folders contents later...
         cp -r /tmp/bitcurator/env/desktop-folders /usr/share/bitcurator/resources
         # We'll also be transfering plymouth contents later...
+
+        # Copy resources for 14.04
         cp -r /tmp/bitcurator/env/lib/plymouth /usr/share/bitcurator/resources
- 
+
+        # Copy resources for 16.04
+        cp -r /tmp/bitcurator/usr/share/plymouth /usr/share/bitcurator/resources/xenial
+
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
  
@@ -1349,8 +1356,8 @@ configure_ubuntu_bitcurator_vm() {
 	#fi
 
   echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
-	# Clean up broken symlinks
-	find -L /home/$SUDO_USER/Desktop -type l -delete
+        # Clean up broken symlinks
+        find -L /home/$SUDO_USER/Desktop -type l -delete
 
   echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
 
@@ -1397,14 +1404,6 @@ configure_ubuntu_bitcurator_vm() {
 
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv2Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
 
-  echoinfo "BitCurator VM: Updating plymouth theme"
-        cp -r /usr/share/bitcurator/resources/plymouth/themes/* /lib/plymouth/themes/
-        # echoinfo "CHECK ME"
-        # Already installed in initial setup
-        apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
-        update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
-        update-alternatives --config default.plymouth
-        update-initramfs -u
   
   echoinfo "BitCurator VM: Adding primary user to vboxsf group"
         usermod -a -G vboxsf $SUDO_USER
@@ -1443,6 +1442,32 @@ configure_ubuntu_bitcurator_vm() {
     echo 'for i in `seq 8 100`; do mknod /dev/loop$i b 7 $i; done' >> /etc/rc.local
   fi
 }
+
+# Global: Ubuntu BitCurator VM Plymouth Configuration
+# Works with 14.04
+configure_ubuntu_14.04_bitcurator_plymouth() {
+  echoinfo "BitCurator VM: Updating plymouth theme for 14.04"
+        cp -r /usr/share/bitcurator/resources/plymouth/themes/* /lib/plymouth/themes/
+        # echoinfo "CHECK ME"
+        # Already installed in initial setup
+        apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
+        update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
+        update-alternatives --config default.plymouth
+        update-initramfs -u
+
+
+# Global: Ubuntu BitCurator VM Plymouth Configuration
+# Works with 16.04
+configure_ubuntu_16.04_bitcurator_plymouth() {
+  echoinfo "BitCurator VM: Updating plymouth theme for 16.04"
+        cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /lib/plymouth/themes/
+        # echoinfo "CHECK ME"
+        # Already installed in initial setup
+        apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
+        update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
+        update-alternatives --config default.plymouth
+        update-initramfs -u
+
 
 # 14.04 BitCurator VM Configuration Function
 configure_ubuntu_14.04_bitcurator_vm() {
@@ -1679,6 +1704,7 @@ configure_ubuntu
 if [ "$SKIN" -eq 1 ]; then
     configure_ubuntu_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_vm
+    configure_ubuntu_${VER}_bitcurator_plymouth
 fi
 
 complete_message
