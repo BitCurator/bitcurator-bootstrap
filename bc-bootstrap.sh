@@ -774,7 +774,7 @@ install_bitcurator_files() {
         cp -r /tmp/bitcurator/env/lib/plymouth /usr/share/bitcurator/resources
 
         # Copy resources for 16.04
-        cp -r /tmp/bitcurator/usr/share/plymouth /usr/share/bitcurator/resources/xenial
+        cp -r /tmp/bitcurator/env/usr/share/plymouth /usr/share/bitcurator/resources/xenial
 
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
