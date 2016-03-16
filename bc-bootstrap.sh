@@ -1460,7 +1460,7 @@ configure_ubuntu_14.04_bitcurator_plymouth() {
 # Works with 16.04
 configure_ubuntu_16.04_bitcurator_plymouth() {
   echoinfo "BitCurator VM: Updating plymouth theme for 16.04"
-        cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /lib/plymouth/themes/
+        cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /usr/share/plymouth/themes/
         # echoinfo "CHECK ME"
         # Already installed in initial setup
         apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
