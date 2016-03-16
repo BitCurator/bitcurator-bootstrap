@@ -1454,7 +1454,7 @@ configure_ubuntu_14.04_bitcurator_plymouth() {
         update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
         update-alternatives --config default.plymouth
         update-initramfs -u
-
+}
 
 # Global: Ubuntu BitCurator VM Plymouth Configuration
 # Works with 16.04
@@ -1467,7 +1467,7 @@ configure_ubuntu_16.04_bitcurator_plymouth() {
         update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
         update-alternatives --config default.plymouth
         update-initramfs -u
-
+}
 
 # 14.04 BitCurator VM Configuration Function
 configure_ubuntu_14.04_bitcurator_vm() {
