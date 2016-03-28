@@ -1283,7 +1283,7 @@ configure_ubuntu() {
 }
 
 # Global: Ubuntu BitCurator VM Configuration Function
-# Works with 14.04 and 16.04 Versions
+# Works with 14.04 Versions
 configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Setting Hostname: bitcurator"
 	OLD_HOSTNAME=$(hostname)
@@ -1472,35 +1472,144 @@ configure_ubuntu_16.04_bitcurator_plymouth() {
 # 14.04 BitCurator VM Configuration Function
 configure_ubuntu_14.04_bitcurator_vm() {
 
-  echoinfo "BitCurator VM: More config needed here..."
+  echoinfo "BitCurator VM: Setting Hostname: bitcurator"
+	OLD_HOSTNAME=$(hostname)
+	sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
+	echo "bitcurator" > /etc/hostname
+	hostname bitcurator
 
-#  sudo -u $SUDO_USER gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'application://gnome-screenshot.desktop', 'application://gcalctool.desktop', 'application://bless.desktop', 'application://autopsy.desktop', 'application://wireshark.desktop']" >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator VM: Fixing Samba User"
+	# Make sure we replace the BITCURATOR_USER template with our actual
+	# user so there is write permissions to samba.
+	sed -i "s/BITCURTOR_USER/$SUDO_USER/g" /etc/samba/smb.conf
 
-#  # Works in 12.04 and 14.04
-#  sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/sift/images/forensics_blue.jpg >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator VM: Restarting Samba"
+	# Restart samba services 
+	service smbd restart >> $HOME/bitcurator-install.log 2>&1
+	service nmbd restart >> $HOME/bitcurator-install.log 2>&1
 
-#  # Works in 14.04 
-#	if [ ! -d /home/$SUDO_USER/.config/autostart ]; then
-#		sudo -u $SUDO_USER mkdir -p /home/$SUDO_USER/.config/autostart
-#	fi
+  echoinfo "BitCurator VM: Quieting i2c_piix4 boot error message:"
+        # Edit /etc/modprobe.d/blacklist.conf
+        sed -i -e "\$a# Fix piix4 error\nblacklist i2c_piix4" /etc/modprobe.d/blacklist.conf
+ 
+  echoinfo "BitCurator VM: Setting noclobber for $SUDO_USER"
+	if ! grep -i "set -o noclobber" $HOME/.bashrc > /dev/null 2>&1
+	then
+		echo "set -o noclobber" >> $HOME/.bashrc
+	fi
+	if ! grep -i "set -o noclobber" /root/.bashrc > /dev/null 2>&1
+	then
+		echo "set -o noclobber" >> /root/.bashrc
+	fi
 
-#  # Works in 14.04 too.
-#	if [ ! -L /home/$SUDO_USER/.config/autostart ]; then
-#		sudo -u $SUDO_USER cp /usr/share/sift/other/gnome-terminal.desktop /home/$SUDO_USER/.config/autostart
-#	fi
-    
-#  # Works in 14.04 too
-#	#if [ ! -e /usr/share/unity-greeter/logo.png.ubuntu ]; then
-#	#	sudo cp /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.ubuntu
-#	#	sudo cp /usr/share/sift/images/login_logo.png /usr/share/unity-greeter/logo.png
-#	#fi
+  echoinfo "BitCurator VM: Configuring Aliases for $SUDO_USER and root"
+	if ! grep -i "alias mountwin" $HOME/.bash_aliases > /dev/null 2>&1
+	then
+		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> $HOME/.bash_aliases
+	fi
+	
+	# For BitCurator VM, root is used frequently, set the alias there too.
+	if ! grep -i "alias mountwin" /root/.bash_aliases > /dev/null 2>&1
+	then
+		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
+	fi
 
-  # Setup user favorites (only for 12.04)
-  #sudo -u $SUDO_USER dconf write /desktop/unity/launcher/favorites "['nautilus.desktop', 'gnome-terminal.desktop', 'firefox.desktop', 'gnome-screenshot.desktop', 'gcalctool.desktop', 'bless.desktop', 'autopsy.desktop', 'wireshark.desktop']" >> $HOME/sift-install.log 2>&1
-
-  # Setup the login background image
-  #cp /usr/share/sift/images/forensics_blue.jpg /usr/share/backgrounds/warty-final-ubuntu.png
+  echoinfo "BitCurator VM: Setting up useful links on $SUDO_USER Desktop"
+	#if [ ! -L /home/$SUDO_USER/Desktop/cases ]; then
+	#	sudo -u $SUDO_USER ln -s /cases /home/$SUDO_USER/Desktop/cases
+	#fi
   
+	#if [ ! -L /home/$SUDO_USER/Desktop/mount_points ]; then
+	#	sudo -u $SUDO_USER ln -s /mnt /home/$SUDO_USER/Desktop/mount_points
+	#fi
+
+  echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
+        # Clean up broken symlinks
+        find -L /home/$SUDO_USER/Desktop -type l -delete
+
+  echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
+
+        #files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
+        #directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
+
+        # Copy over necessary directories and files without clobbering
+        # This will need to be modified to accommodate changes to existing files!
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
+
+  echoinfo "BitCurator VM: Symlinking media directory"
+        cd /home/$SUDO_USER/Desktop
+        sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
+
+        #	for file in /usr/share/bitcurator/resources/*.pdf
+        #	do
+        #		base=`basename $file`
+        #		if [ ! -L /home/$SUDO_USER/Desktop/$base ]; then
+        #			sudo -u $SUDO_USER ln -s $file /home/$SUDO_USER/Desktop/$base
+        #		fi
+        #	done
+  
+  echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
+
+  echoinfo "BitCurator VM: Setting some useful icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
+        #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop trash-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop network-icon-visible true
+  
+  echoinfo "BitCurator VM: Enabling mount visibility for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop volumes-visible true
+
+  echoinfo "BitCurator VM: Disabling automount and automount-open for $SUDO_USER"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount false
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount-open false
+
+  echoinfo "BitCurator VM: Setting Desktop background image"
+        #cd /usr/share/bitcurator/resources/images
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background primary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
+
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv2Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
+
+  
+  echoinfo "BitCurator VM: Adding primary user to vboxsf group"
+        usermod -a -G vboxsf $SUDO_USER
+
+  echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
+
+  echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
+        echo '' >> /etc/sysctl.conf
+        echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
+        echo 'vm.swappiness=10' >> /etc/sysctl.conf
+        echo '# Improve cache management' >> /etc/sysctl.conf
+        echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
+  
+  echoinfo "BitCurator VM: Reenable AffLib for Guymager"
+        # NOTE! The spaces matter here!
+        sed -i 's/AffEnabled              = false/AffEnabled              = TRUE/' /etc/guymager/guymager.cfg
+
+  # To fix: piix4_smbus
+  #         rapl_domains no package found
+
+  if [ ! -L /sbin/iscsiadm ]; then
+    ln -s /usr/bin/iscsiadm /sbin/iscsiadm
+  fi
+  
+  if [ ! -L /usr/local/bin/rip.pl ]; then
+    ln -s /usr/share/regripper/rip.pl /usr/local/bin/rip.pl
+  fi
+
+  # Add extra device loop backs.
+  if ! grep "do mknod /dev/loop" /etc/rc.local > /dev/null 2>&1
+  then
+    echo 'for i in `seq 8 100`; do mknod /dev/loop$i b 7 $i; done' >> /etc/rc.local
+  fi
+
   echoinfo "BitCurator VM: Fixing permissions in user's home directory"
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
 }
@@ -1508,35 +1617,144 @@ configure_ubuntu_14.04_bitcurator_vm() {
 # 16.04 BitCurator VM Configuration Function
 configure_ubuntu_16.04_bitcurator_vm() {
 
-  echoinfo "BitCurator VM: More config needed here..."
+  echoinfo "BitCurator VM: Setting Hostname: bitcurator"
+	OLD_HOSTNAME=$(hostname)
+	sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
+	echo "bitcurator" > /etc/hostname
+	hostname bitcurator
 
-#  sudo -u $SUDO_USER gsettings set com.canonical.Unity.Launcher favorites "['application://nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'application://gnome-screenshot.desktop', 'application://gcalctool.desktop', 'application://bless.desktop', 'application://autopsy.desktop', 'application://wireshark.desktop']" >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator VM: Fixing Samba User"
+	# Make sure we replace the BITCURATOR_USER template with our actual
+	# user so there is write permissions to samba.
+	sed -i "s/BITCURTOR_USER/$SUDO_USER/g" /etc/samba/smb.conf
 
-#  # Works in 14.04 and 16.04
-#  sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/sift/images/forensics_blue.jpg >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator VM: Restarting Samba"
+	# Restart samba services 
+	service smbd restart >> $HOME/bitcurator-install.log 2>&1
+	service nmbd restart >> $HOME/bitcurator-install.log 2>&1
 
-#  # Works in 16.04 
-#	if [ ! -d /home/$SUDO_USER/.config/autostart ]; then
-#		sudo -u $SUDO_USER mkdir -p /home/$SUDO_USER/.config/autostart
-#	fi
+  echoinfo "BitCurator VM: Quieting i2c_piix4 boot error message:"
+        # Edit /etc/modprobe.d/blacklist.conf
+        sed -i -e "\$a# Fix piix4 error\nblacklist i2c_piix4" /etc/modprobe.d/blacklist.conf
+ 
+  echoinfo "BitCurator VM: Setting noclobber for $SUDO_USER"
+	if ! grep -i "set -o noclobber" $HOME/.bashrc > /dev/null 2>&1
+	then
+		echo "set -o noclobber" >> $HOME/.bashrc
+	fi
+	if ! grep -i "set -o noclobber" /root/.bashrc > /dev/null 2>&1
+	then
+		echo "set -o noclobber" >> /root/.bashrc
+	fi
 
-#  # Works in 16.04 too.
-#	if [ ! -L /home/$SUDO_USER/.config/autostart ]; then
-#		sudo -u $SUDO_USER cp /usr/share/sift/other/gnome-terminal.desktop /home/$SUDO_USER/.config/autostart
-#	fi
-    
-#  # Works in 16.04 too
-#	#if [ ! -e /usr/share/unity-greeter/logo.png.ubuntu ]; then
-#	#	sudo cp /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.ubuntu
-#	#	sudo cp /usr/share/sift/images/login_logo.png /usr/share/unity-greeter/logo.png
-#	#fi
+  echoinfo "BitCurator VM: Configuring Aliases for $SUDO_USER and root"
+	if ! grep -i "alias mountwin" $HOME/.bash_aliases > /dev/null 2>&1
+	then
+		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> $HOME/.bash_aliases
+	fi
+	
+	# For BitCurator VM, root is used frequently, set the alias there too.
+	if ! grep -i "alias mountwin" /root/.bash_aliases > /dev/null 2>&1
+	then
+		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
+	fi
 
-  # Setup user favorites (only for 12.04)
-  #sudo -u $SUDO_USER dconf write /desktop/unity/launcher/favorites "['nautilus.desktop', 'gnome-terminal.desktop', 'firefox.desktop', 'gnome-screenshot.desktop', 'gcalctool.desktop', 'bless.desktop', 'autopsy.desktop', 'wireshark.desktop']" >> $HOME/sift-install.log 2>&1
-
-  # Setup the login background image
-  #cp /usr/share/sift/images/forensics_blue.jpg /usr/share/backgrounds/warty-final-ubuntu.png
+  echoinfo "BitCurator VM: Setting up useful links on $SUDO_USER Desktop"
+	#if [ ! -L /home/$SUDO_USER/Desktop/cases ]; then
+	#	sudo -u $SUDO_USER ln -s /cases /home/$SUDO_USER/Desktop/cases
+	#fi
   
+	#if [ ! -L /home/$SUDO_USER/Desktop/mount_points ]; then
+	#	sudo -u $SUDO_USER ln -s /mnt /home/$SUDO_USER/Desktop/mount_points
+	#fi
+
+  echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
+        # Clean up broken symlinks
+        find -L /home/$SUDO_USER/Desktop -type l -delete
+
+  echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
+
+        #files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
+        #directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
+
+        # Copy over necessary directories and files without clobbering
+        # This will need to be modified to accommodate changes to existing files!
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
+
+  echoinfo "BitCurator VM: Symlinking media directory"
+        cd /home/$SUDO_USER/Desktop
+        sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
+
+        #	for file in /usr/share/bitcurator/resources/*.pdf
+        #	do
+        #		base=`basename $file`
+        #		if [ ! -L /home/$SUDO_USER/Desktop/$base ]; then
+        #			sudo -u $SUDO_USER ln -s $file /home/$SUDO_USER/Desktop/$base
+        #		fi
+        #	done
+  
+  echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
+
+  echoinfo "BitCurator VM: Setting some useful icons for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
+        #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop trash-icon-visible true
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop network-icon-visible true
+  
+  echoinfo "BitCurator VM: Enabling mount visibility for $SUDO_USER Desktop"
+        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop volumes-visible true
+
+  echoinfo "BitCurator VM: Disabling automount and automount-open for $SUDO_USER"
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount false
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount-open false
+
+  echoinfo "BitCurator VM: Setting Desktop background image"
+        #cd /usr/share/bitcurator/resources/images
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background primary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
+
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv2Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
+
+  
+  echoinfo "BitCurator VM: Adding primary user to vboxsf group"
+        usermod -a -G vboxsf $SUDO_USER
+
+  echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks.rules
+        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
+        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
+
+  echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
+        echo '' >> /etc/sysctl.conf
+        echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
+        echo 'vm.swappiness=10' >> /etc/sysctl.conf
+        echo '# Improve cache management' >> /etc/sysctl.conf
+        echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
+  
+  echoinfo "BitCurator VM: Reenable AffLib for Guymager"
+        # NOTE! The spaces matter here!
+        sed -i 's/AffEnabled              = false/AffEnabled              = TRUE/' /etc/guymager/guymager.cfg
+
+  # To fix: piix4_smbus
+  #         rapl_domains no package found
+
+  if [ ! -L /sbin/iscsiadm ]; then
+    ln -s /usr/bin/iscsiadm /sbin/iscsiadm
+  fi
+  
+  if [ ! -L /usr/local/bin/rip.pl ]; then
+    ln -s /usr/share/regripper/rip.pl /usr/local/bin/rip.pl
+  fi
+
+  # Add extra device loop backs.
+  if ! grep "do mknod /dev/loop" /etc/rc.local > /dev/null 2>&1
+  then
+    echo 'for i in `seq 8 100`; do mknod /dev/loop$i b 7 $i; done' >> /etc/rc.local
+  fi
+
   echoinfo "BitCurator VM: Fixing permissions in user's home directory"
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
 }
@@ -1702,7 +1920,8 @@ configure_ubuntu
 
 # Configure BitCurator VM (if selected)
 if [ "$SKIN" -eq 1 ]; then
-    configure_ubuntu_bitcurator_vm
+    # No longer needed - use ${VER} only due to changes in 16.04
+    #configure_ubuntu_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_plymouth
 fi
