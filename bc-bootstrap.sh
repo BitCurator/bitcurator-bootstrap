@@ -820,12 +820,16 @@ install_source_packages() {
 
   # Install libewf from current sources
   echoinfo "BitCurator environment: Building and installing libewf"
-	CDIR=$(pwd)
-	git clone --recursive https://github.com/libyal/libewf /tmp/libewf >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/libewf
+        CDIR=$(pwd)
+        git clone --recursive https://github.com/libyal/libewf /tmp/libewf >> $HOME/bitcurator-install.log 2>&1
+        # Hackery: build a recent version, but not so recent that we break Sleuthkit 4.2.0, which won't
+        # build with the current experimental source. This means pulling a specific commit from 2015.
+        cd /tmp/libewf
+        git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
         ./synclibs.sh >> $HOME/bitcurator-install.log 2>&1
         ./autogen.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
+        ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
+        # ./configure --enable-python --enable-python2 --enable-python3 >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
