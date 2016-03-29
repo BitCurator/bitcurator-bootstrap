@@ -969,6 +969,7 @@ install_source_packages() {
         cd /tmp
         rm -rf hashdb-2.0.1
         rm v2.0.1.tar.gz
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
 
   # Install lightgrep
   echoinfo "BitCurator environment: Building and installing lightgrep"
@@ -985,6 +986,7 @@ install_source_packages() {
         # Now clean up
         cd /tmp
         rm -rf liblightgrep
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
 
   # Install bulk_extractor
   echoinfo "BitCurator environment: Building and installing bulk_extractor"
@@ -994,7 +996,7 @@ install_source_packages() {
 	cd /tmp/bulk_extractor
         chmod 755 bootstrap.sh
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure --enable-lightgrep >> $HOME/bitcurator-install.log 2>&1
+        ./configure --enable-lightgrep --disable-hashdb >> $HOME/bitcurator-install.log 2>&1
         # ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
