@@ -954,8 +954,11 @@ install_source_packages() {
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/simsong/hashdb /tmp/hashdb >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/hashdb
+        # git clone --recursive https://github.com/simsong/hashdb /tmp/hashdb >> $HOME/bitcurator-install.log 2>&1
+        cd /tmp
+        wget -q https://github.com/NPS-DEEP/hashdb/archive/v2.0.1.tar.gz
+        tar -zxf v2.0.1.tar.gz
+        cd hashdb-2.0.1
         chmod 755 bootstrap.sh
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
         ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
@@ -964,7 +967,24 @@ install_source_packages() {
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm -rf hashdb
+        rm -rf hashdb-2.0.1
+        rm v2.0.1.tar.gz
+
+  # Install lightgrep
+  echoinfo "BitCurator environment: Building and installing lightgrep"
+  echoinfo " -- Please be patient. This may take several minutes..."
+	CDIR=$(pwd)
+	git clone --recursive https://github.com/jonstewart/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
+	cd /tmp/liblightgrep
+        chmod 755 bootstrap.sh
+        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
+        ./configure --with-boost-chrono=no --with-boost-thread=no --with-boost-program-options=no --with-boost-system=no --prefix=/usr >> $HOME/bitcurator-install.log 2>&1
+        make -s >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+        # Now clean up
+        cd /tmp
+        rm -rf liblightgrep
 
   # Install bulk_extractor
   echoinfo "BitCurator environment: Building and installing bulk_extractor"
@@ -974,7 +994,8 @@ install_source_packages() {
 	cd /tmp/bulk_extractor
         chmod 755 bootstrap.sh
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
+        ./configure --enable-lightgrep >> $HOME/bitcurator-install.log 2>&1
+        # ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
