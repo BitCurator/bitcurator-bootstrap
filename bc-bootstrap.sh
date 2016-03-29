@@ -1201,8 +1201,14 @@ install_source_packages() {
         cd $HOME
         sudo -u $SUDO_USER mkdir .fits
         cd .fits
-        sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
-	# No cleanup needed
+        # sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
+        # Updated for 0.10.1 release - source no longer works
+        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-0.10.1_0.zip
+        sudo -u $SUDO_USER unzip fits-0.10.1_0.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv fits-0.10.1 fits
+        cd fits
+        chmod 755 *.sh
+        # No cleanup needed
         cd /tmp
 
   # Install regripper (not packaged for 14.04LTS or 16.04LTS, use author source)
