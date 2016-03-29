@@ -445,7 +445,8 @@ gawk
 libpthread-stubs0-dev 
 libcppunit-1.13-0v5
 libcppunit-dev 
-libtool 
+libtool
+libtool-bin 
 automake 
 openjdk-8-jdk
 ant 
