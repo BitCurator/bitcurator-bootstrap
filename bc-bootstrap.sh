@@ -448,7 +448,7 @@ libcppunit-dev
 libtool
 libtool-bin 
 automake 
-openjdk-7-jdk
+openjdk-8-jdk
 ant 
 expect 
 ghex 
