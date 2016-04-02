@@ -441,6 +441,7 @@ libcurl4-openssl-dev
 libreadline-dev 
 libmagic-dev 
 libtalloc-dev
+linux-headers-generic
 flex 
 gawk 
 libpthread-stubs0-dev 
