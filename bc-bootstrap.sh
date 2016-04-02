@@ -1650,12 +1650,11 @@ configure_ubuntu_14.04_bitcurator_vm() {
 # 16.04 BitCurator VM Configuration Function
 configure_ubuntu_16.04_bitcurator_vm() {
 
-  # Don't reconfigure hostname in upcoming builds
-  #echoinfo "BitCurator VM: Setting Hostname: bitcurator"
-	#OLD_HOSTNAME=$(hostname)
-	#sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
-	#echo "bitcurator" > /etc/hostname
-	#hostname bitcurator
+  echoinfo "BitCurator VM: Setting Hostname: bitcurator"
+	OLD_HOSTNAME=$(hostname)
+	sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
+	echo "bitcurator" > /etc/hostname
+	hostname bitcurator
 
   echoinfo "BitCurator VM: Fixing Samba User"
 	# Make sure we replace the BITCURATOR_USER template with our actual
@@ -1804,7 +1803,7 @@ complete_message() {
 }
 
 complete_message_skin() {
-    echo "The hostname was changed, you should relogin or reboot for it to take full effect."
+    echo "The hostname may have changed. It's a good idea to reboot at this point."
     echo
     echo "sudo reboot"
     echo
