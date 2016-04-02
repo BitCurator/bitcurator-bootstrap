@@ -734,9 +734,6 @@ install_bitcurator_files() {
         cd /tmp/bitcurator/env/etc
         cp cron.weekly/fstrim /etc/cron.weekly/fstrim
 
-  echoinfo "BitCurator environment: Updating sudoers"
-        echoinfo "(not implemented currently)"
-
   echoinfo "BitCurator environment: Copying fmount support scripts to /usr/local/bin"
         cd /tmp/bitcurator/env/usr/local/bin
         cp * /usr/local/bin
