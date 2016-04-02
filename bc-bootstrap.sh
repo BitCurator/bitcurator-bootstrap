@@ -448,6 +448,7 @@ libcppunit-1.13-0v5
 libcppunit-dev 
 libtool
 libtool-bin 
+libnss-myhostname
 automake 
 openjdk-8-jdk
 ant 
@@ -1652,11 +1653,12 @@ configure_ubuntu_14.04_bitcurator_vm() {
 # 16.04 BitCurator VM Configuration Function
 configure_ubuntu_16.04_bitcurator_vm() {
 
-  echoinfo "BitCurator VM: Setting Hostname: bitcurator"
-	OLD_HOSTNAME=$(hostname)
-	sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
-	echo "bitcurator" > /etc/hostname
-	hostname bitcurator
+  # Don't reconfigure hostname in upcoming builds
+  #echoinfo "BitCurator VM: Setting Hostname: bitcurator"
+	#OLD_HOSTNAME=$(hostname)
+	#sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
+	#echo "bitcurator" > /etc/hostname
+	#hostname bitcurator
 
   echoinfo "BitCurator VM: Fixing Samba User"
 	# Make sure we replace the BITCURATOR_USER template with our actual
