@@ -227,8 +227,8 @@ install_ubuntu_16.04_deps() {
     #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
 
     echoinfo "Adding Respin Repository"
-    apt-add-repository ppa:sergiomejia666/respin >> $HOME/bitcurator-install.log 2>&1 || return 1
-    apt-add-repository ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
+    apt-add-repository -y ppa:sergiomejia666/respin >> $HOME/bitcurator-install.log 2>&1 || return 1
+    apt-add-repository -y ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding SystemBack Repository"
     add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
