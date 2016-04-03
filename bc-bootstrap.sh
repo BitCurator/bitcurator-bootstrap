@@ -226,6 +226,10 @@ install_ubuntu_16.04_deps() {
     #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
     #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
 
+    echoinfo "Adding Respin Repository"
+    apt-add-repository ppa:sergiomejia666/respin >> $HOME/bitcurator-install.log 2>&1 || return 1
+    apt-add-repository ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
+
     echoinfo "Adding SystemBack Repository"
     add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
@@ -468,7 +472,7 @@ xmount
 mercurial-common 
 python-sphinx 
 vim 
-git
+git 
 git-svn 
 equivs 
 python2.7-dev 
@@ -540,14 +544,14 @@ libevent-dev
 python-pip 
 python3-pip 
 antiword 
-openssh-server
-maven
-libparse-win32registry-perl
+openssh-server 
+maven 
+libparse-win32registry-perl 
 mediainfo 
 libav-tools 
 plymouth-themes 
 mplayer 
-tree
+tree 
 gxine 
 mencoder 
 libdvdread4 
@@ -559,7 +563,7 @@ lame
 nautilus-script-audio-convert 
 libmad0 
 mpg321 
-libavcodec-extra
+libavcodec-extra 
 squashfs-tools 
 casper 
 libdebian-installer4 
@@ -568,8 +572,10 @@ user-setup
 discover 
 aufs-tools 
 grsync 
-gadmin-rsync
-systemback"
+gadmin-rsync 
+systemback 
+xresprobe 
+respin"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
