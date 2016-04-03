@@ -35,3 +35,7 @@ sudo apt-get update
 sudo apt-get install xresprobe -y
 sudo apt-get install respin -y
 sudo respin
+
+Guidelines for legacy BIOS, UEFI, and SecureBoot ready hybrid
+-------------------------------------------------------------
+https://linuxconfig.org/legacy-bios-uefi-and-secureboot-ready-ubuntu-live-image-customization
