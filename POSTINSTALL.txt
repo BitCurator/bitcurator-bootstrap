@@ -3,36 +3,35 @@ Postinstall Guidelines for Preparing the BitCurator Environment
 Additional optional manual steps:
 
 - Rearrange desktop icons for LiveCD/VM release
-
 - Update theme to "Radiance" (better QT menu visuals)
-
 - Disable screenlock
-
 - Disable online search results
-
 - Enable workspaces in Appearance (Behavior tab)
-
 - Adjust terminal settings (font size, window size)
-
 - Adjust user groups and permissions in "Users and Groups"
-
 - Add usb_storage to end of /etc/modules and remove any duplicate entries
-
 - Add blacklist i2c_piix4 to /etc/modprobe.d/blacklist.conf
-
 - Remove all previous kernels
-
 - Add http://wiki.bitcurator.net/ as Firefox homepage
-
 - Clean up /tmp
-
 - Clear .bash_history
-
 - Set pyExifToolGUI initial config (by running)
-
 - Run:
   sudo apt-get clean
   sudo apt-get autoclean
-
 - Disabling USB automount when using udisks2: 
   http://askubuntu.com/questions/652905/how-to-disable-usb-automount-in-xubuntu-14-04
+
+Guidelines for Preparing the BitCurator Live ISO
+------------------------------------------------
+The blacklabimager fork of remasterys used to create live ISO images up to the
+last Trusty-based release (1.6.0) no longer works. Systemback is included in the
+distribution, but may be confusing to users attempting to create their own versions.
+
+Use respin (note that respin may cause ubiquity crash in current release):
+sudo apt-add-repository ppa:sergiomejia666/respin
+sudo apt-add-repository ppa:sergiomejia666/xresprobe
+sudo apt-get update
+sudo apt-get install xresprobe -y
+sudo apt-get install respin -y
+sudo respin
