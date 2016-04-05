@@ -323,6 +323,7 @@ subversion
 libarchive-dev 
 nautilus-actions 
 libxml2-dev 
+libicu-dev
 libboost-dev 
 libboost-test-dev 
 libboost-program-options-dev 
@@ -496,6 +497,7 @@ subversion
 libarchive-dev 
 nautilus-actions 
 libxml2-dev 
+libicu-dev
 libboost-dev 
 libboost-test-dev 
 libboost-program-options-dev 
