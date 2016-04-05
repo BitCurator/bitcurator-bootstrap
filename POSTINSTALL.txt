@@ -36,6 +36,10 @@ sudo apt-get install xresprobe -y
 sudo apt-get install respin -y
 sudo respin
 
+Alternate: Pinguy:
+https://sourceforge.net/projects/pinguy-os/?source=typ_redirect
+Install package and force deps
+
 Guidelines for legacy BIOS, UEFI, and SecureBoot ready hybrid
 -------------------------------------------------------------
 https://linuxconfig.org/legacy-bios-uefi-and-secureboot-ready-ubuntu-live-image-customization
