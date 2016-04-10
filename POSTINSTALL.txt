@@ -43,3 +43,8 @@ Install package and force deps
 Guidelines for legacy BIOS, UEFI, and SecureBoot ready hybrid
 -------------------------------------------------------------
 https://linuxconfig.org/legacy-bios-uefi-and-secureboot-ready-ubuntu-live-image-customization
+
+Guidelines for terminal hold on command exit
+--------------------------------------------
+http://askubuntu.com/questions/46627/how-can-i-make-a-script-that-opens-terminal-windows-and-executes-commands-in-the
+http://askubuntu.com/questions/20330/how-to-run-a-script-without-closing-the-terminal
