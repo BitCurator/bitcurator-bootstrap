@@ -62,3 +62,6 @@ Icon=/usr/share/icons/Humanity/apps/128/terminal.svg
 Icon[en_US]=/
 Exec=gnome-terminal -e "bash -lc \"fido; exec bash\""
 
+Adding a desktop file to the Unity launcher
+-------------------------------------------
+https://help.ubuntu.com/community/UnityLaunchersAndDesktopFiles
