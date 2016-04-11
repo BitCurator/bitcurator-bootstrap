@@ -48,3 +48,17 @@ Guidelines for terminal hold on command exit
 --------------------------------------------
 http://askubuntu.com/questions/46627/how-can-i-make-a-script-that-opens-terminal-windows-and-executes-commands-in-the
 http://askubuntu.com/questions/20330/how-to-run-a-script-without-closing-the-terminal
+
+Example launch
+--------------
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=FIDO Format Identification
+GenericName=FIDO
+Comment=FIDO command-line
+Terminal=true
+Icon=/usr/share/icons/Humanity/apps/128/terminal.svg
+Icon[en_US]=/
+Exec=gnome-terminal -e "bash -lc \"fido; exec bash\""
+
