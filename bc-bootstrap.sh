@@ -456,7 +456,7 @@ libtool
 libtool-bin 
 libnss-myhostname
 automake 
-openjdk-8-jdk
+openjdk-7-jdk
 ant 
 expect 
 ghex 
