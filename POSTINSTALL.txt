@@ -50,6 +50,10 @@ http://askubuntu.com/questions/46627/how-can-i-make-a-script-that-opens-terminal
 http://askubuntu.com/questions/20330/how-to-run-a-script-without-closing-the-terminal
 http://superuser.com/questions/198015/open-gnome-terminal-programmatically-and-execute-commands-after-bashrc-was-execu
 
+Assistance in handling window resize
+------------------------------------
+http://askubuntu.com/questions/5363/how-to-start-a-terminal-with-certain-text-already-input-on-the-command-line
+
 Example launch
 --------------
 [Desktop Entry]
