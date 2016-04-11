@@ -48,6 +48,7 @@ Guidelines for terminal hold on command exit
 --------------------------------------------
 http://askubuntu.com/questions/46627/how-can-i-make-a-script-that-opens-terminal-windows-and-executes-commands-in-the
 http://askubuntu.com/questions/20330/how-to-run-a-script-without-closing-the-terminal
+http://superuser.com/questions/198015/open-gnome-terminal-programmatically-and-execute-commands-after-bashrc-was-execu
 
 Example launch
 --------------
