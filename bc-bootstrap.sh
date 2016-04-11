@@ -236,8 +236,8 @@ install_ubuntu_16.04_deps() {
     #echoinfo "Adding Ubuntu Tweak Repository"
     #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding Oracle Java Repository"
-    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # echoinfo "Adding Oracle Java Repository"
+    # add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
     # Need oracle-java8-installer to replace openjdk in package list below (future)
 
     echoinfo "Adding Guymager Repository"
