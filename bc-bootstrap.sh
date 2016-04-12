@@ -180,11 +180,11 @@ install_ubuntu_14.04_deps() {
     #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
     #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
 
-    #echoinfo "Adding SystemBack Repository"
-    #add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+    echoinfo "Adding SystemBack Repository"
+    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    #echoinfo "Adding Ubuntu Tweak Repository"
-    #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
+    echoinfo "Adding Ubuntu Tweak Repository"
+    add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding Oracle Java Repository"
     add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -233,11 +233,11 @@ install_ubuntu_16.04_deps() {
     #echoinfo "Adding SystemBack Repository"
     #add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    #echoinfo "Adding Ubuntu Tweak Repository"
-    #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
+    echoinfo "Adding Ubuntu Tweak Repository"
+    add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    # echoinfo "Adding Oracle Java Repository"
-    # add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    echoinfo "Adding Oracle Java Repository"
+    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
     # Need oracle-java8-installer to replace openjdk in package list below (future)
 
     echoinfo "Adding Guymager Repository"
@@ -262,8 +262,6 @@ install_ubuntu_16.04_deps() {
 }
 
 
-#unity-tweak-tool 
-#gnome-tweak-tool 
 install_ubuntu_14.04_packages() {
     packages="dkms 
 g++ 
@@ -291,6 +289,8 @@ ghex
 gnome-system-tools 
 gnome-panel 
 gnome-search-tool 
+unity-tweak-tool 
+gnome-tweak-tool 
 hfsutils 
 hfsutils-tcltk 
 hfsplus 
@@ -432,8 +432,6 @@ systemback"
     return 0
 }
 
-#unity-tweak-tool 
-#gnome-tweak-tool 
 install_ubuntu_16.04_packages() {
     packages="dkms 
 g++ 
@@ -465,6 +463,8 @@ ghex
 gnome-system-tools 
 gnome-panel 
 gnome-search-tool 
+unity-tweak-tool 
+gnome-tweak-tool 
 hfsutils 
 hfsutils-tcltk 
 hfsplus 
