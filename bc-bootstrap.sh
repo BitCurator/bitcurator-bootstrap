@@ -850,11 +850,13 @@ install_source_packages() {
         # Hackery: build a recent version, but not so recent that we break Sleuthkit 4.2.0, which won't
         # build with the current experimental source. This means pulling a specific commit from 2015.
         cd /tmp/libewf
-        git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
+        #git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
         ./synclibs.sh >> $HOME/bitcurator-install.log 2>&1
         ./autogen.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
+        # ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
         # ./configure --enable-python --enable-python2 --enable-python3 >> $HOME/bitcurator-install.log 2>&1
+        # Use this configure to build libewf-experimental successfully in Ubuntu
+        ./configure --enable-python --enable-python3 >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
@@ -893,36 +895,48 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.0/poco-1.7.0.tar.gz
-	tar -zxf poco-1.7.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.0
+        wget -q pocoproject.org/releases/poco-1.7.2/poco-1.7.2.tar.gz
+        tar -zxf poco-1.7.2.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.2
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
+        # Now clean up
         cd /tmp
-        rm poco-1.7.0.tar.gz
-        rm -rf poco-1.7.0
+        rm poco-1.7.2.tar.gz
+        rm -rf poco-1.7.2
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
-	cd /usr/share/sleuthkit
+        git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
+        cd /usr/share/sleuthkit
+
+        # Fix libewf random handle ref
+        sed -i 's/libewf_read_random/libewf_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
+
+        # Copy ficlam to use location
+        sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
+        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/ficlam.sh /home/bcadmin/.fiwalk
+        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/clamconfig.txt /home/bcadmin/.fiwalk
+        sudo -u $SUDO_USER chmod 755 /home/bcadmin/.fiwalk/ficlam.sh
+        
+
         ./bootstrap >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
-  # NOTE: Framework is not currently needed. Maybe in a future version.
-  #echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
-  #      cd framework
-  #      ./bootstrap >> $HOME/bitcurator-install.log 2>&1
-  #      ./configure >> $HOME/bitcurator-install.log 2>&1
-  #      make -s >> $HOME/bitcurator-install.log 2>&1
-  #      make install >> $HOME/bitcurator-install.log 2>&1
-  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+
+        # NOTE: Framework is not currently needed. Maybe in a future version.
+        #echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
+        #      cd framework
+        #      ./bootstrap >> $HOME/bitcurator-install.log 2>&1
+        #      ./configure >> $HOME/bitcurator-install.log 2>&1
+        #      make -s >> $HOME/bitcurator-install.log 2>&1
+        #      make install >> $HOME/bitcurator-install.log 2>&1
+        #      ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         # cd /tmp
         # rm -rf sleuthkit
@@ -946,17 +960,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.8.tar.gz
-	tar -zxf libsodium-1.0.8.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd libsodium-1.0.8
+        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.10.tar.gz
+	tar -zxf libsodium-1.0.10.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd libsodium-1.0.10
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm libsodium-1.0.8.tar.gz
-        rm -rf libsodium-1.0.8	
+        rm libsodium-1.0.10.tar.gz
+        rm -rf libsodium-1.0.10
 
   # Install ZeroMQ (packaged version in 14.04LTS and 16.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
