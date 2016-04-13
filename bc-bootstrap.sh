@@ -198,6 +198,9 @@ install_ubuntu_14.04_deps() {
     
     echoinfo "Adding Yad Repository: $@"
     add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
+    
+    echoinfo "Adding Gradle Repository: $@"
+    add-apt-repository -y ppa:cwchien/gradle >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -251,6 +254,9 @@ install_ubuntu_16.04_deps() {
     
     echoinfo "Adding Yad Repository: $@"
     add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
+    
+    echoinfo "Adding Gradle Repository: $@"
+    add-apt-repository -y ppa:cwchien/gradle >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -412,7 +418,8 @@ aufs-tools
 grsync 
 gadmin-rsync
 systemback
-yad"
+yad
+gradle"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -585,7 +592,8 @@ gadmin-rsync
 systemback 
 xresprobe 
 respin
-yad"
+yad
+gradle"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
