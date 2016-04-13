@@ -195,6 +195,9 @@ install_ubuntu_14.04_deps() {
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
     #apt-get install guymager-beta
+    
+    echoinfo "Adding Yad Repository: $@"
+    add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -245,6 +248,9 @@ install_ubuntu_16.04_deps() {
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
     #apt-get install guymager-beta
+    
+    echoinfo "Adding Yad Repository: $@"
+    add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -405,7 +411,8 @@ xresprobe
 aufs-tools 
 grsync 
 gadmin-rsync
-systemback"
+systemback
+yad"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -577,7 +584,8 @@ grsync
 gadmin-rsync 
 systemback 
 xresprobe 
-respin"
+respin
+yad"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
