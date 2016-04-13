@@ -1122,21 +1122,29 @@ install_source_packages() {
   #      cd /tmp
   #      # Check me
   
-  # NOTE: REMOVED FOR 1.7 / 16.04 BUILDS  
   # Install loc-bagger (not packaged for 14.04LTS or 16.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
-  # echoinfo "BitCurator environment: Building and installing bagger"
-	# CDIR=$(pwd)
-  #      cd $HOME
-  #      sudo -u $SUDO_USER mkdir .bagger
-  #      cd .bagger
-  #      sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
-  #      sudo -u $SUDO_USER unzip bagger-2.1.3 >> $HOME/bitcurator-install.log 2>&1
-	## Now clean up
-  #      cd $HOME/.bagger
-  #      rm bagger-2.1.3.zip
-  #      cd /tmp
+  echoinfo "BitCurator environment: Building and installing bagger"
+	CDIR=$(pwd)
+
+        cd $HOME
+
+        sudo -u $SUDO_USER mkdir .bagger
+        cd .bagger
+        sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagger >> $HOME/bitcurator-install.log 2>&1
+        cd bagger
+        sudo -u $SUDO_USER gradle distZip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger/build/distributions/bagger.zip $HOME/.bagger
+        cd $HOME/.bagger
+        rm -rf bagger
+        sudo -u $SUDO_USER unzip bagger.zip 
+
+        #sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
+        #sudo -u $SUDO_USER unzip bagger-2.1.3 >> $HOME/bitcurator-install.log 2>&1
+
+        # Now move the unzipped package to .bagger and clean up
+        # No cleanup needed at this point
 
   # Install sdhash (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
