@@ -914,7 +914,7 @@ install_source_packages() {
         cd /usr/share/sleuthkit
 
         # Fix libewf random handle ref
-        sed -i 's/libewf_handle_read_random/libewf_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
+        sed -i 's/libewf_handle_read_random/libewf_handle_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
 
         # Copy ficlam to use location
         sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
