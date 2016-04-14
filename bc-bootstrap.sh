@@ -720,6 +720,9 @@ install_bitcurator_files() {
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         sudo python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
   
+  echoinfo "BitCurator environment: Copying libewf-20140608.tar.gz to /tmp"
+        cp /tmp/bitcurator/externals/libewf-20140608.tar.gz /tmp
+  
   echoinfo "BitCurator environment: Installing BitCurator mount policy app and mounter"
         cd /tmp/bitcurator/mounter
         cp *.py /usr/local/bin
@@ -846,23 +849,32 @@ install_source_packages() {
   # Install libewf from current sources
   echoinfo "BitCurator environment: Building and installing libewf"
         CDIR=$(pwd)
-        git clone --recursive https://github.com/libyal/libewf /tmp/libewf >> $HOME/bitcurator-install.log 2>&1
-        # Hackery: build a recent version, but not so recent that we break Sleuthkit 4.2.0, which won't
-        # build with the current experimental source. This means pulling a specific commit from 2015.
-        cd /tmp/libewf
-        #git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
-        ./synclibs.sh >> $HOME/bitcurator-install.log 2>&1
-        ./autogen.sh >> $HOME/bitcurator-install.log 2>&1
-        # ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
-        # ./configure --enable-python --enable-python2 --enable-python3 >> $HOME/bitcurator-install.log 2>&1
-        # Use this configure to build libewf-experimental successfully in Ubuntu
-        ./configure --enable-python --enable-python3 >> $HOME/bitcurator-install.log 2>&1
+
+        # Newer versions break a lot of stuff. Keep 20140608 for now.
+        cd /tmp
+        tar zxf libewf-20140608.tar.gz
+        cd libewf-20140608
+        ./configure --enable-python --enable-v1-api
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
+
+        #git clone --recursive https://github.com/libyal/libewf /tmp/libewf >> $HOME/bitcurator-install.log 2>&1
+        #git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
+        #./synclibs.sh >> $HOME/bitcurator-install.log 2>&1
+        #./autogen.sh >> $HOME/bitcurator-install.log 2>&1
+        # ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
+        # ./configure --enable-python --enable-python2 --enable-python3 >> $HOME/bitcurator-install.log 2>&1
+        # Use this configure to build libewf-experimental successfully in Ubuntu
+        #./configure --enable-python --enable-python3 >> $HOME/bitcurator-install.log 2>&1
+        #make -s >> $HOME/bitcurator-install.log 2>&1
+        #make install >> $HOME/bitcurator-install.log 2>&1
+        #ldconfig >> $HOME/bitcurator-install.log 2>&1
+
         # Now clean up
         cd /tmp
-        rm -rf libewf	
+        rm -rf libewf-20140608
+        rm libewf-20140608.tar.gz
 
   # Install AFFLIBv3 (may remove this in future, for now use sshock fork)
   echoinfo "BitCurator environment: Building and installing AFFLIBv3"
