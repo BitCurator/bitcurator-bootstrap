@@ -925,8 +925,9 @@ install_source_packages() {
         git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
         cd /usr/share/sleuthkit
 
+        # Not needed for 20140608 build
         # Fix libewf random handle ref
-        sed -i 's/libewf_handle_read_random/libewf_handle_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
+        #sed -i 's/libewf_handle_read_random/libewf_handle_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
 
         # Copy ficlam to use location
         sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
