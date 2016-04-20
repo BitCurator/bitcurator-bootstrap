@@ -1165,7 +1165,7 @@ install_source_packages() {
         sudo -u $SUDO_USER mv bagger/build/distributions/bagger.zip $HOME/.bagger
         cd $HOME/.bagger
         rm -rf bagger
-        sudo -u $SUDO_USER unzip bagger.zip 
+        sudo -u $SUDO_USER unzip bagger.zip >> $HOME/bitcurator-install.log 2>&1 
 
         #sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
         #sudo -u $SUDO_USER unzip bagger-2.1.3 >> $HOME/bitcurator-install.log 2>&1
