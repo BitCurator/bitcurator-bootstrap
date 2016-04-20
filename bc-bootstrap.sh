@@ -852,9 +852,9 @@ install_source_packages() {
 
         # Newer versions break a lot of stuff. Keep 20140608 for now.
         cd /tmp
-        tar zxf libewf-20140608.tar.gz
+        tar zxf libewf-20140608.tar.gz >> $HOME/bitcurator-install.log 2>&1
         cd libewf-20140608
-        ./configure --enable-python --enable-v1-api
+        ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
