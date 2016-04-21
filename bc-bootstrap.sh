@@ -1108,7 +1108,7 @@ install_source_packages() {
         cd /tmp
         git clone http://offog.org/git/dumpfloppy.git >> $HOME/bitcurator-install.log 2>&1
         cd dumpfloppy
-        ./configure >> $HOME/bitcurator-install.log 2>&1
+        aclocal --force && autoconf -f && automake --add-missing && ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
