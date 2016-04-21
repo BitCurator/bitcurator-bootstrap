@@ -589,9 +589,6 @@ discover
 aufs-tools 
 grsync 
 gadmin-rsync 
-systemback 
-xresprobe 
-respin
 yad
 gradle"
 
