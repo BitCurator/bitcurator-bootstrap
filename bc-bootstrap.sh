@@ -925,17 +925,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.2/poco-1.7.2.tar.gz
-        tar -zxf poco-1.7.2.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.2
+        wget -q pocoproject.org/releases/poco-1.7.3/poco-1.7.3.tar.gz
+        tar -zxf poco-1.7.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.3
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm poco-1.7.2.tar.gz
-        rm -rf poco-1.7.2
+        rm poco-1.7.3.tar.gz
+        rm -rf poco-1.7.3
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -1303,9 +1303,9 @@ install_source_packages() {
         cd .fits
         # sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
         # Updated for 0.10.1 release - source no longer works
-        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-0.10.1_0.zip
-        sudo -u $SUDO_USER unzip fits-0.10.1_0.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv fits-0.10.1 fits
+        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-0.10.2.zip
+        sudo -u $SUDO_USER unzip fits-0.10.2.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv fits-0.10.2 fits
         cd fits
         chmod 755 *.sh
         # No cleanup needed
