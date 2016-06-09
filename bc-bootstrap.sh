@@ -720,6 +720,9 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Copying libewf-20140608.tar.gz to /tmp"
         cp /tmp/bitcurator/externals/libewf-20140608.tar.gz /tmp
   
+  echoinfo "BitCurator environment: Copying libuna-alpha-20150027.tar.gz to /tmp"
+        cp /tmp/bitcurator/externals/libuna-alpha-20150927.tar.gz /tmp
+  
   echoinfo "BitCurator environment: Installing BitCurator mount policy app and mounter"
         cd /tmp/bitcurator/mounter
         cp *.py /usr/local/bin
@@ -842,6 +845,24 @@ install_source_packages() {
         cd /tmp
         rm thrift-0.9.3.tar.gz
         rm -rf thrift-0.9.3
+
+  # Install libuna from specific release
+  echoinfo "BitCurator environment: Building and installing libuna"
+        CDIR=$(pwd)
+
+        # Newer versions break a lot of stuff. Keep 20140608 for now.
+        cd /tmp
+        tar zxf libuna-alpha-20150927.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd libuna-20150927
+        ./configure >> $HOME/bitcurator-install.log 2>&1
+        make -s >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
+
+        # Now clean up
+        cd /tmp
+        rm -rf libuna-20150927
+        rm libuna-alpha-20150927.tar.gz
 
   # Install libewf from current sources
   echoinfo "BitCurator environment: Building and installing libewf"
