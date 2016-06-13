@@ -419,7 +419,8 @@ grsync
 gadmin-rsync
 systemback
 yad
-gradle"
+gradle
+hardinfo"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -590,7 +591,8 @@ aufs-tools
 grsync 
 gadmin-rsync 
 yad
-gradle"
+gradle
+hardinfo"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
