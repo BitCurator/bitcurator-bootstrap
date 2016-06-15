@@ -420,7 +420,8 @@ gadmin-rsync
 systemback
 yad
 gradle
-hardinfo"
+hardinfo
+synaptic"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -592,7 +593,8 @@ grsync
 gadmin-rsync 
 yad
 gradle
-hardinfo"
+hardinfo
+synaptic"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
