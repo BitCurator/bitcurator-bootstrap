@@ -823,14 +823,6 @@ install_bitcurator_files() {
 
 install_source_packages() {
 
-#  wget "https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz"  >> $HOME/sift-install.log 2>&1
-#  tar -zxf kibana-3.1.0.tar.gz  >> $HOME/sift-install.log 2>&1
-#  cd /tmp/kibana-3.1.0/ >> $HOME/sift-install.log 2>&1
-#  mkdir -p /var/www/html/kibana
-#  cp -r . /var/www/html/kibana >> $HOME/sift-install.log 2>&1
-#  cd $CDIR
-#}
-
   # Install Apache Thrift - packaged version too old in 14.04LTS and 16.04LTS
   echoinfo "BitCurator environment: Building and installing Apache Thrift"
   echoinfo " -- Please be patient. This may take several minutes..."
