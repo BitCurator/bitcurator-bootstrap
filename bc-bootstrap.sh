@@ -722,7 +722,7 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Copying libewf-20140608.tar.gz to /tmp"
         cp /tmp/bitcurator/externals/libewf-20140608.tar.gz /tmp
   
-  echoinfo "BitCurator environment: Copying libuna-alpha-20150027.tar.gz to /tmp"
+  echoinfo "BitCurator environment: Copying libuna-alpha-20150927.tar.gz to /tmp"
         cp /tmp/bitcurator/externals/libuna-alpha-20150927.tar.gz /tmp
   
   echoinfo "BitCurator environment: Installing BitCurator mount policy app and mounter"
@@ -1005,17 +1005,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q download.zeromq.org/zeromq-4.1.4.tar.gz
-	tar -zxf zeromq-4.1.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.1.4
+        wget -q download.zeromq.org/zeromq-4.1.5.tar.gz
+	tar -zxf zeromq-4.1.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd zeromq-4.1.5
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm zeromq-4.1.4.tar.gz
-        rm -rf zeromq-4.1.4
+        rm zeromq-4.1.5.tar.gz
+        rm -rf zeromq-4.1.5
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
