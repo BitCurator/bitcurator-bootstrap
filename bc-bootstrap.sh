@@ -239,8 +239,9 @@ install_ubuntu_16.04_deps() {
     #echoinfo "Adding SystemBack Repository"
     #add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding Ubuntu Tweak Repository"
-    add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
+    
+    #echoinfo "Adding Ubuntu Tweak Repository"
+    #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding Oracle Java Repository"
     add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -448,6 +449,9 @@ synaptic"
     return 0
 }
 
+# Removed, no longer needed:
+#unity-tweak-tool 
+#gnome-tweak-tool 
 install_ubuntu_16.04_packages() {
     packages="dkms 
 g++ 
@@ -479,8 +483,6 @@ ghex
 gnome-system-tools 
 gnome-panel 
 gnome-search-tool 
-unity-tweak-tool 
-gnome-tweak-tool 
 hfsutils 
 hfsutils-tcltk 
 hfsplus 
