@@ -595,6 +595,7 @@ grsync
 gadmin-rsync 
 yad
 gradle
+dialog
 hardinfo
 synaptic"
 
@@ -810,12 +811,38 @@ install_bitcurator_files() {
 
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
         cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
- 
+
+}
+
+install_ubuntu_14.04_respin_support() {
+  # Checkout code from bitcurator and put these files into place
+  echoinfo "BitCurator environment: Installing Distro/Respin Tools"
+  echoinfo " -- Please be patient. This may take several minutes..."
+	CDIR=$(pwd)
+  
   echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
         dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
-  echoinfo "BitCurator environment: Installing LiveCD imager"
+  echoinfo "BitCurator environment: Installing Blacklab LiveCD imager"
         dpkg -i /tmp/bitcurator/livecd/blacklabimager15.deb >> $HOME/bitcurator-install.log 2>&1
+
+  echoinfo "BitCurator environment: Cleaning up..."
+	cd $CDIR
+	rm -r -f /tmp/bitcurator
+
+}
+
+install_ubuntu_16.04_respin_support() {
+  # Checkout code from bitcurator and put these files into place
+  echoinfo "BitCurator environment: Installing Distro/Respin Tools"
+  echoinfo " -- Please be patient. This may take several minutes..."
+	CDIR=$(pwd)
+  
+  echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
+        dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
+ 
+  echoinfo "BitCurator environment: Installing Pinguy LiveCD imager"
+        dpkg -i /tmp/bitcurator/livecd/pinguybuilder_4.3-8_all-beta.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
@@ -1970,6 +1997,7 @@ if [ "$UPGRADE_ONLY" -eq 1 ]; then
   install_ubuntu_${VER}_pip_packages $ITYPE || echoerror "Updating Python Packages Failed"
   install_perl_modules || echoerror "Updating Perl Packages Failed"
   install_bitcurator_files || echoerror "Installing/Updating BitCurator Files Failed"
+  install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Python Packages Failed"
   install_source_packages || echoerror "Installing/Updating BitCurator Source Packages Failed"
   #install_kibana || echoerror "Installing/Updating Kibana Failed"
 
