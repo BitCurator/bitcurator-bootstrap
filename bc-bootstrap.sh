@@ -452,6 +452,8 @@ synaptic"
 # Removed, no longer needed:
 #unity-tweak-tool 
 #gnome-tweak-tool 
+# Removed, as deleted from Xenial repo:
+# libmyodbc 
 install_ubuntu_16.04_packages() {
     packages="dkms 
 g++ 
@@ -527,7 +529,6 @@ bison
 python3-pyqt4 
 python3-sip-dev 
 mysql-client 
-libmyodbc 
 unixodbc 
 unixodbc-dev 
 libmysqlclient-dev 
