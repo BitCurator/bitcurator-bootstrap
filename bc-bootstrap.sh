@@ -1997,7 +1997,7 @@ if [ "$UPGRADE_ONLY" -eq 1 ]; then
   install_ubuntu_${VER}_pip_packages $ITYPE || echoerror "Updating Python Packages Failed"
   install_perl_modules || echoerror "Updating Perl Packages Failed"
   install_bitcurator_files || echoerror "Installing/Updating BitCurator Files Failed"
-  install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Python Packages Failed"
+  install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
   install_source_packages || echoerror "Installing/Updating BitCurator Source Packages Failed"
   #install_kibana || echoerror "Installing/Updating Kibana Failed"
 
