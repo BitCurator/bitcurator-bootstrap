@@ -2048,6 +2048,7 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_perl_modules
     #install_kibana
     install_bitcurator_files
+    install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
     install_source_packages
 fi
 
