@@ -1035,8 +1035,9 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q download.zeromq.org/zeromq-4.1.5.tar.gz
-	tar -zxf zeromq-4.1.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        #wget -q download.zeromq.org/zeromq-4.1.5.tar.gz
+        wqet -q https://github.com/zeromq/zeromq4-1/releases/download/v4.1.5/zeromq-4.1.5.tar.gz
+        tar -zxf zeromq-4.1.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
         cd zeromq-4.1.5
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
