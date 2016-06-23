@@ -268,7 +268,7 @@ install_ubuntu_16.04_deps() {
     echoinfo "Upgrading all packages to latest version ..."
     __apt_get_upgrade_noinput >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Fixing swqppiness for build"
+    echoinfo "Fixing swappiness for build"
     sysctl vm.swappiness=10 >> $HOME/bitcurator-install.log 2>&1
 
     return 0
