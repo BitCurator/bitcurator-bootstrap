@@ -972,7 +972,8 @@ install_source_packages() {
         #sed -i 's/libewf_handle_read_random/libewf_handle_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
 
         # Temporary fix for erroenous auto (6/20/2016)
-        sed -i "s/auto byte = hex/unsigned char byte = hex/g" /usr/share/sleuthkit/tsk/auto/guid.cpp
+        # Removed 6/29
+        # sed -i "s/auto byte = hex/unsigned char byte = hex/g" /usr/share/sleuthkit/tsk/auto/guid.cpp
 
         # Copy ficlam to use location
         sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
