@@ -1203,22 +1203,24 @@ install_source_packages() {
 	CDIR=$(pwd)
 
         cd $HOME
-
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
-        sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagger >> $HOME/bitcurator-install.log 2>&1
-        cd bagger
-        sudo -u $SUDO_USER gradle distZip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger/build/distributions/bagger.zip $HOME/.bagger
-        cd $HOME/.bagger
-        rm -rf bagger
-        sudo -u $SUDO_USER unzip bagger.zip >> $HOME/bitcurator-install.log 2>&1 
 
-        #sudo -u $SUDO_USER wget -q http://sourceforge.net/projects/loc-xferutils/files/loc-bagger/2.1.3/bagger-2.1.3.zip >> $HOME/bitcurator-install.log 2>&1
-        #sudo -u $SUDO_USER unzip bagger-2.1.3 >> $HOME/bitcurator-install.log 2>&1
+        #sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagger >> $HOME/bitcurator-install.log 2>&1
+        #cd bagger
+        #sudo -u $SUDO_USER gradle distZip >> $HOME/bitcurator-install.log 2>&1
+        #sudo -u $SUDO_USER mv bagger/build/distributions/bagger.zip $HOME/.bagger
+        #cd $HOME/.bagger
+        #rm -rf bagger
+        #sudo -u $SUDO_USER unzip bagger.zip >> $HOME/bitcurator-install.log 2>&1 
 
-        # Now move the unzipped package to .bagger and clean up
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.1/bagger-2.7.1.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.7.1.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger-2.7.1 bagger >> $HOME/bitcurator-install.log 2>&1
+        rm bagger-2.7.1.zip
+
         # No cleanup needed at this point
+        cd /tmp
 
   # Install sdhash (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
