@@ -237,7 +237,7 @@ install_ubuntu_16.04_deps() {
     #apt-add-repository -y ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     #echoinfo "Adding SystemBack Repository"
-    #add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     
     #echoinfo "Adding Ubuntu Tweak Repository"
@@ -594,6 +594,7 @@ discover
 aufs-tools 
 grsync 
 gadmin-rsync 
+systemback
 yad
 gradle
 dialog
