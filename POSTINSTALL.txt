@@ -70,3 +70,10 @@ Exec=gnome-terminal -e "bash -lc \"fido; exec bash\""
 Adding a desktop file to the Unity launcher
 -------------------------------------------
 https://help.ubuntu.com/community/UnityLaunchersAndDesktopFiles
+
+Notes on auto-login not working:
+--------------------------------
+If you have VirtualBox installed on the system you are dist/backup. The 'vboxadd' user id is the same as casper. Running this will change caspers user-uid so it isn't the same as vboxadd.
+
+Code:
+sed -i -e 's@user-uid [0-9]*@user-uid 990@' /usr/share/initramfs-tools/scripts/casper-bottom/*adduser
