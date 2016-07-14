@@ -599,7 +599,11 @@ yad
 gradle
 dialog
 hardinfo
-synaptic"
+synaptic
+libvte-common
+libvte9
+plymouth-x11
+python-vte"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
