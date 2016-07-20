@@ -481,7 +481,8 @@ automake
 openjdk-8-jdk
 ant 
 expect 
-ghex 
+ghex
+bless 
 gnome-system-tools 
 gnome-panel 
 gnome-search-tool 
