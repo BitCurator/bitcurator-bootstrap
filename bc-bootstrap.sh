@@ -955,17 +955,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.3/poco-1.7.3.tar.gz
-        tar -zxf poco-1.7.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.3
+        wget -q pocoproject.org/releases/poco-1.7.4/poco-1.7.4.tar.gz
+        tar -zxf poco-1.7.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.4
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm poco-1.7.3.tar.gz
-        rm -rf poco-1.7.3
+        rm poco-1.7.4.tar.gz
+        rm -rf poco-1.7.4
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
