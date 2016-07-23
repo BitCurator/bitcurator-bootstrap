@@ -604,7 +604,8 @@ synaptic
 libvte-common
 libvte9
 plymouth-x11
-python-vte"
+python-vte
+clonezilla"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
