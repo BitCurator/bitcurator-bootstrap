@@ -1080,18 +1080,32 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing lightgrep"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/jonstewart/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/liblightgrep
-        chmod 755 bootstrap.sh
-        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure --with-boost-chrono=no --with-boost-thread=no --with-boost-program-options=no --with-boost-system=no --prefix=/usr >> $HOME/bitcurator-install.log 2>&1
-        make -s >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-        # Now clean up
-        cd /tmp
-        rm -rf liblightgrep
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
+
+  # Updated for BitCurator 1.7+
+  git clone --recursive git://github.com/strozfriedberg/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
+  cd /tmp/liblightgrep
+  autoreconf -fi >> $HOME/bitcurator-install.log 2>&1
+  ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
+  make -j4 -s >> $HOME/bitcurator-install.log 2>&1
+  make install >> $HOME/bitcurator-install.log 2>&1
+  cp pylightgrep/lightgrep.py /usr/local/bin
+  chmod 755 /usr/local/bin/lightgrep.py
+  cd /tmp
+  rm -rf liblightgrep
+  ldconfig >> $HOME/bitcurator-install.log 2>&1
+
+#	git clone --recursive https://github.com/jonstewart/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
+#	cd /tmp/liblightgrep
+#        chmod 755 bootstrap.sh
+#        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
+#        ./configure --with-boost-chrono=no --with-boost-thread=no --with-boost-program-options=no --with-boost-system=no --prefix=/usr >> $HOME/bitcurator-install.log 2>&1
+#        make -s >> $HOME/bitcurator-install.log 2>&1
+#        make install >> $HOME/bitcurator-install.log 2>&1
+#        ldconfig >> $HOME/bitcurator-install.log 2>&1
+#        # Now clean up
+#        cd /tmp
+#        rm -rf liblightgrep
+#        ldconfig >> $HOME/bitcurator-install.log 2>&1
 
   # Install bulk_extractor
   echoinfo "BitCurator environment: Building and installing bulk_extractor"
