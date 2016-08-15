@@ -1920,6 +1920,10 @@ configure_ubuntu_16.04_bitcurator_vm() {
 
   echoinfo "BitCurator VM: Fixing permissions in user's home directory"
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
+ 
+  echoinfo "BitCurator VM: vboxvideo module load force"
+  bash -c 'echo vboxvideo >> /etc/modules'
+
 }
 
 complete_message() {
