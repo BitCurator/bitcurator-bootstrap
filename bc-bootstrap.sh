@@ -1922,7 +1922,8 @@ configure_ubuntu_16.04_bitcurator_vm() {
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
  
   echoinfo "BitCurator VM: vboxvideo module load force"
-  bash -c 'echo vboxvideo >> /etc/modules'
+  # held back for now
+  # bash -c 'echo vboxvideo >> /etc/modules'
 
 }
 
