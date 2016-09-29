@@ -956,17 +956,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.4/poco-1.7.4.tar.gz
-        tar -zxf poco-1.7.4.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.4
+        wget -q pocoproject.org/releases/poco-1.7.5/poco-1.7.5.tar.gz
+        tar -zxf poco-1.7.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.5
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm poco-1.7.4.tar.gz
-        rm -rf poco-1.7.4
+        rm poco-1.7.5.tar.gz
+        rm -rf poco-1.7.5
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -1012,8 +1012,10 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://github.com/py4n6/pytsk/releases/download/20150406/pytsk-20150406.tgz
-        tar -zxf pytsk-20150406.tgz >> $HOME/bitcurator-install.log 2>&1
+        # wget -q https://github.com/py4n6/pytsk/releases/download/20150406/pytsk-20150406.tgz
+        # tar -zxf pytsk-20150406.tgz >> $HOME/bitcurator-install.log 2>&1
+        wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk-20160721.tgz
+        tar -zxf pytsk-20160721.tgz >> $HOME/bitcurator-install.log 2>&1
         cd pytsk
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
@@ -1026,17 +1028,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.10.tar.gz
-	tar -zxf libsodium-1.0.10.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd libsodium-1.0.10
+        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
+	tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd libsodium-1.0.11
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm libsodium-1.0.10.tar.gz
-        rm -rf libsodium-1.0.10
+        rm libsodium-1.0.11.tar.gz
+        rm -rf libsodium-1.0.11
 
   # Install ZeroMQ (packaged version in 14.04LTS and 16.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
@@ -1061,9 +1063,9 @@ install_source_packages() {
 	CDIR=$(pwd)
         # git clone --recursive https://github.com/simsong/hashdb /tmp/hashdb >> $HOME/bitcurator-install.log 2>&1
         cd /tmp
-        wget -q https://github.com/NPS-DEEP/hashdb/archive/v2.0.1.tar.gz
-        tar -zxf v2.0.1.tar.gz
-        cd hashdb-2.0.1
+        wget -q https://github.com/NPS-DEEP/hashdb/archive/v3.0.0.tar.gz
+        tar -zxf v3.0.0.tar.gz
+        cd hashdb-3.0.0
         chmod 755 bootstrap.sh
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
         ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
@@ -1072,8 +1074,8 @@ install_source_packages() {
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm -rf hashdb-2.0.1
-        rm v2.0.1.tar.gz
+        rm -rf hashdb-3.0.0
+        rm v3.0.0.tar.gz
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 
   # Install lightgrep
@@ -1235,10 +1237,10 @@ install_source_packages() {
         #rm -rf bagger
         #sudo -u $SUDO_USER unzip bagger.zip >> $HOME/bitcurator-install.log 2>&1 
 
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.1/bagger-2.7.1.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.7.1.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.7.1 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.7.1.zip
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.2/bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger-2.7.2 bagger >> $HOME/bitcurator-install.log 2>&1
+        rm bagger-2.7.2.zip
 
         # No cleanup needed at this point
         cd /tmp
@@ -1354,10 +1356,10 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .fits
         cd .fits
         # sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
-        # Updated for 0.10.1 release - source no longer works
-        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-0.10.2.zip
-        sudo -u $SUDO_USER unzip fits-0.10.2.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv fits-0.10.2 fits
+        # Updated for 1.0.2 release - previous source no longer works
+        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.2.zip
+        sudo -u $SUDO_USER unzip fits-1.0.2.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv fits-1.0.2 fits
         cd fits
         chmod 755 *.sh
         # No cleanup needed
