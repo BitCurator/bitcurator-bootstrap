@@ -173,7 +173,7 @@ install_ubuntu_14.04_deps() {
     echoinfo "Installing Python Software Properies ... "
     __apt_get_install_noinput software-properties-common >> $HOME/bitcurator-install.log 2>&1  || return 1
 
-    echoinfo "Enabling Universal Repository ... "
+    echoinfo "Enabling Universe Repository ... "
     __enable_universe_repository >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     #echoinfo "Enabling Elastic Repository ... "
@@ -232,19 +232,22 @@ install_ubuntu_16.04_deps() {
     #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
     #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
 
+    # Need to replace this for future testing with ch1x0r's master
     #echoinfo "Adding Respin Repository"
     #apt-add-repository -y ppa:sergiomejia666/respin >> $HOME/bitcurator-install.log 2>&1 || return 1
     #apt-add-repository -y ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
 
+    # Not needed for current build, SystemBack is broken for 16.04
     #echoinfo "Adding SystemBack Repository"
-    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+    #add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    
+    # Not needed fo current build, Tweak is outdated
     #echoinfo "Adding Ubuntu Tweak Repository"
     #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
+    # Not needed for current build, still use OpenJDK
     echoinfo "Adding Oracle Java Repository"
-    add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
     # Need oracle-java8-installer to replace openjdk in package list below (future)
 
     echoinfo "Adding Guymager Repository"
