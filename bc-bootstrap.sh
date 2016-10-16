@@ -598,7 +598,6 @@ discover
 aufs-tools 
 grsync 
 gadmin-rsync 
-systemback
 yad
 gradle
 dialog
