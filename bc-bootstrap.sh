@@ -1883,7 +1883,7 @@ configure_ubuntu_16.04_bitcurator_vm() {
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv2Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
+        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv3Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
 
   
   echoinfo "BitCurator VM: Adding primary user to vboxsf group"
