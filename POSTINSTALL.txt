@@ -22,6 +22,22 @@ Additional optional manual steps:
 - Disabling USB automount when using udisks2: 
   http://askubuntu.com/questions/652905/how-to-disable-usb-automount-in-xubuntu-14-04
 
+- Disable translation downloads:
+  Create file /etc/apt/apt.conf.d/99translations
+  Add the following line:
+    Acquire::Languages "none";
+  sudo rm -r /var/lib/apt/lists/*Translation*
+
+
+- Disable ipv6 (specialized builds, not typical):
+  - Edit /etc/sysctl.conf:
+
+  net.ipv6.conf.all.disable_ipv6 = 1
+  net.ipv6.conf.default.disable_ipv6 = 1
+  net.ipv6.conf.lo.disable_ipv6 = 1
+
+  run sudo sysctl -p and cat /proc/sys/net/ipv6/conf/all/disable_ipv6 to check
+
 Guidelines for Preparing the BitCurator Live ISO
 ------------------------------------------------
 The blacklabimager fork of remasterys used to create live ISO images up to the
