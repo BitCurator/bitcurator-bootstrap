@@ -854,8 +854,9 @@ install_ubuntu_16.04_respin_support() {
   echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
         dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
-  echoinfo "BitCurator environment: Installing Pinguy LiveCD imager"
-        dpkg -i /tmp/bitcurator/livecd/pinguybuilder_4.3-8_all-beta.deb >> $HOME/bitcurator-install.log 2>&1
+  echoinfo "BitCurator environment: Installing BodhiBuilder LiveCD imager"
+        #dpkg -i /tmp/bitcurator/livecd/pinguybuilder_4.3-8_all-beta.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator/livecd/bodhibuilder_2.2.1.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
