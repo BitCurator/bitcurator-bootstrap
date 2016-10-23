@@ -609,6 +609,7 @@ plymouth-x11
 python-vte
 clonezilla
 xorriso
+mokutil
 syslinux-utils"
 
 # ubuntu-restricted-extras 
