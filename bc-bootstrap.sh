@@ -238,8 +238,8 @@ install_ubuntu_16.04_deps() {
     #apt-add-repository -y ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     # Included for convenience
-    echoinfo "Adding SystemBack Repository"
-    add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
+    # echoinfo "Adding SystemBack Repository"
+    # add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     # Not needed fo current build, Tweak is outdated
     #echoinfo "Adding Ubuntu Tweak Repository"
@@ -608,7 +608,7 @@ libvte9
 plymouth-x11
 python-vte
 clonezilla
-systemback"
+xorriso"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
