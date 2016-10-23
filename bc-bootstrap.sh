@@ -608,7 +608,8 @@ libvte9
 plymouth-x11
 python-vte
 clonezilla
-xorriso"
+xorriso
+syslinux-utils"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
