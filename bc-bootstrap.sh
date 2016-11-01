@@ -1021,14 +1021,14 @@ install_source_packages() {
         cd /tmp
         # wget -q https://github.com/py4n6/pytsk/releases/download/20150406/pytsk-20150406.tgz
         # tar -zxf pytsk-20150406.tgz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk-20160721.tgz
-        tar -zxf pytsk-20160721.tgz >> $HOME/bitcurator-install.log 2>&1
-        cd pytsk
+        wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk3-20160721.tar.gz
+        tar -zxf pytsk3-20160721.tgz >> $HOME/bitcurator-install.log 2>&1
+        cd pytsk3-20160721
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm -rf pytsk
+        rm -rf pytsk3-20160721
   
   # Install libsodium (not packaged version in 14.04LTS or 16.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
