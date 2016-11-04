@@ -980,6 +980,8 @@ install_source_packages() {
 	CDIR=$(pwd)
         git clone --recursive https://github.com/sleuthkit/sleuthkit /usr/share/sleuthkit >> $HOME/bitcurator-install.log 2>&1
         cd /usr/share/sleuthkit
+        git fetch
+        git checkout master >> $HOME/bitcurator-install.log 2>&1
 
         # Not needed for 20140608 build
         # Fix libewf random handle ref
