@@ -1161,7 +1161,7 @@ install_source_packages() {
 	CDIR=$(pwd)
         mkdir /usr/share/hfsexplorer
         cd /usr/share/hfsexplorer
-        wget -q http://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1/hfsexplorer-0.23.1-bin.zip
+        wget -q https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1/hfsexplorer-0.23.1-bin.zip
 	unzip hfsexplorer-0.23.1-bin.zip >> $HOME/bitcurator-install.log 2>&1
         rm hfsexplorer-0.23.1-bin.zip
         ldconfig >> $HOME/bitcurator-install.log 2>&1
@@ -1321,7 +1321,7 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing ssdeep"
 	CDIR=$(pwd)
         cd /tmp
-        wget -q http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
+        wget -q https://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
         tar zxvf ssdeep-2.13.tar.gz >> $HOME/bitcurator-install.log 2>&1
         cd ssdeep-2.13
         ./configure >> $HOME/bitcurator-install.log 2>&1
