@@ -1352,8 +1352,8 @@ install_source_packages() {
         cd /tmp
         git clone https://github.com/openpreserve/fido >> $HOME/bitcurator-install.log 2>&1
         cd fido
-        python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
-        python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
+        python setup.py build >> $HOME/bitcurator-install.log 2>&1
+        python setup.py install >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
         rm -rf fido
