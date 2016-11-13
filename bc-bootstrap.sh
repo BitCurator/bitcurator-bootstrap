@@ -1301,6 +1301,18 @@ install_source_packages() {
         cd /tmp
         rm -rf pyExifToolGUI
 
+  # Install FIDO (not packaged for 14.04LTS or 16.04LTS, use openpreserve source)
+  echoinfo "BitCurator environment: Building and installing FIDO"
+	CDIR=$(pwd)
+        cd /tmp
+        git clone https://github.com/openpreserve/fido >> $HOME/bitcurator-install.log 2>&1
+        cd fido
+        python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
+        python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
+	# Now clean up
+        cd /tmp
+        rm -rf fido
+
   # Install testdisk and photorec (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing testdisk and photorec"
 	CDIR=$(pwd)
@@ -1346,33 +1358,15 @@ install_source_packages() {
         cd /tmp
         rm -rf openpyxl
 
-  # Install FIDO (not packaged for 14.04LTS or 16.04LTS, use openpreserve source)
-  echoinfo "BitCurator environment: Building and installing FIDO"
-	CDIR=$(pwd)
-        cd /tmp
-        git clone https://github.com/openpreserve/fido >> $HOME/bitcurator-install.log 2>&1
-        cd fido
-        python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
-        python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm -rf fido
-
 #  # Install FITS (not packaged for 14.04LTS or 16.04LTS, use Harvard GitHub source)
 #  echoinfo "BitCurator environment: Building and installing FITS"
 #	CDIR=$(pwd)
 #        cd $HOME
 #        sudo -u $SUDO_USER mkdir .fits
 #        cd .fits
-#        # sudo -u $SUDO_USER git clone https://github.com/harvard-lts/fits >> $HOME/bitcurator-install.log 2>&1
-#        # Updated for 1.0.2 release - previous source no longer works
 #        wget -q http://projects.iq.harvard.edu/files/fits/files/fits-1.0.3.zip
 #        sudo -u $SUDO_USER unzip fits-1.0.3.zip >> $HOME/bitcurator-install.log 2>&1
 #        sudo -u $SUDO_USER mv fits-1.0.3 fits
-#        cd fits
-#        chmod 755 *.sh
-#        # No cleanup needed
-#        cd /tmp
 
   # Install regripper (not packaged for 14.04LTS or 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing regripper"
