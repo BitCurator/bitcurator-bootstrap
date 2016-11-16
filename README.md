@@ -27,12 +27,16 @@ in the VirtualBox "Devices" menu.
 
 To check out the code, make sure you have git installed. Enter the following in a terminal:
 
-  * sudo apt-get install git
-  * git clone https://github.com/bitcurator/bitcurator-bootstrap
+```shell
+sudo apt-get install git
+git clone https://github.com/bitcurator/bitcurator-bootstrap
+```
 
 To run, enter the following inside the bitcurator-bootstrap directory:
 
-  * sudo ./bc-bootstrap.sh -s -i -y
+```shell
+sudo ./bc-bootstrap.sh -s -i -y
+```
 
 This will tell the script to skin the environment, install all packages, and continue
 without prompting the user (even if failures are encountered).
@@ -41,7 +45,9 @@ The script requires one interaction from the user (near the end of the build) to
 select the correct Plymouth theme to "skin" then environment for BitCurator. When
 you see the line:
 
-  "There are 4 choices for the alternative default.plymouth (providing /lib/plymouth/themes/default.plymouth)."
+```shell
+There are 4 choices for the alternative default.plymouth (providing /lib/plymouth/themes/default.plymouth).
+```
 
 and a list of choices, type the "1" key and hit enter. The script should now complete.
 Type "sudo reboot" and hit enter to reboot.
