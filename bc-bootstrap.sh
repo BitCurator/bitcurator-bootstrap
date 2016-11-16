@@ -228,33 +228,10 @@ install_ubuntu_16.04_deps() {
     echoinfo "Enabling Universal Repository ... "
     __enable_universe_repository >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    #echoinfo "Enabling Elastic Repository ... "
-    #wget -qO - "https://packages.elasticsearch.org/GPG-KEY-elasticsearch" | apt-key add - >> $HOME/sift-install.log 2>&1 || return 1
-    #add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" >> $HOME/sift-install.log 2>&1 || return 1
-
-    # Need to replace this for future testing with ch1x0r's master
-    #echoinfo "Adding Respin Repository"
-    #apt-add-repository -y ppa:sergiomejia666/respin >> $HOME/bitcurator-install.log 2>&1 || return 1
-    #apt-add-repository -y ppa:sergiomejia666/xresprobe >> $HOME/bitcurator-install.log 2>&1 || return 1
-
-    # Included for convenience
-    # echoinfo "Adding SystemBack Repository"
-    # add-apt-repository -y ppa:nemh/systemback >> $HOME/bitcurator-install.log 2>&1 || return 1
-
-    # Not needed fo current build, Tweak is outdated
-    #echoinfo "Adding Ubuntu Tweak Repository"
-    #add-apt-repository -y ppa:tualatrix/ppa  >> $HOME/bitcurator-install.log 2>&1 || return 1
-
-    # Not needed for current build, still use OpenJDK
-    # echoinfo "Adding Oracle Java Repository"
-    # add-apt-repository -y ppa:webupd8team/java >> $HOME/bitcurator-install.log 2>&1 || return 1
-    # Need oracle-java8-installer to replace openjdk in package list below (future)
-
     echoinfo "Adding Guymager Repository"
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
-    #apt-get install guymager-beta
     
     echoinfo "Adding Yad Repository: $@"
     add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -725,37 +702,41 @@ install_bitcurator_files() {
   echoinfo "BitCurator environment: Installing BitCurator Tools"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/bitcurator/bitcurator /tmp/bitcurator >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/bitcurator/bctools
+
+	git clone --recursive https://github.com/bitcurator/bitcurator-distro-main /tmp/bitcurator-distro-main >> $HOME/bitcurator-install.log 2>&1
+
+	git clone --recursive https://github.com/bitcurator/bitcurator-distro-tools /tmp/bitcurator-distro-tools >> $HOME/bitcurator-install.log 2>&1
+
+  echoinfo "BitCurator environment: Installing bctools"
+	      cd /tmp/bitcurator-distro-tools
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
-	#bash install.sh >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Installing py3fpdf"
-        cd /tmp/bitcurator/externals/py3fpdf
+        cd /tmp/bitcurator-distro-main/externals/py3fpdf
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         sudo python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
   
   echoinfo "BitCurator environment: Copying libewf-20140608.tar.gz to /tmp"
-        cp /tmp/bitcurator/externals/libewf-20140608.tar.gz /tmp
+        cp /tmp/bitcurator-distro-main/externals/libewf-20140608.tar.gz /tmp
   
   echoinfo "BitCurator environment: Copying libuna-alpha-20150927.tar.gz to /tmp"
-        cp /tmp/bitcurator/externals/libuna-alpha-20150927.tar.gz /tmp
+        cp /tmp/bitcurator-distro-main/externals/libuna-alpha-20150927.tar.gz /tmp
   
   echoinfo "BitCurator environment: Installing BitCurator mount policy app and mounter"
-        cd /tmp/bitcurator/mounter
+        cd /tmp/bitcurator-distro-main/mounter
         cp *.py /usr/local/bin
 
   echoinfo "BitCurator environment: Installing BitCurator desktop launcher scripts"
-        cd /tmp/bitcurator/scripts
+        cd /tmp/bitcurator-distro-main/scripts
         cp ./launch-scripts/* /usr/local/bin 
   
   echoinfo "BitCurator environment: Moving BitCurator configuration files to /etc/bitcurator"
-        cd /tmp/bitcurator/env/etc
+        cd /tmp/bitcurator-distro-main/env/etc
         cp -r bitcurator /etc
  
   echoinfo "BitCurator environment: Copying .vimrc and editor refinements to home"
-        cd /tmp/bitcurator/env
+        cd /tmp/bitcurator-distro-main/env
         cp .vimrc $HOME
         cp -r .vim $HOME
         cd $HOME/.vim
@@ -764,43 +745,43 @@ install_bitcurator_files() {
         cd /tmp
  
   echoinfo "BitCurator environment: Moving BitCurator sudoers file to /etc/sudoers"
-        cd /tmp/bitcurator/env/etc
+        cd /tmp/bitcurator-distro-main/env/etc
         cp sudoers /etc
         chmod 440 /etc/sudoers
 
   echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
-        cd /tmp/bitcurator/env/.config
+        cd /tmp/bitcurator-distro-main/env/.config
         sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
         chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
   
   echoinfo "BitCurator environment: Moving BitCurator nautilus files to $HOME/.local/share/nautilus/"
-        cd /tmp/bitcurator/env/.local/share/nautilus
+        cd /tmp/bitcurator-distro-main/env/.local/share/nautilus
         sudo -u $SUDO_USER rsync -a -v --ignore-existing scripts $HOME/.local/share/nautilus >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
-        cd /tmp/bitcurator/env/etc
+        cd /tmp/bitcurator-distro-main/env/etc
         cp cron.weekly/fstrim /etc/cron.weekly/fstrim
 
   echoinfo "BitCurator environment: Copying fmount support scripts to /usr/local/bin"
-        cd /tmp/bitcurator/env/usr/local/bin
+        cd /tmp/bitcurator-distro-main/env/usr/local/bin
         cp * /usr/local/bin
 
   echoinfo "BitCurator environment: Copying rbfstab scripts to /usr/sbin"
-        cd /tmp/bitcurator/env/usr/sbin
+        cd /tmp/bitcurator-distro-main/env/usr/sbin
         cp * /usr/sbin
   
   echoinfo "BitCurator environment: Force fstab options for devices"
-        cd /tmp/bitcurator/env/etc/udev/rules.d
+        cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
         cp fstab.rules /etc/udev/rules.d
 
   echoinfo "BitCurator environment: Moving BitCurator icons and pixmaps to /usr/share"
-        cd /tmp/bitcurator/env/usr/share/icons
+        cd /tmp/bitcurator-distro-main/env/usr/share/icons
         cp -r bitcurator /usr/share/icons
-        cd /tmp/bitcurator/env/usr/share/pixmaps
+        cd /tmp/bitcurator-distro-main/env/usr/share/pixmaps
         cp -r * /usr/share/pixmaps
   
   echoinfo "BitCurator environment: Updating grub configuration"
-        cd /tmp/bitcurator/env/etc/default
+        cd /tmp/bitcurator-distro-main/env/etc/default
         cp grub /etc/default/grub
         update-grub >> $HOME/bitcurator-install.log 2>&1
  
@@ -814,17 +795,17 @@ install_bitcurator_files() {
         fi
 
         # We'll be transfering desktop-folders contents later...
-        cp -r /tmp/bitcurator/env/desktop-folders /usr/share/bitcurator/resources
+        cp -r /tmp/bitcurator-distro-main/env/desktop-folders /usr/share/bitcurator/resources
         # We'll also be transfering plymouth contents later...
 
         # Copy resources for 14.04
-        cp -r /tmp/bitcurator/env/lib/plymouth /usr/share/bitcurator/resources
+        cp -r /tmp/bitcurator-distro-main/env/lib/plymouth /usr/share/bitcurator/resources
 
         # Copy resources for 16.04
-        cp -r /tmp/bitcurator/env/usr/share/plymouth /usr/share/bitcurator/resources/xenial
+        cp -r /tmp/bitcurator-distro-main/env/usr/share/plymouth /usr/share/bitcurator/resources/xenial
 
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
-        cp -r /tmp/bitcurator/env/images /usr/share/bitcurator/resources
+        cp -r /tmp/bitcurator-distro-main/env/images /usr/share/bitcurator/resources
 
 }
 
@@ -835,14 +816,14 @@ install_ubuntu_14.04_respin_support() {
 	CDIR=$(pwd)
   
   echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
-        dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Installing Blacklab LiveCD imager"
-        dpkg -i /tmp/bitcurator/livecd/blacklabimager15.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/blacklabimager15.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
-	rm -r -f /tmp/bitcurator
+	rm -r -f /tmp/bitcurator-distro-main
 
 }
 
@@ -853,15 +834,14 @@ install_ubuntu_16.04_respin_support() {
 	CDIR=$(pwd)
   
   echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
-        dpkg -i /tmp/bitcurator/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Installing BodhiBuilder LiveCD imager"
-        #dpkg -i /tmp/bitcurator/livecd/pinguybuilder_4.3-8_all-beta.deb >> $HOME/bitcurator-install.log 2>&1
-        dpkg -i /tmp/bitcurator/livecd/bodhibuilder_2.2.1.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.1.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
-	rm -r -f /tmp/bitcurator
+	rm -r -f /tmp/bitcurator-distro-main
 
 }
 
@@ -915,18 +895,6 @@ install_source_packages() {
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 
-        #git clone --recursive https://github.com/libyal/libewf /tmp/libewf >> $HOME/bitcurator-install.log 2>&1
-        #git checkout 1fb9693145907f59ef3401b58d7ec43a7b14ca15 .
-        #./synclibs.sh >> $HOME/bitcurator-install.log 2>&1
-        #./autogen.sh >> $HOME/bitcurator-install.log 2>&1
-        # ./configure --enable-python --enable-v1-api >> $HOME/bitcurator-install.log 2>&1
-        # ./configure --enable-python --enable-python2 --enable-python3 >> $HOME/bitcurator-install.log 2>&1
-        # Use this configure to build libewf-experimental successfully in Ubuntu
-        #./configure --enable-python --enable-python3 >> $HOME/bitcurator-install.log 2>&1
-        #make -s >> $HOME/bitcurator-install.log 2>&1
-        #make install >> $HOME/bitcurator-install.log 2>&1
-        #ldconfig >> $HOME/bitcurator-install.log 2>&1
-
         # Now clean up
         cd /tmp
         rm -rf libewf-20140608
@@ -935,11 +903,6 @@ install_source_packages() {
   # Install AFFLIBv3 (may remove this in future, for now use sshock fork)
   echoinfo "BitCurator environment: Building and installing AFFLIBv3"
 	CDIR=$(pwd)
-	# git clone --recursive https://github.com/simsong/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
-  #
-  # Note: The repo above is still available, but AFFLIBv3 is now being
-  # maintained by Phillip Hellewell. Use his fork instead.
-  #
 	git clone --recursive https://github.com/sshock/AFFLIBv3 /tmp/AFFLIBv3 >> $HOME/bitcurator-install.log 2>&1
 	cd /tmp/AFFLIBv3
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
@@ -983,38 +946,17 @@ install_source_packages() {
         git fetch
         git checkout master >> $HOME/bitcurator-install.log 2>&1
 
-        # Not needed for 20140608 build
-        # Fix libewf random handle ref
-        #sed -i 's/libewf_handle_read_random/libewf_handle_read_buffer_at_offset/' /usr/share/sleuthkit/tsk/img/ewf.c
-
-        # Temporary fix for erroenous auto (6/20/2016)
-        # Removed 6/29
-        # sed -i "s/auto byte = hex/unsigned char byte = hex/g" /usr/share/sleuthkit/tsk/auto/guid.cpp
-
         # Copy ficlam to use location
         sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
         sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/ficlam.sh /home/bcadmin/.fiwalk
         sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/clamconfig.txt /home/bcadmin/.fiwalk
         sudo -u $SUDO_USER chmod 755 /home/bcadmin/.fiwalk/ficlam.sh
-        
 
         ./bootstrap >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
-
-        # NOTE: Framework is not currently needed. Maybe in a future version.
-        #echoinfo "BitCurator environment: Building and installing The Sleuth Kit framework"
-        #      cd framework
-        #      ./bootstrap >> $HOME/bitcurator-install.log 2>&1
-        #      ./configure >> $HOME/bitcurator-install.log 2>&1
-        #      make -s >> $HOME/bitcurator-install.log 2>&1
-        #      make install >> $HOME/bitcurator-install.log 2>&1
-        #      ldconfig >> $HOME/bitcurator-install.log 2>&1
-        # Now clean up
-        # cd /tmp
-        # rm -rf sleuthkit
 
   # Install PyTSK
   echoinfo "BitCurator environment: Building and installing PyTSK (Python bindings for TSK)"
@@ -1105,19 +1047,6 @@ install_source_packages() {
   rm -rf liblightgrep
   ldconfig >> $HOME/bitcurator-install.log 2>&1
 
-#	git clone --recursive https://github.com/jonstewart/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
-#	cd /tmp/liblightgrep
-#        chmod 755 bootstrap.sh
-#        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
-#        ./configure --with-boost-chrono=no --with-boost-thread=no --with-boost-program-options=no --with-boost-system=no --prefix=/usr >> $HOME/bitcurator-install.log 2>&1
-#        make -s >> $HOME/bitcurator-install.log 2>&1
-#        make install >> $HOME/bitcurator-install.log 2>&1
-#        ldconfig >> $HOME/bitcurator-install.log 2>&1
-#        # Now clean up
-#        cd /tmp
-#        rm -rf liblightgrep
-#        ldconfig >> $HOME/bitcurator-install.log 2>&1
-
   # Install bulk_extractor
   echoinfo "BitCurator environment: Building and installing bulk_extractor"
   echoinfo " -- Please be patient. This may take several minutes..."
@@ -1207,27 +1136,6 @@ install_source_packages() {
         cd /tmp
         rm -rf bagit-python
 
-  # NOTE: REMOVED FOR 1.7 / 16.04 BUILDS  
-  # Install bagit (not packaged for 14.04LTS or 16.04LTS, use author source)
-  # Bagit doesn't have an installer, and is weirdly packaged. For now,
-  # put it in a .bagit directory in $HOME
-  #echoinfo "BitCurator environment: Building and installing bagit"
-	#CDIR=$(pwd)
-  #      cd $HOME
-  #      sudo -u $SUDO_USER mkdir .bagit
-  #      cd .bagit
-  #      sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagit-java >> $HOME/bitcurator-install.log 2>&1
-  #      cd bagit-java
-  #      sudo -u $SUDO_USER mvn package >> $HOME/bitcurator-install.log 2>&1
-  #      cd target
-  #      sudo -u $SUDO_USER unzip bagit-4.10.0-SNAPSHOT-bin.zip >> $HOME/bitcurator-install.log 2>&1
-  #      sudo -u $SUDO_USER mv bagit-4.10.0-SNAPSHOT $HOME/.bagit/bagit-4.10.0 >> $HOME/bitcurator-install.log 2>&1
-	## Now clean up
-  #      cd $HOME/.bagit
-  #      rm -rf bagit-java
-  #      cd /tmp
-  #      # Check me
-  
   # Install loc-bagger (not packaged for 14.04LTS or 16.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
@@ -1237,14 +1145,6 @@ install_source_packages() {
         cd $HOME
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
-
-        #sudo -u $SUDO_USER git clone https://github.com/LibraryOfCongress/bagger >> $HOME/bitcurator-install.log 2>&1
-        #cd bagger
-        #sudo -u $SUDO_USER gradle distZip >> $HOME/bitcurator-install.log 2>&1
-        #sudo -u $SUDO_USER mv bagger/build/distributions/bagger.zip $HOME/.bagger
-        #cd $HOME/.bagger
-        #rm -rf bagger
-        #sudo -u $SUDO_USER unzip bagger.zip >> $HOME/bitcurator-install.log 2>&1 
 
         sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.2/bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
         sudo -u $SUDO_USER unzip bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
@@ -1397,36 +1297,9 @@ install_source_packages() {
         cd /tmp
         rm -rf nsrllookup
 
-  # FUTURE - need fix for automated VeraPDF install
-  # Install VeraPDF (not packaged for 14.04LTS or 16.04LTS, use author source)
-  # echoinfo "BitCurator environment: Building and installing VeraPDF"
-	# CDIR=$(pwd)
-  #      cd /tmp
-  #      wget -q downloads.verapdf.org/rel/verapdf-installer.zip
-  #      unzip verapdf-installer.zip >> $HOME/bitcurator-install.log 2>&1
-  #      rm verapdf-installer.zip
-  #      mv verapdf* verapdf
-  #      cd verapdf
-  #      ./verapdf-install >> $HOME/bitcurator-install.log 2>&1
-
 }
 
 configure_ubuntu() {
-  #echoinfo "BitCurator VM: Creating Cases Folder"
-  #	if [ ! -d /cases ]; then
-  #		mkdir -p /cases
-  #		chown $SUDO_USER:$SUDO_USER /cases
-  #		chmod 775 /cases
-  #		chmod g+s /cases
-  #	fi
-
-  #echoinfo "BitCurator VM: Creating Mount Folders"
-  #	for dir in usb vss shadow windows_mount e01 aff ewf bde iscsi
-  #	do
-  #		if [ ! -d /mnt/$dir ]; then
-  #			mkdir -p /mnt/$dir
-  #		fi
-  #	done
 
   echoinfo "BitCurator VM: Setting up symlinks to useful scripts"
   if [ ! -L /usr/bin/vol.py ] && [ ! -e /usr/bin/vol.py ]; then
@@ -1441,11 +1314,6 @@ configure_ubuntu() {
 	if [ ! -L /usr/bin/mount_ewf.py ] && [ ! -e /usr/bin/mount_ewf.py ]; then
 		ln -s /usr/bin/ewfmount /usr/bin/mount_ewf.py
 	fi
-
-#  if [ ! -L /usr/local/etc/foremost.conf ]; then
-#    ln -s /etc/foremost.conf /usr/local/etc/foremost.conf
-#  fi
-#  sed -i "s/APT::Periodic::Update-Package-Lists \"1\"/APT::Periodic::Update-Package-Lists \"0\"/g" /etc/apt/apt.conf.d/10periodic
 
   echoinfo "BitCurator VM: Finished basic configuration"
 }
@@ -1469,25 +1337,6 @@ configure_ubuntu_bitcurator_vm() {
 	service smbd restart >> $HOME/bitcurator-install.log 2>&1
 	service nmbd restart >> $HOME/bitcurator-install.log 2>&1
 
-  #echoinfo "BitCurator VM: Setting Timezone to UTC" >> $HOME/bitcurator-install.log 2>&1
-  #echo "Etc/UTC" > /etc/timezone >> $HOME/bitcurator-install.log 2>&1
-    
-  #echoinfo "BitCurator VM: Fixing Regripper Files"
-#	# Make sure to remove all ^M from regripper plugins
-#	# Not sure why they are there in the first place ...
-#	dos2unix -ascii /usr/share/regripper/* >> $HOME/sift-install.log 2>&1
-
-#  if [ -f /usr/share/regripper/plugins/usrclass-all ]; then
-#    mv /usr/share/regripper/plugins/usrclass-all /usr/share/regripper/plugins/usrclass
-#  fi
-#
-#  if [ -f /usr/share/regripper/plugins/ntuser-all ]; then
-#    mv /usr/share/regripper/plugins/ntuser-all /usr/share/regripper/plugins/ntuser
-#  fi
-#
-#  chmod 775 /usr/share/regripper/rip.pl
-#  chmod -R 755 /usr/share/regripper/plugins
-   
   echoinfo "BitCurator VM: Quieting i2c_piix4 boot error message:"
         # Edit /etc/modprobe.d/blacklist.conf
         sed -i -e "\$a# Fix piix4 error\nblacklist i2c_piix4" /etc/modprobe.d/blacklist.conf
@@ -1514,15 +1363,6 @@ configure_ubuntu_bitcurator_vm() {
 		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
 	fi
 
-  echoinfo "BitCurator VM: Setting up useful links on $SUDO_USER Desktop"
-	#if [ ! -L /home/$SUDO_USER/Desktop/cases ]; then
-	#	sudo -u $SUDO_USER ln -s /cases /home/$SUDO_USER/Desktop/cases
-	#fi
-  
-	#if [ ! -L /home/$SUDO_USER/Desktop/mount_points ]; then
-	#	sudo -u $SUDO_USER ln -s /mnt /home/$SUDO_USER/Desktop/mount_points
-	#fi
-
   echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
         # Clean up broken symlinks
         find -L /home/$SUDO_USER/Desktop -type l -delete
@@ -1539,14 +1379,6 @@ configure_ubuntu_bitcurator_vm() {
   echoinfo "BitCurator VM: Symlinking media directory"
         cd /home/$SUDO_USER/Desktop
         sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
-
-        #	for file in /usr/share/bitcurator/resources/*.pdf
-        #	do
-        #		base=`basename $file`
-        #		if [ ! -L /home/$SUDO_USER/Desktop/$base ]; then
-        #			sudo -u $SUDO_USER ln -s $file /home/$SUDO_USER/Desktop/$base
-        #		fi
-        #	done
   
   echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
@@ -1681,15 +1513,6 @@ configure_ubuntu_14.04_bitcurator_vm() {
 	then
 		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
 	fi
-
-  echoinfo "BitCurator VM: Setting up useful links on $SUDO_USER Desktop"
-	#if [ ! -L /home/$SUDO_USER/Desktop/cases ]; then
-	#	sudo -u $SUDO_USER ln -s /cases /home/$SUDO_USER/Desktop/cases
-	#fi
-  
-	#if [ ! -L /home/$SUDO_USER/Desktop/mount_points ]; then
-	#	sudo -u $SUDO_USER ln -s /mnt /home/$SUDO_USER/Desktop/mount_points
-	#fi
 
   echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
         # Clean up broken symlinks
@@ -1827,23 +1650,11 @@ configure_ubuntu_16.04_bitcurator_vm() {
 		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
 	fi
 
-  echoinfo "BitCurator VM: Setting up useful links on $SUDO_USER Desktop"
-	#if [ ! -L /home/$SUDO_USER/Desktop/cases ]; then
-	#	sudo -u $SUDO_USER ln -s /cases /home/$SUDO_USER/Desktop/cases
-	#fi
-  
-	#if [ ! -L /home/$SUDO_USER/Desktop/mount_points ]; then
-	#	sudo -u $SUDO_USER ln -s /mnt /home/$SUDO_USER/Desktop/mount_points
-	#fi
-
   echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
         # Clean up broken symlinks
         find -L /home/$SUDO_USER/Desktop -type l -delete
 
   echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
-
-        #files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
-        #directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
 
         # Copy over necessary directories and files without clobbering
         # This will need to be modified to accommodate changes to existing files!
@@ -1852,14 +1663,6 @@ configure_ubuntu_16.04_bitcurator_vm() {
   echoinfo "BitCurator VM: Symlinking media directory"
         cd /home/$SUDO_USER/Desktop
         sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
-
-        #	for file in /usr/share/bitcurator/resources/*.pdf
-        #	do
-        #		base=`basename $file`
-        #		if [ ! -L /home/$SUDO_USER/Desktop/$base ]; then
-        #			sudo -u $SUDO_USER ln -s $file /home/$SUDO_USER/Desktop/$base
-        #		fi
-        #	done
   
   echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
