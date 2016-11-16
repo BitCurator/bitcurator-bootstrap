@@ -1,7 +1,7 @@
 bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurator Environment
 ---------------------------------------------------------------------------------------------------
 
-# Building the BitCurator Environment
+# Building the BitCurator environment
 
 The bc-boostrap.sh shell script assists in building releases of the BitCurator environment. The script automates the majority of the process of preparing a clean Ubuntu 16.04.1LTS install for testing and respin as a BitCurator release.
 
