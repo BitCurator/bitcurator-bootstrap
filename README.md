@@ -50,19 +50,3 @@ Type "sudo reboot" and hit enter to reboot.
 
 Future versions of this script may support upgrade paths for previous Virtual Machine releases.
 At present, please use this script only to create fresh environment instances.
-
-# Additional Notes
-
-The BitCurator environment depends on hundreds of libraries and software tools, some of
-which must be compiled from source. Be patient! For reference, the build process takes
-approximately 45 minutes on a Core i7 machine with an SSD.
-
-# WARNINGS
-
-The bootstrap script is in active development. Do not use this script to upgrade or modify
-existing BitCurator environments at present.
-
-For general project information, please visit:
-
-<http://wiki.bitcurator.net/>
-
