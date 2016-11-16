@@ -36,18 +36,14 @@ To run, enter the following inside the bitcurator-bootstrap directory:
 sudo ./bc-bootstrap.sh -s -i -y
 ```
 
-This will tell the script to skin the environment, install all packages, and continue
-without prompting the user (even if failures are encountered).
+This will tell the script to skin the environment, install all packages, and continue without prompting the user (even if failures are encountered).
 
-The script requires one interaction from the user (near the end of the build) to
-select the correct Plymouth theme to "skin" then environment for BitCurator. When
-you see the line:
+The script should eventually terminate. You must run the command:
 
 ```shell
-There are 4 choices for the alternative default.plymouth (providing /lib/plymouth/themes/default.plymouth).
+sudo reboot
 ```
-
-and a list of choices, type the "1" key and hit enter. The script should now complete. Type **sudo reboot** and hit enter to reboot.
+and hit enter to reboot. Once the environment has rebooted, you should be logged in to a desktop that displays several BitCurator environment icons, the BitCurator logo as the background, and the write-blocking logo in the top right menu bar. If one or more of these things does not happen, something has gone wrong. You can review the **bitcurator-install.log** file in **/home/bcadmin** to determine where the failure may have occurred.
 
 # License(s)
 
