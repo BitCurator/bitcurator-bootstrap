@@ -1,7 +1,6 @@
-bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurator Environment
----------------------------------------------------------------------------------------------------
+# bitcurator-bootstrap: Build, upgrade, and configuration scripts for the BitCurator Environment
 
-# Building the BitCurator environment
+## Building the BitCurator environment
 
 The bc-boostrap.sh shell script assists in building releases of the BitCurator environment. The script automates the majority of the process of preparing a clean Ubuntu 16.04.1LTS install for testing and respin as a BitCurator release.
 
@@ -11,7 +10,7 @@ Looking for the latest release? You can find it at:
 
 https://wiki.bitcurator.net/
 
-# Installation
+## Installation
 
 The bc-bootstap.sh script expects to find itself in a Ubuntu 16.04.1LTS environment. It has not been tested on any other versions of Ubuntu. The environment must have the **git** package installed to checkout this repository. When running in a VM, any extensions (for example, the VirtualBox extensions) should be installed prior to running this script.
 
@@ -45,7 +44,7 @@ sudo reboot
 ```
 and hit enter to reboot. Once the environment has rebooted, you should be logged in to a desktop that displays several BitCurator environment icons, the BitCurator logo as the background, and the write-blocking logo in the top right menu bar. If one or more of these things does not happen, something has gone wrong. You can review the **bitcurator-install.log** file in **/home/bcadmin** to determine where the failure may have occurred.
 
-# License(s)
+## License(s)
 
 The BitCurator logo, BitCurator project documentation, and other non-software products of the BitCurator team are subject to the the Creative Commons Attribution 4.0 Generic license (CC By 4.0).
 
