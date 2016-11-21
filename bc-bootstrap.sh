@@ -217,7 +217,7 @@ install_ubuntu_14.04_deps() {
     return 0
 }
 
-install_ubuntu_16.04_deps() {
+install_ubuntu_17.04_deps() {
 
     echoinfo "Updating your APT Repositories ... "
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -434,7 +434,7 @@ synaptic"
 #gnome-tweak-tool 
 # Removed, as deleted from Xenial repo:
 # libmyodbc 
-install_ubuntu_16.04_packages() {
+install_ubuntu_17.04_packages() {
     packages="dkms 
 g++ 
 guymager-beta
@@ -652,7 +652,7 @@ install_ubuntu_14.04_pip_packages() {
     return 0
 }
 
-install_ubuntu_16.04_pip_packages() {
+install_ubuntu_17.04_pip_packages() {
     #pip_packages="pip docopt python-evtx python-registry six configobj construct pyv8 pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
     pip_packages="pip docopt python-evtx python-registry six configobj construct et_xmlfile jdcal pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
     pip_pre_packages="bitstring"
@@ -690,7 +690,7 @@ install_ubuntu_16.04_pip_packages() {
     return 0
 }
 
-# Global: Works on 14.04 and 16.04
+# Global: Works on 14.04 and 17.04
 install_perl_modules() {
 	# Required by macl.pl script
 	#perl -MCPAN -e "install Net::Wigle" >> $HOME/bitcurator-install.log 2>&1
@@ -801,7 +801,7 @@ install_bitcurator_files() {
         # Copy resources for 14.04
         cp -r /tmp/bitcurator-distro-main/env/lib/plymouth /usr/share/bitcurator/resources
 
-        # Copy resources for 16.04
+        # Copy resources for 17.04
         cp -r /tmp/bitcurator-distro-main/env/usr/share/plymouth /usr/share/bitcurator/resources/xenial
 
   echoinfo "BitCurator environment: Moving image files to /usr/share/bitcurator/resources"
@@ -827,7 +827,7 @@ install_ubuntu_14.04_respin_support() {
 
 }
 
-install_ubuntu_16.04_respin_support() {
+install_ubuntu_17.04_respin_support() {
   # Checkout code from bitcurator and put these files into place
   echoinfo "BitCurator environment: Installing Distro/Respin Tools"
   echoinfo " -- Please be patient. This may take several minutes..."
@@ -847,7 +847,7 @@ install_ubuntu_16.04_respin_support() {
 
 install_source_packages() {
 
-  # Install Apache Thrift - packaged version too old in 14.04LTS and 16.04LTS
+  # Install Apache Thrift - packaged version too old in 14.04LTS and 17.04LTS
   echoinfo "BitCurator environment: Building and installing Apache Thrift"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -974,7 +974,7 @@ install_source_packages() {
         cd /tmp
         rm -rf pytsk3-20160721
   
-  # Install libsodium (not packaged version in 14.04LTS or 16.04LTS, needed for ZeroMQ)
+  # Install libsodium (not packaged version in 14.04LTS or 17.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -991,7 +991,7 @@ install_source_packages() {
         rm libsodium-1.0.11.tar.gz
         rm -rf libsodium-1.0.11
 
-  # Install ZeroMQ (packaged version in 14.04LTS and 16.04LTS out of date)
+  # Install ZeroMQ (packaged version in 14.04LTS and 17.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
@@ -1069,7 +1069,7 @@ install_source_packages() {
         cd /tmp
         rm -rf bulk_extractor
 
-  # Install HFSUtils (not packaged for 14.04LTS or 16.04LTS)
+  # Install HFSUtils (not packaged for 14.04LTS or 17.04LTS)
   echoinfo "BitCurator environment: Building and installing hfsutils"
 	CDIR=$(pwd)
         cd /tmp
@@ -1085,7 +1085,7 @@ install_source_packages() {
         rm hfsutils-3.2.6.tar.gz
         rm -rf hfsutils-3.2.6
   
-  # Install HFS Explorer (not packaged for 14.04LTS or 16.04LTS)
+  # Install HFS Explorer (not packaged for 14.04LTS or 17.04LTS)
   echoinfo "BitCurator environment: Building and installing HFS Explorer"
 	CDIR=$(pwd)
         mkdir /usr/share/hfsexplorer
@@ -1097,7 +1097,7 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
 
-  # Install disktype (not packaged for 14.04LTS or 16.04LTS, use KW fork)
+  # Install disktype (not packaged for 14.04LTS or 17.04LTS, use KW fork)
   echoinfo "BitCurator environment: Building and installing disktype"
 	CDIR=$(pwd)
         cd /tmp
@@ -1110,7 +1110,7 @@ install_source_packages() {
         cd /tmp
         rm -rf disktype
 
-  # Install dumpfloppy (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install dumpfloppy (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing dumpfloppy"
 	CDIR=$(pwd)
         cd /tmp
@@ -1124,7 +1124,7 @@ install_source_packages() {
         cd /tmp
         rm -rf dumpfloppy
   
-  # Install bagit-python (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install bagit-python (not packaged for 14.04LTS or 17.04LTS, use author source)
   #echoinfo "BitCurator environment: Building and installing bagit-python"
 	CDIR=$(pwd)
         cd /tmp
@@ -1136,7 +1136,7 @@ install_source_packages() {
         cd /tmp
         rm -rf bagit-python
 
-  # Install loc-bagger (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install loc-bagger (not packaged for 14.04LTS or 17.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
   echoinfo "BitCurator environment: Building and installing bagger"
@@ -1154,7 +1154,7 @@ install_source_packages() {
         # No cleanup needed at this point
         cd /tmp
 
-  # Install sdhash (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install sdhash (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
 	CDIR=$(pwd)
         cd /tmp
@@ -1169,7 +1169,7 @@ install_source_packages() {
         cd /tmp
         rm -rf sdhash-3.4
   
-  # Install md5deep (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install md5deep (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing md5deep"
 	CDIR=$(pwd)
         cd /tmp
@@ -1184,7 +1184,7 @@ install_source_packages() {
         cd /tmp
         rm -rf hashdeep
   
-  # Install pyExifToolGUI (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install pyExifToolGUI (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing pyExifToolGUI"
 	CDIR=$(pwd)
         cd /tmp
@@ -1201,7 +1201,7 @@ install_source_packages() {
         cd /tmp
         rm -rf pyExifToolGUI
 
-  # Install FIDO (not packaged for 14.04LTS or 16.04LTS, use openpreserve source)
+  # Install FIDO (not packaged for 14.04LTS or 17.04LTS, use openpreserve source)
   echoinfo "BitCurator environment: Building and installing FIDO"
 	CDIR=$(pwd)
         cd /tmp
@@ -1213,7 +1213,7 @@ install_source_packages() {
         cd /tmp
         rm -rf fido
 
-  # Install testdisk and photorec (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install testdisk and photorec (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing testdisk and photorec"
 	CDIR=$(pwd)
         cd /tmp
@@ -1229,7 +1229,7 @@ install_source_packages() {
         cd /tmp
         rm -rf testdisk-7.0
   
-  # Install ssdeep (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install ssdeep (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing ssdeep"
 	CDIR=$(pwd)
         cd /tmp
@@ -1245,7 +1245,7 @@ install_source_packages() {
         rm -rf ssdeep-2.13
         rm ssdeep-2.13.tar.gz
   
-  # Install openpyxl (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install openpyxl (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing openpyxl"
 	CDIR=$(pwd)
         cd /tmp
@@ -1258,7 +1258,7 @@ install_source_packages() {
         cd /tmp
         rm -rf openpyxl
 
-#  # Install FITS (not packaged for 14.04LTS or 16.04LTS, use Harvard GitHub source)
+#  # Install FITS (not packaged for 14.04LTS or 17.04LTS, use Harvard GitHub source)
 #  echoinfo "BitCurator environment: Building and installing FITS"
 #	CDIR=$(pwd)
 #        cd $HOME
@@ -1268,7 +1268,7 @@ install_source_packages() {
 #        sudo -u $SUDO_USER unzip fits-1.0.3.zip >> $HOME/bitcurator-install.log 2>&1
 #        sudo -u $SUDO_USER mv fits-1.0.3 fits
 
-  # Install regripper (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install regripper (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing regripper"
 	CDIR=$(pwd)
         cd /tmp
@@ -1280,7 +1280,7 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
 
-  # Install NSRLlookup (not packaged for 14.04LTS or 16.04LTS, use author source)
+  # Install NSRLlookup (not packaged for 14.04LTS or 17.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing nsrllookup"
 	CDIR=$(pwd)
         cd /tmp
@@ -1457,9 +1457,9 @@ configure_ubuntu_14.04_bitcurator_plymouth() {
 }
 
 # Global: Ubuntu BitCurator VM Plymouth Configuration
-# Works with 16.04
-configure_ubuntu_16.04_bitcurator_plymouth() {
-  echoinfo "BitCurator VM: Updating plymouth theme for 16.04"
+# Works with 17.04
+configure_ubuntu_17.04_bitcurator_plymouth() {
+  echoinfo "BitCurator VM: Updating plymouth theme for 17.04"
         cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /usr/share/plymouth/themes/
         # echoinfo "CHECK ME"
         # Already installed in initial setup
@@ -1605,8 +1605,8 @@ configure_ubuntu_14.04_bitcurator_vm() {
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
 }
 
-# 16.04 BitCurator VM Configuration Function
-configure_ubuntu_16.04_bitcurator_vm() {
+# 17.04 BitCurator VM Configuration Function
+configure_ubuntu_17.04_bitcurator_vm() {
 
   echoinfo "BitCurator VM: Setting Hostname: bitcurator"
 	OLD_HOSTNAME=$(hostname)
@@ -1773,8 +1773,8 @@ if [ $ARCH != "64" ]; then
 fi
 
 #if [ $VER != "12.04" ] && [ $VER != "14.04" ]; then
-if [ $VER != "14.04" ] && [ $VER != "16.04" ]; then
-    echo "BitCurator is only installable on Ubuntu 14.04 and 16.04 at this time."
+if [ $VER != "14.04" ] && [ $VER != "17.04" ]; then
+    echo "BitCurator is only installable on Ubuntu 14.04 and 17.04 at this time."
     exit 3
 fi
 
@@ -1898,7 +1898,7 @@ configure_ubuntu
 
 # Configure BitCurator VM (if selected)
 if [ "$SKIN" -eq 1 ]; then
-    # No longer needed - use ${VER} only due to changes in 16.04
+    # No longer needed - use ${VER} only due to changes in 17.04
     #configure_ubuntu_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_plymouth
