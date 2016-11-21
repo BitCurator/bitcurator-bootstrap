@@ -438,7 +438,7 @@ install_ubuntu_17.04_packages() {
     packages="dkms 
 g++ 
 guymager-beta
-libcrypto++9v5 
+libcrypto++6 
 libssl-dev 
 expat 
 libexpat1-dev 
