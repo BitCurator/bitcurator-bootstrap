@@ -436,7 +436,6 @@ synaptic"
 # libmyodbc 
 install_ubuntu_16.04_packages() {
     packages="dkms 
-module-assistant 
 g++ 
 guymager-beta
 libcrypto++9v5 
@@ -781,8 +780,8 @@ install_bitcurator_files() {
         cd /tmp/bitcurator-distro-main/env/usr/share/pixmaps
         cp -r * /usr/share/pixmaps
 
-  echoinfo "BitCurator environment: Setup module-assistant"
-        # Disabled for now - manually run on first install after upgrade + dist-upgrade
+  #echoinfo "BitCurator environment: Setup module-assistant"
+        # Disabled for now - manually run on first ISO install after respin, or VBox chokes 
         #m-a prepare >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Updating grub configuration"
