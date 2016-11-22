@@ -782,7 +782,8 @@ install_bitcurator_files() {
         cp -r * /usr/share/pixmaps
 
   echoinfo "BitCurator environment: Setup module-assistant"
-        m-a prepare >> $HOME/bitcurator-install.log 2>&1
+        # Disabled for now - manually run on first install after upgrade + dist-upgrade
+        #m-a prepare >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Updating grub configuration"
         cd /tmp/bitcurator-distro-main/env/etc/default
