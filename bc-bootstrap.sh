@@ -772,7 +772,7 @@ install_bitcurator_files() {
   
   echoinfo "BitCurator environment: Force fstab options for devices"
         cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
-        cp fstab.rules /etc/udev/rules.d
+        cp 10-fstab.rules /etc/udev/rules.d
 
   echoinfo "BitCurator environment: Moving BitCurator icons and pixmaps to /usr/share"
         cd /tmp/bitcurator-distro-main/env/usr/share/icons
