@@ -564,17 +564,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q mirror.cogentco.com/pub/apache/thrift/0.9.3/thrift-0.9.3.tar.gz
-	tar -zxf thrift-0.9.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd thrift-0.9.3
+        wget -q http://apache.mirrors.pair.com/thrift/0.10.0/thrift-0.10.0.tar.gz 
+        tar -zxf thrift-0.10.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd thrift-0.10.0
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
+        # Now clean up
         cd /tmp
-        rm thrift-0.9.3.tar.gz
-        rm -rf thrift-0.9.3
+        rm thrift-0.10.0.tar.gz
+        rm -rf thrift-0.10.0
 
   # Install libuna from specific release
   echoinfo "BitCurator environment: Building and installing libuna"
@@ -638,17 +638,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.5/poco-1.7.5.tar.gz
-        tar -zxf poco-1.7.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.5
+        wget -q pocoproject.org/releases/poco-1.7.7/poco-1.7.7.tar.gz
+        tar -zxf poco-1.7.7.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.7
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm poco-1.7.5.tar.gz
-        rm -rf poco-1.7.5
+        rm poco-1.7.7.tar.gz
+        rm -rf poco-1.7.7
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -708,18 +708,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        #wget -q download.zeromq.org/zeromq-4.1.5.tar.gz
-        wget -q https://github.com/zeromq/zeromq4-1/releases/download/v4.1.5/zeromq-4.1.5.tar.gz
-        tar -zxf zeromq-4.1.5.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.1.5
+        wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.0/zeromq-4.2.0.tar.gz
+        tar -zxf zeromq-4.2.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd zeromq-4.2.0
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm zeromq-4.1.5.tar.gz
-        rm -rf zeromq-4.1.5
+        rm zeromq-4.2.0.tar.gz
+        rm -rf zeromq-4.2.0
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
@@ -745,26 +744,24 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing lightgrep"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
-
-  # Updated for BitCurator 1.7+
-  git clone --recursive git://github.com/strozfriedberg/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
-  cd /tmp/liblightgrep
-  autoreconf -fi >> $HOME/bitcurator-install.log 2>&1
-  ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
-  make -j4 -s >> $HOME/bitcurator-install.log 2>&1
-  make install >> $HOME/bitcurator-install.log 2>&1
-  cp pylightgrep/lightgrep.py /usr/local/bin
-  chmod 755 /usr/local/bin/lightgrep.py
-  cd /tmp
-  rm -rf liblightgrep
-  ldconfig >> $HOME/bitcurator-install.log 2>&1
+        git clone --recursive git://github.com/strozfriedberg/liblightgrep.git /tmp/liblightgrep >> $HOME/bitcurator-install.log 2>&1
+        cd /tmp/liblightgrep
+        autoreconf -fi >> $HOME/bitcurator-install.log 2>&1
+        ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu >> $HOME/bitcurator-install.log 2>&1
+        make -j4 -s >> $HOME/bitcurator-install.log 2>&1
+        make install >> $HOME/bitcurator-install.log 2>&1
+        cp pylightgrep/lightgrep.py /usr/local/bin
+        chmod 755 /usr/local/bin/lightgrep.py
+        cd /tmp
+        rm -rf liblightgrep
+        ldconfig >> $HOME/bitcurator-install.log 2>&1
 
   # Install bulk_extractor
   echoinfo "BitCurator environment: Building and installing bulk_extractor"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
-	git clone --recursive https://github.com/simsong/bulk_extractor /tmp/bulk_extractor >> $HOME/bitcurator-install.log 2>&1
-	cd /tmp/bulk_extractor
+        git clone --recursive https://github.com/simsong/bulk_extractor /tmp/bulk_extractor >> $HOME/bitcurator-install.log 2>&1
+        cd /tmp/bulk_extractor
         chmod 755 bootstrap.sh
         ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
         ./configure --enable-lightgrep --disable-hashdb >> $HOME/bitcurator-install.log 2>&1
@@ -858,10 +855,10 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
 
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.2/bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.7.2.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.7.2 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.7.2.zip
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.3/bagger-2.7.3.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.7.3.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger-2.7.3 bagger >> $HOME/bitcurator-install.log 2>&1
+        rm bagger-2.7.3.zip
 
         # No cleanup needed at this point
         cd /tmp
