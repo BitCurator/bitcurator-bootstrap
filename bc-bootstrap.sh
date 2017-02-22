@@ -355,7 +355,8 @@ python-vte
 clonezilla
 xorriso
 mokutil
-syslinux-utils"
+syslinux-utils
+nwipe"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
