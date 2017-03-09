@@ -446,6 +446,9 @@ install_bitcurator_files() {
         cd /tmp/bitcurator-distro-main/externals/py3fpdf
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         sudo python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
+
+  echoinfo "BitCurator environment: Copying HFSExplorer snapshot to /tmp"
+        cp /tmp/bitcurator-distro-main/externals/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip /tmp
   
   echoinfo "BitCurator environment: Copying libewf-20140608.tar.gz to /tmp"
         cp /tmp/bitcurator-distro-main/externals/libewf-20140608.tar.gz /tmp
@@ -800,9 +803,12 @@ install_source_packages() {
 	CDIR=$(pwd)
         mkdir /usr/share/hfsexplorer
         cd /usr/share/hfsexplorer
-        wget -q https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1/hfsexplorer-0.23.1-bin.zip
-	unzip hfsexplorer-0.23.1-bin.zip >> $HOME/bitcurator-install.log 2>&1
-        rm hfsexplorer-0.23.1-bin.zip
+        #wget -q https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1/hfsexplorer-0.23.1-bin.zip
+	#unzip hfsexplorer-0.23.1-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        #rm hfsexplorer-0.23.1-bin.zip
+        cp /tmp/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip /usr/share/hfsexplorer
+        unzip hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip >> $HOME/bitcurator-install.log 2>&1
+        rm hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
