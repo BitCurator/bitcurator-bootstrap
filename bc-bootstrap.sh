@@ -180,7 +180,12 @@ install_ubuntu_16.04_deps() {
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
     wget -q http://deb.pinguin.lu/debsign_public.key -O- | sudo apt-key add - >>$HOME/bitcurator-install.log 2>&1
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
-    
+   
+    echoinfo "Adding Siegfried Repository"
+    wget -qO - https://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -
+    echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
+    apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
+
     echoinfo "Adding Yad Repository: $@"
     add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
     
@@ -356,7 +361,8 @@ clonezilla
 xorriso
 mokutil
 syslinux-utils
-nwipe"
+nwipe
+siegfried"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
