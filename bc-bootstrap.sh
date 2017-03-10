@@ -876,6 +876,10 @@ install_source_packages() {
         # No cleanup needed at this point
         cd /tmp
 
+  # Install Brunnhilde (depends on Siegfried, installed as a package in BC)
+  echoinfo "BitCurator environment: Installing Brunnhilde"
+        pip install brunnhilde
+
   # Install sdhash (not packaged for 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing sdhash"
 	CDIR=$(pwd)
