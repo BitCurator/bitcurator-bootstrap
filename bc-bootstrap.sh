@@ -232,6 +232,7 @@ libtool-bin
 libnss-myhostname
 automake 
 openjdk-8-jdk
+openjfx
 ant 
 expect 
 ghex
@@ -648,17 +649,17 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.7/poco-1.7.7.tar.gz
-        tar -zxf poco-1.7.7.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.7
+        wget -q pocoproject.org/releases/poco-1.7.8/poco-1.7.8p2.tar.gz
+        tar -zxf poco-1.7.8p2.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd poco-1.7.8p2
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make -s >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm poco-1.7.7.tar.gz
-        rm -rf poco-1.7.7
+        rm poco-1.7.8p2.tar.gz
+        rm -rf poco-1.7.8p2
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -685,50 +686,52 @@ install_source_packages() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        # wget -q https://github.com/py4n6/pytsk/releases/download/20150406/pytsk-20150406.tgz
-        # tar -zxf pytsk-20150406.tgz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk3-20160721.tar.gz
-        tar -zxf pytsk3-20160721.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd pytsk3-20160721
+        #wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk3-20160721.tar.gz
+        #tar -zxf pytsk3-20160721.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        wget -q https://github.com/py4n6/pytsk/releases/download/20170128/pytsk3-20170128.tar.gz
+        tar -zxf pytsk3-20170128.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd pytsk3-20170128
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm -rf pytsk3-20160721
+        rm -rf pytsk3-20170128
   
   # Install libsodium (not packaged version in 16.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
-	tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd libsodium-1.0.11
+        #wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
+        #tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        git clone https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz
+        tar -zxf libsodium-1.0.12.tar.gz >> $HOME/bitcurator-install.log 1>&1
+        cd libsodium-1.0.12
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm libsodium-1.0.11.tar.gz
-        rm -rf libsodium-1.0.11
+        rm libsodium-1.0.12.tar.gz
+        rm -rf libsodium-1.0.12
 
   # Install ZeroMQ (packaged version in 16.04LTS out of date)
   echoinfo "BitCurator environment: Building and installing ZeroMQ"
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
         cd /tmp
-        wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.0/zeromq-4.2.0.tar.gz
-        tar -zxf zeromq-4.2.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.2.0
+        wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz
+        tar -zxf zeromq-4.2.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd zeromq-4.2.1
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm zeromq-4.2.0.tar.gz
-        rm -rf zeromq-4.2.0
+        rm zeromq-4.2.1.tar.gz
+        rm -rf zeromq-4.2.1
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
@@ -868,10 +871,10 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
 
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.3/bagger-2.7.3.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.7.3.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.7.3 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.7.3.zip
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.6/bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger-2.7.6 bagger >> $HOME/bitcurator-install.log 2>&1
+        rm bagger-2.7.6.zip
 
         # No cleanup needed at this point
         cd /tmp
