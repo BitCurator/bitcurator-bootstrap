@@ -704,7 +704,7 @@ install_source_packages() {
         cd /tmp
         #wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
         #tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        git clone https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz
+        wget -q https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz
         tar -zxf libsodium-1.0.12.tar.gz >> $HOME/bitcurator-install.log 1>&1
         cd libsodium-1.0.12
         ./configure >> $HOME/bitcurator-install.log 2>&1
