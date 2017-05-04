@@ -363,7 +363,11 @@ xorriso
 mokutil
 syslinux-utils
 nwipe
-siegfried"
+siegfried
+libffi-dev
+libgdbm-dev
+libyaml-dev
+ruby"
 
 # ubuntu-restricted-extras 
 # Added to above list. May be removed depending on deployment.
@@ -791,21 +795,22 @@ install_source_packages() {
         cd /tmp
         rm -rf bulk_extractor
 
-  # Install HFSUtils (not packaged for 16.04LTS)
-  echoinfo "BitCurator environment: Building and installing hfsutils"
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q ftp://ftp.mars.org/pub/hfs/hfsutils-3.2.6.tar.gz
-	tar -zxf hfsutils-3.2.6.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd hfsutils-3.2.6
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm hfsutils-3.2.6.tar.gz
-        rm -rf hfsutils-3.2.6
+  # Install HFSUtils
+  # Retained for reference - installed from package now
+  # echoinfo "BitCurator environment: Building and installing hfsutils"
+  #      CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q ftp://ftp.mars.org/pub/hfs/hfsutils-3.2.6.tar.gz
+  #      tar -zxf hfsutils-3.2.6.tar.gz >> $HOME/bitcurator-install.log 2>&1
+  #      cd hfsutils-3.2.6
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+  #      # Now clean up
+  #      cd /tmp
+  #      rm hfsutils-3.2.6.tar.gz
+  #      rm -rf hfsutils-3.2.6
   
   # Install HFS Explorer (not packaged for 16.04LTS)
   echoinfo "BitCurator environment: Building and installing HFS Explorer"
@@ -1025,6 +1030,29 @@ install_source_packages() {
 	# Now clean up
         cd /tmp
         rm -rf nsrllookup
+
+  # Install latest Ruby
+  # Disregard for now - install from package
+  #echoinfo "BitCurator environment: Building and installing Ruby"
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      git clone https://github.com/rbenv/rbenv.git /home/bcadmin/.rbenv >> $HOME/bitcurator-install.log 2>&1
+  #      
+  #      echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/bcadmin/.bashrc
+  #      echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+  #      source /home/bcadmin/.bashrc
+  #      git clone https://github.com/rbenv/ruby-build.git /home/bcadmin/.rbenv/plugins/ruby-build
+  #      rbenv install 2.4.1
+  #      rbenv global 2.4.1
+
+  # Install Kaitai
+  echoinfo "BitCurator environment: Installing Kaitai Struct and Visualizer"
+        cd /tmp
+        echo "deb https://dl.bintray.com/kaitai-io/debian jessie main" | sudo tee /etc/apt/sources.list.d/kaitai.list
+        sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv 379CE192D401AB61 >> $HOME/bitcurator-install.log 2>&1
+        sudo apt-get update >> $HOME/bitcurator-install.log 2>&1
+        sudo apt-get install kaitai-struct-compiler >> $HOME/bitcurator-install.log 2>&1
+        sudo gem install kaitai-struct-visualizer >> $HOME/bitcurator-install.log 2>&1
 
 }
 
