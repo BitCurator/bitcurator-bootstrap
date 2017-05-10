@@ -595,7 +595,7 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing libuna"
         CDIR=$(pwd)
 
-        # Newer versions break a lot of stuff. Keep 20140608 for now.
+        # Newer versions break a lot of stuff. Keep 20150927 for now.
         cd /tmp
         tar zxf libuna-alpha-20150927.tar.gz >> $HOME/bitcurator-install.log 2>&1
         cd libuna-20150927
@@ -692,14 +692,14 @@ install_source_packages() {
         cd /tmp
         #wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk3-20160721.tar.gz
         #tar -zxf pytsk3-20160721.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/py4n6/pytsk/releases/download/20170128/pytsk3-20170128.tar.gz
-        tar -zxf pytsk3-20170128.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd pytsk3-20170128
+        wget -q https://github.com/py4n6/pytsk/releases/download/20170508/pytsk3-20170508.tar.gz
+        tar -zxf pytsk3-20170508.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd pytsk3-20170508
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm -rf pytsk3-20170128
+        rm -rf pytsk3-20170508
   
   # Install libsodium (not packaged version in 16.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
