@@ -576,21 +576,21 @@ install_ubuntu_16.04_respin_support() {
 install_source_packages() {
 
   # Install Apache Thrift - packaged version too old in 16.04LTS
-  echoinfo "BitCurator environment: Building and installing Apache Thrift"
-  echoinfo " -- Please be patient. This may take several minutes..."
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q http://apache.mirrors.pair.com/thrift/0.10.0/thrift-0.10.0.tar.gz 
-        tar -zxf thrift-0.10.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd thrift-0.10.0
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make -s >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-        # Now clean up
-        cd /tmp
-        rm thrift-0.10.0.tar.gz
-        rm -rf thrift-0.10.0
+  #echoinfo "BitCurator environment: Building and installing Apache Thrift"
+  #echoinfo " -- Please be patient. This may take several minutes..."
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q http://apache.mirrors.pair.com/thrift/0.10.0/thrift-0.10.0.tar.gz 
+  #      tar -zxf thrift-0.10.0.tar.gz >> $HOME/bitcurator-install.log 2>&1
+  #      cd thrift-0.10.0
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make -s >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+  #      # Now clean up
+  #      cd /tmp
+  #      rm thrift-0.10.0.tar.gz
+  #      rm -rf thrift-0.10.0
 
   # Install libuna from specific release
   echoinfo "BitCurator environment: Building and installing libuna"
@@ -650,21 +650,21 @@ install_source_packages() {
         cd /tmp
 
   # Install POCO
-  echoinfo "BitCurator environment: Building and installing POCO C++ libraries"
-  echoinfo " -- Please be patient. This may take several minutes..."
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q pocoproject.org/releases/poco-1.7.8/poco-1.7.8p2.tar.gz
-        tar -zxf poco-1.7.8p2.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd poco-1.7.8p2
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make -s >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-        # Now clean up
-        cd /tmp
-        rm poco-1.7.8p2.tar.gz
-        rm -rf poco-1.7.8p2
+  #echoinfo "BitCurator environment: Building and installing POCO C++ libraries"
+  #echoinfo " -- Please be patient. This may take several minutes..."
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q pocoproject.org/releases/poco-1.7.8/poco-1.7.8p2.tar.gz
+  #      tar -zxf poco-1.7.8p2.tar.gz >> $HOME/bitcurator-install.log 2>&1
+  #      cd poco-1.7.8p2
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make -s >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+  #      # Now clean up
+  #      cd /tmp
+  #      rm poco-1.7.8p2.tar.gz
+  #      rm -rf poco-1.7.8p2
 
   # Install The Sleuth Kit (TSK) from current sources
   echoinfo "BitCurator environment: Building and installing The Sleuth Kit"
@@ -722,21 +722,21 @@ install_source_packages() {
         rm -rf libsodium-1.0.12
 
   # Install ZeroMQ (packaged version in 16.04LTS out of date)
-  echoinfo "BitCurator environment: Building and installing ZeroMQ"
-  echoinfo " -- Please be patient. This may take several minutes..."
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz
-        tar -zxf zeromq-4.2.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd zeromq-4.2.1
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm zeromq-4.2.1.tar.gz
-        rm -rf zeromq-4.2.1
+  #echoinfo "BitCurator environment: Building and installing ZeroMQ"
+  #echoinfo " -- Please be patient. This may take several minutes..."
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz
+  #      tar -zxf zeromq-4.2.1.tar.gz >> $HOME/bitcurator-install.log 2>&1
+  #      cd zeromq-4.2.1
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+	## Now clean up
+  #      cd /tmp
+  #      rm zeromq-4.2.1.tar.gz
+  #      rm -rf zeromq-4.2.1
   
   # Install hashdb (optional dependency for bulk_extractor)
   echoinfo "BitCurator environment: Building and installing hashdb"
