@@ -709,17 +709,17 @@ install_source_packages() {
         cd /tmp
         #wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
         #tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/jedisct1/libsodium/releases/download/1.0.12/libsodium-1.0.12.tar.gz
-        tar -zxf libsodium-1.0.12.tar.gz >> $HOME/bitcurator-install.log 1>&1
-        cd libsodium-1.0.12
+        wget -q https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz
+        tar -zxf libsodium-1.0.15.tar.gz >> $HOME/bitcurator-install.log 1>&1
+        cd libsodium-1.0.15
         ./configure >> $HOME/bitcurator-install.log 2>&1
         make >> $HOME/bitcurator-install.log 2>&1
         make install >> $HOME/bitcurator-install.log 2>&1
         ldconfig >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm libsodium-1.0.12.tar.gz
-        rm -rf libsodium-1.0.12
+        rm libsodium-1.0.15.tar.gz
+        rm -rf libsodium-1.0.15
 
   # Install ZeroMQ (packaged version in 16.04LTS out of date)
   #echoinfo "BitCurator environment: Building and installing ZeroMQ"
