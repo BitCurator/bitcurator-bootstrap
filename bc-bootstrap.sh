@@ -565,7 +565,7 @@ install_ubuntu_16.04_respin_support() {
         dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Installing BodhiBuilder LiveCD imager"
-        dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.4_all.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.5_all.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
