@@ -165,7 +165,7 @@ usage() {
     exit 1
 }
 
-install_ubuntu_16.04_deps() {
+install_ubuntu_deps() {
 
     echoinfo "Updating your APT Repositories ... "
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
@@ -207,7 +207,7 @@ install_ubuntu_16.04_deps() {
     return 0
 }
 
-install_ubuntu_16.04_packages() {
+install_ubuntu_packages() {
     packages="ant 
 antiword 
 aufs-tools 
@@ -395,7 +395,7 @@ yad"
     return 0
 }
 
-install_ubuntu_16.04_pip_packages() {
+install_ubuntu_pip_packages() {
     pip_packages="pip docopt python-evtx python-registry six configobj construct et_xmlfile jdcal pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
     pip_pre_packages="bitstring"
 
@@ -555,7 +555,7 @@ install_bitcurator_files() {
 
 }
 
-install_ubuntu_16.04_respin_support() {
+install_ubuntu_respin_support() {
   # Checkout code from bitcurator and put these files into place
   echoinfo "BitCurator environment: Installing Distro/Respin Tools"
   echoinfo " -- Please be patient. This may take several minutes..."
@@ -1202,7 +1202,7 @@ configure_ubuntu_bitcurator_vm() {
 
 # Global: Ubuntu BitCurator VM Plymouth Configuration
 # Works with 16.04
-configure_ubuntu_16.04_bitcurator_plymouth() {
+configure_ubuntu_bitcurator_plymouth() {
   echoinfo "BitCurator VM: Updating plymouth theme for 16.04"
         cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /usr/share/plymouth/themes/
         # echoinfo "CHECK ME"
@@ -1214,7 +1214,7 @@ configure_ubuntu_16.04_bitcurator_plymouth() {
 }
 
 # 16.04 BitCurator VM Configuration Function
-configure_ubuntu_16.04_bitcurator_vm() {
+configure_ubuntu_bitcurator_vm() {
 
   echoinfo "BitCurator VM: Setting Hostname: bitcurator"
 	OLD_HOSTNAME=$(hostname)
@@ -1380,8 +1380,8 @@ if [ $ARCH != "64" ]; then
     exit 2
 fi
 
-if [ $VER != "16.04" ] && [ $VER != "16.10" ]; then
-    echo "BitCurator is only installable on Ubuntu 16.04 and 16.10 at this time."
+if [ $VER != "17.10" ] && [ $VER != "18.04" ]; then
+    echo "BitCurator is only installable on Ubuntu 17.10 and 18.04 at this time."
     exit 3
 fi
 
@@ -1438,12 +1438,12 @@ if [ "$UPGRADE_ONLY" -eq 1 ]; then
   
   export DEBIAN_FRONTEND=noninteractive
 
-  install_ubuntu_${VER}_deps $ITYPE || echoerror "Updating Depedencies Failed"
-  install_ubuntu_${VER}_packages $ITYPE || echoerror "Updating Packages Failed"
-  install_ubuntu_${VER}_pip_packages $ITYPE || echoerror "Updating Python Packages Failed"
+  install_ubuntu_deps $ITYPE || echoerror "Updating Depedencies Failed"
+  install_ubuntu_packages $ITYPE || echoerror "Updating Packages Failed"
+  install_ubuntu_pip_packages $ITYPE || echoerror "Updating Python Packages Failed"
   install_perl_modules || echoerror "Updating Perl Packages Failed"
   install_bitcurator_files || echoerror "Installing/Updating BitCurator Files Failed"
-  install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
+  install_ubuntu_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
   install_source_packages || echoerror "Installing/Updating BitCurator Source Packages Failed"
   #install_kibana || echoerror "Installing/Updating Kibana Failed"
 
@@ -1487,9 +1487,9 @@ fi
 
 if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     export DEBIAN_FRONTEND=noninteractive
-    install_ubuntu_${VER}_deps $ITYPE
-    install_ubuntu_${VER}_packages $ITYPE
-    install_ubuntu_${VER}_pip_packages $ITYPE
+    install_ubuntu_deps $ITYPE
+    install_ubuntu_packages $ITYPE
+    install_ubuntu_pip_packages $ITYPE
     configure_cpan
     install_perl_modules
     #install_kibana
@@ -1507,8 +1507,8 @@ configure_ubuntu
 if [ "$SKIN" -eq 1 ]; then
     # No longer needed - use ${VER} only due to changes in 16.04
     #configure_ubuntu_bitcurator_vm
-    configure_ubuntu_${VER}_bitcurator_vm
-    configure_ubuntu_${VER}_bitcurator_plymouth
+    configure_ubuntu_bitcurator_vm
+    configure_ubuntu_bitcurator_plymouth
 fi
 
 complete_message
