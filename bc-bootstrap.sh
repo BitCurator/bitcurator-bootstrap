@@ -494,18 +494,18 @@ install_bitcurator_files() {
         cp sudoers /etc
         chmod 440 /etc/sudoers
 
-  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
-        cd /tmp/bitcurator-distro-main/env/.config
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
-        chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
+#  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
+#        cd /tmp/bitcurator-distro-main/env/.config
+#        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
+#        chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
   
   echoinfo "BitCurator environment: Moving BitCurator nautilus files to $HOME/.local/share/nautilus/"
         cd /tmp/bitcurator-distro-main/env/.local/share/nautilus
         sudo -u $SUDO_USER rsync -a -v --ignore-existing scripts $HOME/.local/share/nautilus >> $HOME/bitcurator-install.log 2>&1
 
-  echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
-        cd /tmp/bitcurator-distro-main/env/etc
-        cp cron.weekly/fstrim /etc/cron.weekly/fstrim
+#  echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
+#        cd /tmp/bitcurator-distro-main/env/etc
+#        cp cron.weekly/fstrim /etc/cron.weekly/fstrim
 
   echoinfo "BitCurator environment: Copying fmount support scripts to /usr/local/bin"
         cd /tmp/bitcurator-distro-main/env/usr/local/bin
@@ -515,9 +515,9 @@ install_bitcurator_files() {
         cd /tmp/bitcurator-distro-main/env/usr/sbin
         cp * /usr/sbin
   
-  echoinfo "BitCurator environment: Force fstab options for devices"
-        cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
-        cp fstab.rules /etc/udev/rules.d
+#  echoinfo "BitCurator environment: Force fstab options for devices"
+#        cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
+#        cp fstab.rules /etc/udev/rules.d
 
   echoinfo "BitCurator environment: Moving BitCurator icons and pixmaps to /usr/share"
         cd /tmp/bitcurator-distro-main/env/usr/share/icons
