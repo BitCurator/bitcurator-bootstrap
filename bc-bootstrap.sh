@@ -867,23 +867,23 @@ install_source_packages() {
         cd /tmp
         rm -rf bagit-python
 
-  # Install loc-bagger (not packaged for 16.04LTS, use author source)
-  # Bagger doesn't have an installer, and is weirdly packaged. For now,
-  # put it in a .bagger directory in $HOME
-  echoinfo "BitCurator environment: Building and installing bagger"
-	CDIR=$(pwd)
-
-        cd $HOME
-        sudo -u $SUDO_USER mkdir .bagger
-        cd .bagger
-
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.6/bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.7.6 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.7.6.zip
-
-        # No cleanup needed at this point
-        cd /tmp
+#  # Install loc-bagger (not packaged for 16.04LTS, use author source)
+#  # Bagger doesn't have an installer, and is weirdly packaged. For now,
+#  # put it in a .bagger directory in $HOME
+#  echoinfo "BitCurator environment: Building and installing bagger"
+#	CDIR=$(pwd)
+#
+#        cd $HOME
+#        sudo -u $SUDO_USER mkdir .bagger
+#        cd .bagger
+#
+#        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.6/bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
+#        sudo -u $SUDO_USER unzip bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
+#        sudo -u $SUDO_USER mv bagger-2.7.6 bagger >> $HOME/bitcurator-install.log 2>&1
+#        rm bagger-2.7.6.zip
+#
+#        # No cleanup needed at this point
+#        cd /tmp
 
   # Install Brunnhilde (depends on Siegfried, installed as a package in BC)
   echoinfo "BitCurator environment: Installing Brunnhilde"
@@ -1166,8 +1166,6 @@ configure_ubuntu_bitcurator_vm() {
         usermod -a -G vboxsf $SUDO_USER
 
   echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
-        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
-        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks.rules
         sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
         sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
 
@@ -1494,7 +1492,7 @@ if [ "$INSTALL" -eq 1 ] && [ "$CONFIGURE_ONLY" -eq 0 ]; then
     install_perl_modules
     #install_kibana
     install_bitcurator_files
-    install_ubuntu_${VER}_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
+    install_ubuntu_respin_support $ITYPE || echoerror "Updating Distro Support Failed"
     install_source_packages
 fi
 
