@@ -186,8 +186,9 @@ install_ubuntu_deps() {
     echo "deb http://dl.bintray.com/siegfried/debian wheezy main" | sudo tee -a /etc/apt/sources.list
     apt-get update >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding Yad Repository: $@"
-    add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
+# Disabled for 1.9.0-prealpha - no longer required (no appindicators)
+#    echoinfo "Adding Yad Repository: $@"
+#    add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
     
     echoinfo "Adding Gradle Repository: $@"
     add-apt-repository -y ppa:cwchien/gradle >> $HOME/bitcurator-install.log 2>&1 || return 1
