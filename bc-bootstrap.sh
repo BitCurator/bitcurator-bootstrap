@@ -272,9 +272,9 @@ libboost-program-options-dev
 libboost-system-dev 
 libboost-test-dev 
 libbz2-dev 
-libcppunit-1.13-0v5
+libcppunit-1.14-0
 libcppunit-dev 
-libcrypto++9v5 
+libcrypto++6 
 libcurl4-openssl-dev 
 libdebian-installer4 
 libdvdread4 
