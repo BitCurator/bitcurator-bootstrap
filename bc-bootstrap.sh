@@ -454,6 +454,11 @@ install_bitcurator_files() {
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
 
+  echoinfo "BitCurator environment (prealpha): Switching to bionic for distro-main"
+        cd /tmp/bitcurator-distro-main
+        git fetch
+        git checkout bionic
+
   echoinfo "BitCurator environment: Installing py3fpdf"
         cd /tmp/bitcurator-distro-main/externals/py3fpdf
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
