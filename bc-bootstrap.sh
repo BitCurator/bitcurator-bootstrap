@@ -501,10 +501,10 @@ install_bitcurator_files() {
         cp sudoers /etc
         chmod 440 /etc/sudoers
 
-#  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
-#        cd /tmp/bitcurator-distro-main/env/.config
-#        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
-#        chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
+  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
+        cd /tmp/bitcurator-distro-main/env/.config
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
+        chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
   
   echoinfo "BitCurator environment: Moving BitCurator nautilus files to $HOME/.local/share/nautilus/"
         cd /tmp/bitcurator-distro-main/env/.local/share/nautilus
