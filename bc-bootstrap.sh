@@ -565,7 +565,7 @@ install_ubuntu_16.04_respin_support() {
         dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Installing BodhiBuilder LiveCD imager"
-        dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.5_all.deb >> $HOME/bitcurator-install.log 2>&1
+        dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.7_all.deb >> $HOME/bitcurator-install.log 2>&1
 
   echoinfo "BitCurator environment: Cleaning up..."
 	cd $CDIR
@@ -693,14 +693,14 @@ install_source_packages() {
         cd /tmp
         #wget -q https://github.com/py4n6/pytsk/releases/download/20160721/pytsk3-20160721.tar.gz
         #tar -zxf pytsk3-20160721.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/py4n6/pytsk/releases/download/20170508/pytsk3-20170508.tar.gz
-        tar -zxf pytsk3-20170508.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd pytsk3-20170508
+        wget -q https://github.com/py4n6/pytsk/releases/download/20171108/pytsk3-20171108.tar.gz
+        tar -zxf pytsk3-20171108.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd pytsk3-20171108
         python3 setup.py build >> $HOME/bitcurator-install.log 2>&1
         python3 setup.py install >> $HOME/bitcurator-install.log 2>&1
         # Now clean up
         cd /tmp
-        rm -rf pytsk3-20170508
+        rm -rf pytsk3-20171108
   
   # Install libsodium (not packaged version in 16.04LTS, needed for ZeroMQ)
   echoinfo "BitCurator environment: Building and installing libsodium"
