@@ -877,10 +877,10 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
 
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.7.6/bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.7.6.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.7.6 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.7.6.zip
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/2.7.7/bagger-2.7.7.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER unzip bagger-2.7.7.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER mv bagger-2.7.7 bagger >> $HOME/bitcurator-install.log 2>&1
+        rm bagger-2.7.7.zip
 
         # No cleanup needed at this point
         cd /tmp
