@@ -3,6 +3,10 @@
 [![GitHub issues](https://img.shields.io/github/issues/bitcurator/bitcurator-distro-bootstrap.svg)](https://github.com/bitcurator/bitcurator-distro-bootstrap/issues)
 [![GitHub forks](https://img.shields.io/github/forks/bitcurator/bitcurator-distro-bootstrap.svg)](https://github.com/bitcurator/bitcurator-distro-bootstrap/network)
 
+## DEPRECATION NOTICE:
+
+This repository has been deprecated, and is no longer actively maintained. Future releases of BitCurator will be created and maintained using SaltStack (https://saltstack.com/). You can find additional information in the current main repository (https://github.com/bitcurator/bitcurator-distro) and the Salt-based build tool repository (https://github.com/bitcurator/bitcurator-distro-salt).
+
 ## Building the BitCurator environment
 
 The bc-boostrap.sh shell script assists in building releases of the BitCurator environment. The script automates the majority of the process of preparing a clean Ubuntu 16.04.1LTS install for testing and respin as a BitCurator release.
