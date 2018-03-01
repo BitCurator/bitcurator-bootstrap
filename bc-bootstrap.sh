@@ -494,30 +494,30 @@ install_bitcurator_files() {
         cp sudoers /etc
         chmod 440 /etc/sudoers
 
-  echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
-        cd /tmp/bitcurator-distro-main/env/.config
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
-        chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
+  #echoinfo "BitCurator environment: Moving BitCurator autostart files to $HOME/.config/autostart"
+  #      cd /tmp/bitcurator-distro-main/env/.config
+  #      sudo -u $SUDO_USER rsync -a -v --ignore-existing autostart $HOME/.config/ >> $HOME/bitcurator-install.log 2>&1
+  #      chmod 755 $HOME/.config/autostart/bcpolicyapp.py.desktop
   
   echoinfo "BitCurator environment: Moving BitCurator nautilus files to $HOME/.local/share/nautilus/"
         cd /tmp/bitcurator-distro-main/env/.local/share/nautilus
         sudo -u $SUDO_USER rsync -a -v --ignore-existing scripts $HOME/.local/share/nautilus >> $HOME/bitcurator-install.log 2>&1
 
-  echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
-        cd /tmp/bitcurator-distro-main/env/etc
-        cp cron.weekly/fstrim /etc/cron.weekly/fstrim
+  #echoinfo "BitCurator environment: Disabling fstrim in cron.weekly"
+  #      cd /tmp/bitcurator-distro-main/env/etc
+  #      cp cron.weekly/fstrim /etc/cron.weekly/fstrim
 
   echoinfo "BitCurator environment: Copying fmount support scripts to /usr/local/bin"
         cd /tmp/bitcurator-distro-main/env/usr/local/bin
         cp * /usr/local/bin
 
-  echoinfo "BitCurator environment: Copying rbfstab scripts to /usr/sbin"
-        cd /tmp/bitcurator-distro-main/env/usr/sbin
-        cp * /usr/sbin
+  #echoinfo "BitCurator environment: Copying rbfstab scripts to /usr/sbin"
+  #      cd /tmp/bitcurator-distro-main/env/usr/sbin
+  #      cp * /usr/sbin
   
-  echoinfo "BitCurator environment: Force fstab options for devices"
-        cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
-        cp fstab.rules /etc/udev/rules.d
+  #echoinfo "BitCurator environment: Force fstab options for devices"
+  #      cd /tmp/bitcurator-distro-main/env/etc/udev/rules.d
+  #      cp fstab.rules /etc/udev/rules.d
 
   echoinfo "BitCurator environment: Moving BitCurator icons and pixmaps to /usr/share"
         cd /tmp/bitcurator-distro-main/env/usr/share/icons
@@ -529,10 +529,10 @@ install_bitcurator_files() {
         # Disabled for now - manually run on first ISO install after respin, or VBox chokes 
         #m-a prepare >> $HOME/bitcurator-install.log 2>&1
 
-  echoinfo "BitCurator environment: Updating grub configuration"
-        cd /tmp/bitcurator-distro-main/env/etc/default
-        cp grub /etc/default/grub
-        update-grub >> $HOME/bitcurator-install.log 2>&1
+  #echoinfo "BitCurator environment: Updating grub configuration"
+  #      cd /tmp/bitcurator-distro-main/env/etc/default
+  #      cp grub /etc/default/grub
+  #      update-grub >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Moving desktop support files to /usr/share/bitcurator/resources"
         if [ ! -d /usr/share/bitcurator ]; then
@@ -561,8 +561,8 @@ install_ubuntu_16.04_respin_support() {
   echoinfo " -- Please be patient. This may take several minutes..."
 	CDIR=$(pwd)
   
-  echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
-        dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
+  #echoinfo "BitCurator environment: Installing legacy xresprobe dependency"
+  #      dpkg -i /tmp/bitcurator-distro-main/livecd/xresprobe_0.4.24ubuntu9_amd64.deb >> $HOME/bitcurator-install.log 2>&1
  
   echoinfo "BitCurator environment: Installing BodhiBuilder LiveCD imager"
         dpkg -i /tmp/bitcurator-distro-main/livecd/bodhibuilder_2.2.7_all.deb >> $HOME/bitcurator-install.log 2>&1
@@ -1047,13 +1047,13 @@ install_source_packages() {
   #      rbenv global 2.4.1
 
   # Install Kaitai
-  echoinfo "BitCurator environment: Installing Kaitai Struct and Visualizer"
-        cd /tmp
-        echo "deb https://dl.bintray.com/kaitai-io/debian jessie main" | sudo tee /etc/apt/sources.list.d/kaitai.list
-        sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv 379CE192D401AB61 >> $HOME/bitcurator-install.log 2>&1
-        sudo apt-get update >> $HOME/bitcurator-install.log 2>&1
-        sudo apt-get install kaitai-struct-compiler >> $HOME/bitcurator-install.log 2>&1
-        sudo gem install kaitai-struct-visualizer >> $HOME/bitcurator-install.log 2>&1
+  #echoinfo "BitCurator environment: Installing Kaitai Struct and Visualizer"
+  #      cd /tmp
+  #      echo "deb https://dl.bintray.com/kaitai-io/debian jessie main" | sudo tee /etc/apt/sources.list.d/kaitai.list
+  #      sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv 379CE192D401AB61 >> $HOME/bitcurator-install.log 2>&1
+  #      sudo apt-get update >> $HOME/bitcurator-install.log 2>&1
+  #      sudo apt-get install kaitai-struct-compiler >> $HOME/bitcurator-install.log 2>&1
+  #      sudo gem install kaitai-struct-visualizer >> $HOME/bitcurator-install.log 2>&1
 
 }
 
@@ -1076,136 +1076,11 @@ configure_ubuntu() {
   echoinfo "BitCurator VM: Finished basic configuration"
 }
 
-# Global: Ubuntu BitCurator VM Configuration Function
-configure_ubuntu_bitcurator_vm() {
-  echoinfo "BitCurator VM: Setting Hostname: bitcurator"
-	OLD_HOSTNAME=$(hostname)
-	sed -i "s/$OLD_HOSTNAME/bitcurator/g" /etc/hosts
-	echo "bitcurator" > /etc/hostname
-	hostname bitcurator
-
-  echoinfo "BitCurator VM: Fixing Samba User"
-	# Make sure we replace the BITCURATOR_USER template with our actual
-	# user so there is write permissions to samba.
-	sed -i "s/BITCURTOR_USER/$SUDO_USER/g" /etc/samba/smb.conf
-
-  echoinfo "BitCurator VM: Restarting Samba"
-	# Restart samba services 
-	service smbd restart >> $HOME/bitcurator-install.log 2>&1
-	service nmbd restart >> $HOME/bitcurator-install.log 2>&1
-
-  echoinfo "BitCurator VM: Quieting i2c_piix4 boot error message:"
-        # Edit /etc/modprobe.d/blacklist.conf
-        sed -i -e "\$a# Fix piix4 error\nblacklist i2c_piix4" /etc/modprobe.d/blacklist.conf
- 
-  echoinfo "BitCurator VM: Setting noclobber for $SUDO_USER"
-	if ! grep -i "set -o noclobber" $HOME/.bashrc > /dev/null 2>&1
-	then
-		echo "set -o noclobber" >> $HOME/.bashrc
-	fi
-	if ! grep -i "set -o noclobber" /root/.bashrc > /dev/null 2>&1
-	then
-		echo "set -o noclobber" >> /root/.bashrc
-	fi
-
-  echoinfo "BitCurator VM: Configuring Aliases for $SUDO_USER and root"
-	if ! grep -i "alias mountwin" $HOME/.bash_aliases > /dev/null 2>&1
-	then
-		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> $HOME/.bash_aliases
-	fi
-	
-	# For BitCurator VM, root is used frequently, set the alias there too.
-	if ! grep -i "alias mountwin" /root/.bash_aliases > /dev/null 2>&1
-	then
-		echo "alias mountwin='mount -o ro,loop,show_sys_files,streams_interface=windows'" >> /root/.bash_aliases
-	fi
-
-  echoinfo "BitCurator VM: Cleaning up broken symlinks on $SUDO_USER Desktop"
-        # Clean up broken symlinks
-        find -L /home/$SUDO_USER/Desktop -type l -delete
-
-  echoinfo "BitCurator VM: Adding all BitCurator resources to $SUDO_USER Desktop"
-
-        #files="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type f)"
-        #directories="$(find -L "/usr/share/bitcurator/resources/desktop-folders" -type d)"
-
-        # Copy over necessary directories and files without clobbering
-        # This will need to be modified to accommodate changes to existing files!
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
-
-  echoinfo "BitCurator VM: Symlinking media directory"
-        cd /home/$SUDO_USER/Desktop
-        sudo -u $SUDO_USER ln -s /media Shared\ Folders\ and\ Media
-  
-  echoinfo "BitCurator VM: Enabling desktop icons for $SUDO_USER Desktop"
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background show-desktop-icons true
-
-  echoinfo "BitCurator VM: Setting some useful icons for $SUDO_USER Desktop"
-        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop home-icon-visible true
-        #gsettings set org.gnome.nautilus.desktop computer-icon-visible true
-        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop trash-icon-visible true
-        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop network-icon-visible true
-  
-  echoinfo "BitCurator VM: Enabling mount visibility for $SUDO_USER Desktop"
-        sudo -u $SUDO_USER gsettings set org.gnome.nautilus.desktop volumes-visible true
-
-  echoinfo "BitCurator VM: Disabling automount and automount-open for $SUDO_USER"
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount false
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.media-handling automount-open false
-
-  echoinfo "BitCurator VM: Setting Desktop background image"
-        #cd /usr/share/bitcurator/resources/images
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background primary-color '#3464A2'
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background secondary-color '#3464A2'
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background color-shading-type 'solid'
-
-        sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv3Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
-
-  
-  echoinfo "BitCurator VM: Adding primary user to vboxsf group"
-        usermod -a -G vboxsf $SUDO_USER
-
-  echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
-        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
-        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks.rules
-        sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
-        sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
-
-  echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
-        echo '' >> /etc/sysctl.conf
-        echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
-        echo 'vm.swappiness=10' >> /etc/sysctl.conf
-        echo '# Improve cache management' >> /etc/sysctl.conf
-        echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
-  
-  echoinfo "BitCurator VM: Reenable AffLib for Guymager"
-        # NOTE! The spaces matter here!
-        sed -i 's/AffEnabled              = false/AffEnabled              = TRUE/' /etc/guymager/guymager.cfg
-
-  # To fix: piix4_smbus
-  #         rapl_domains no package found
-
-  if [ ! -L /sbin/iscsiadm ]; then
-    ln -s /usr/bin/iscsiadm /sbin/iscsiadm
-  fi
-  
-  if [ ! -L /usr/local/bin/rip.pl ]; then
-    ln -s /usr/share/regripper/rip.pl /usr/local/bin/rip.pl
-  fi
-
-  # Add extra device loop backs.
-  if ! grep "do mknod /dev/loop" /etc/rc.local > /dev/null 2>&1
-  then
-    echo 'for i in `seq 8 100`; do mknod /dev/loop$i b 7 $i; done' >> /etc/rc.local
-  fi
-}
-
 # Global: Ubuntu BitCurator VM Plymouth Configuration
 # Works with 16.04
 configure_ubuntu_16.04_bitcurator_plymouth() {
   echoinfo "BitCurator VM: Updating plymouth theme for 16.04"
         cp -r /usr/share/bitcurator/resources/xenial/plymouth/themes/* /usr/share/plymouth/themes/
-        # echoinfo "CHECK ME"
         # Already installed in initial setup
         apt-get install plymouth-theme-script >> $HOME/bitcurator-install.log 2>&1
         update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/bitcurator-logo/bitcurator-logo.plymouth 100
@@ -1306,12 +1181,12 @@ configure_ubuntu_16.04_bitcurator_vm() {
         sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks2.rules
         sed -i 's/{ID_DRIVE_FLOPPY_ZIP}="1"/{ID_DRIVE_FLOPPY_ZIP}="0"/' /lib/udev/rules.d/80-udisks2.rules
 
-  echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
-        echo '' >> /etc/sysctl.conf
-        echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
-        echo 'vm.swappiness=10' >> /etc/sysctl.conf
-        echo '# Improve cache management' >> /etc/sysctl.conf
-        echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
+  #echoinfo "BitCurator VM: Fixing swappiness and cache pressure"
+  #      echo '' >> /etc/sysctl.conf
+  #      echo '# Decrease swap usage to a workable level' >> /etc/sysctl.conf
+  #      echo 'vm.swappiness=10' >> /etc/sysctl.conf
+  #      echo '# Improve cache management' >> /etc/sysctl.conf
+  #      echo 'vm.vfs_cache_pressure=50' >> /etc/sysctl.conf
   
   echoinfo "BitCurator VM: Reenable AffLib for Guymager"
         # NOTE! The spaces matter here!
@@ -1337,7 +1212,7 @@ configure_ubuntu_16.04_bitcurator_vm() {
   echoinfo "BitCurator VM: Fixing permissions in user's home directory"
   chown -R $SUDO_USER:$SUDO_USER /home/$SUDO_USER
  
-  echoinfo "BitCurator VM: vboxvideo module load force"
+  #echoinfo "BitCurator VM: vboxvideo module load force"
   # held back for now
   # bash -c 'echo vboxvideo >> /etc/modules'
 
