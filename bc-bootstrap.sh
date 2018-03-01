@@ -1172,8 +1172,8 @@ configure_ubuntu_16.04_bitcurator_vm() {
         sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background false && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background picture-uri file:///usr/share/bitcurator/resources/images/BitCuratorEnv3Logo300px.png && sudo -u $SUDO_USER gsettings set org.gnome.desktop.background draw-background true
 
   
-  echoinfo "BitCurator VM: Adding primary user to vboxsf group"
-        usermod -a -G vboxsf $SUDO_USER
+  #echoinfo "BitCurator VM: Adding primary user to vboxsf group"
+  #      usermod -a -G vboxsf $SUDO_USER
 
   echoinfo "BitCurator VM: Fixing udisks rules to enable floppy access"
         sed -i 's/{ID_DRIVE_FLOPPY}="1"/{ID_DRIVE_FLOPPY}="0"/' /lib/udev/rules.d/80-udisks.rules
@@ -1383,7 +1383,7 @@ if [ "$SKIN" -eq 1 ]; then
     # No longer needed - use ${VER} only due to changes in 16.04
     #configure_ubuntu_bitcurator_vm
     configure_ubuntu_${VER}_bitcurator_vm
-    configure_ubuntu_${VER}_bitcurator_plymouth
+    #configure_ubuntu_${VER}_bitcurator_plymouth
 fi
 
 complete_message
