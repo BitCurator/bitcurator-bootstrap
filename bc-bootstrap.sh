@@ -229,6 +229,7 @@ dcfldd
 dconf-tools 
 dialog
 discover 
+disktype
 dkms 
 easytag 
 equivs 
@@ -311,6 +312,7 @@ libxml2-dev
 libyaml-dev
 linux-headers-generic
 maven 
+md5deep 
 mediainfo 
 mencoder 
 mercurial-common 
@@ -350,12 +352,14 @@ sharutils
 siegfried
 smartmontools 
 squashfs-tools 
+ssdeep 
 subversion 
 swig 
 synaptic
 syslinux-utils
 tagtool 
 tagtool 
+testdisk 
 tree 
 ubiquity-frontend-debconf 
 udisks2 
@@ -829,17 +833,17 @@ install_source_packages() {
         cd /tmp
 
   # Install disktype (not packaged for 16.04LTS, use KW fork)
-  echoinfo "BitCurator environment: Building and installing disktype"
-	CDIR=$(pwd)
-        cd /tmp
-        git clone https://github.com/kamwoods/disktype >> $HOME/bitcurator-install.log 2>&1
-        cd disktype/src
-        make >> $HOME/bitcurator-install.log 2>&1
-        cp disktype /usr/local/bin
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm -rf disktype
+  #echoinfo "BitCurator environment: Building and installing disktype"
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      git clone https://github.com/kamwoods/disktype >> $HOME/bitcurator-install.log 2>&1
+  #      cd disktype/src
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      cp disktype /usr/local/bin
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+	## Now clean up
+  #      cd /tmp
+  #      rm -rf disktype
 
   # Install dumpfloppy (not packaged for 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing dumpfloppy"
@@ -905,19 +909,19 @@ install_source_packages() {
         rm -rf sdhash-3.4
   
   # Install md5deep (not packaged for 16.04LTS, use author source)
-  echoinfo "BitCurator environment: Building and installing md5deep"
-	CDIR=$(pwd)
-        cd /tmp
-        git clone https://github.com/jessek/hashdeep >> $HOME/bitcurator-install.log 2>&1
-        cd hashdeep
-        ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig
-	# Now clean up
-        cd /tmp
-        rm -rf hashdeep
+  #echoinfo "BitCurator environment: Building and installing md5deep"
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      git clone https://github.com/jessek/hashdeep >> $HOME/bitcurator-install.log 2>&1
+  #      cd hashdeep
+  #      ./bootstrap.sh >> $HOME/bitcurator-install.log 2>&1
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig
+	## Now clean up
+  #      cd /tmp
+  #      rm -rf hashdeep
   
   # Install pyExifToolGUI (not packaged for 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing pyExifToolGUI"
@@ -949,36 +953,36 @@ install_source_packages() {
         rm -rf fido
 
   # Install testdisk and photorec (not packaged for 16.04LTS, use author source)
-  echoinfo "BitCurator environment: Building and installing testdisk and photorec"
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q http://www.cgsecurity.org/testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
-        bunzip2 testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
-        tar xvf testdisk-7.0.tar >> $HOME/bitcurator-install.log 2>&1
-        cd testdisk-7.0
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm -rf testdisk-7.0
+  #echoinfo "BitCurator environment: Building and installing testdisk and photorec"
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q http://www.cgsecurity.org/testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
+  #      bunzip2 testdisk-7.0.tar.bz2 >> $HOME/bitcurator-install.log 2>&1
+  #      tar xvf testdisk-7.0.tar >> $HOME/bitcurator-install.log 2>&1
+  #      cd testdisk-7.0
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+	## Now clean up
+  #      cd /tmp
+  #      rm -rf testdisk-7.0
   
   # Install ssdeep (not packaged for 16.04LTS, use author source)
-  echoinfo "BitCurator environment: Building and installing ssdeep"
-	CDIR=$(pwd)
-        cd /tmp
-        wget -q https://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
-        tar zxvf ssdeep-2.13.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        cd ssdeep-2.13
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-	# Now clean up
-        cd /tmp
-        rm -rf ssdeep-2.13
-        rm ssdeep-2.13.tar.gz
+  #echoinfo "BitCurator environment: Building and installing ssdeep"
+	#CDIR=$(pwd)
+  #      cd /tmp
+  #      wget -q https://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
+  #      tar zxvf ssdeep-2.13.tar.gz >> $HOME/bitcurator-install.log 2>&1
+  #      cd ssdeep-2.13
+  #      ./configure >> $HOME/bitcurator-install.log 2>&1
+  #      make >> $HOME/bitcurator-install.log 2>&1
+  #      make install >> $HOME/bitcurator-install.log 2>&1
+  #      ldconfig >> $HOME/bitcurator-install.log 2>&1
+	## Now clean up
+  #      cd /tmp
+  #      rm -rf ssdeep-2.13
+  #      rm ssdeep-2.13.tar.gz
   
   # Install openpyxl (not packaged for 16.04LTS, use author source)
   echoinfo "BitCurator environment: Building and installing openpyxl"
