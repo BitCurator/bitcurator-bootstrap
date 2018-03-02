@@ -675,10 +675,10 @@ install_source_packages() {
         git checkout master >> $HOME/bitcurator-install.log 2>&1
 
         # Copy ficlam to use location
-        sudo -u $SUDO_USER mkdir /home/bcadmin/.fiwalk
-        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/ficlam.sh /home/bcadmin/.fiwalk
-        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/clamconfig.txt /home/bcadmin/.fiwalk
-        sudo -u $SUDO_USER chmod 755 /home/bcadmin/.fiwalk/ficlam.sh
+        sudo -u $SUDO_USER mkdir $HOME/.fiwalk
+        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/ficlam.sh $HOME/.fiwalk
+        sudo -u $SUDO_USER cp /usr/share/sleuthkit/tools/fiwalk/plugins/clamconfig.txt $HOME/.fiwalk
+        sudo -u $SUDO_USER chmod 755 $HOME/.fiwalk/ficlam.sh
 
         ./bootstrap >> $HOME/bitcurator-install.log 2>&1
         ./configure >> $HOME/bitcurator-install.log 2>&1
@@ -1141,7 +1141,7 @@ configure_ubuntu_16.04_bitcurator_vm() {
 
         # Copy over necessary directories and files without clobbering
         # This will need to be modified to accommodate changes to existing files!
-        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* /home/bcadmin/Desktop/
+        sudo -u $SUDO_USER rsync -a -v --ignore-existing /usr/share/bitcurator/resources/desktop-folders/* $HOME/Desktop/
 
   echoinfo "BitCurator VM: Symlinking media directory"
         cd /home/$SUDO_USER/Desktop
