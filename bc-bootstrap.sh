@@ -173,8 +173,9 @@ install_ubuntu_16.04_deps() {
     echoinfo "Installing Python Software Properies ... "
     __apt_get_install_noinput software-properties-common >> $HOME/bitcurator-install.log 2>&1  || return 1
 
-    echoinfo "Enabling Universal Repository ... "
-    __enable_universe_repository >> $HOME/bitcurator-install.log 2>&1 || return 1
+# No longer needed in 16.04(.4)
+#    echoinfo "Enabling Universal Repository ... "
+#    __enable_universe_repository >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Adding Guymager Repository"
     wget -nH -rP /etc/apt/sources.list.d/ http://deb.pinguin.lu/pinguin.lu.list >> $HOME/bitcurator-install.log 2>&1    
@@ -188,11 +189,12 @@ install_ubuntu_16.04_deps() {
 
     echoinfo "Adding Yad Repository: $@"
     add-apt-repository -y ppa:nilarimogard/webupd8 >> $HOME/bitcurator-install.log 2>&1 || return 1
-    
-    echoinfo "Adding Gradle Repository: $@"
-    add-apt-repository -y ppa:cwchien/gradle >> $HOME/bitcurator-install.log 2>&1 || return 1
+   
+    # Not required for any current builds 
+    #echoinfo "Adding Gradle Repository: $@"
+    #add-apt-repository -y ppa:cwchien/gradle >> $HOME/bitcurator-install.log 2>&1 || return 1
 
-    echoinfo "Adding BitCurator Repository: $@"
+    #echoinfo "Adding BitCurator Repository: $@"
     #add-apt-repository -y ppa:bitcurator/$@  >> $HOME/bitcurator-install.log 2>&1 || return 1
 
     echoinfo "Updating Repository Package List ..."
@@ -248,7 +250,6 @@ gnome-panel
 gnome-search-tool 
 gnome-sushi 
 gnome-system-tools 
-gradle
 grsync 
 gtkhash 
 guymager-beta
@@ -703,23 +704,23 @@ install_source_packages() {
         rm -rf pytsk3-20171108
   
   # Install libsodium (not packaged version in 16.04LTS, needed for ZeroMQ)
-  echoinfo "BitCurator environment: Building and installing libsodium"
-  echoinfo " -- Please be patient. This may take several minutes..."
-	CDIR=$(pwd)
-        cd /tmp
-        #wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
-        #tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
-        wget -q https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz
-        tar -zxf libsodium-1.0.15.tar.gz >> $HOME/bitcurator-install.log 1>&1
-        cd libsodium-1.0.15
-        ./configure >> $HOME/bitcurator-install.log 2>&1
-        make >> $HOME/bitcurator-install.log 2>&1
-        make install >> $HOME/bitcurator-install.log 2>&1
-        ldconfig >> $HOME/bitcurator-install.log 2>&1
-        # Now clean up
-        cd /tmp
-        rm libsodium-1.0.15.tar.gz
-        rm -rf libsodium-1.0.15
+#  echoinfo "BitCurator environment: Building and installing libsodium"
+#  echoinfo " -- Please be patient. This may take several minutes..."
+#	CDIR=$(pwd)
+#        cd /tmp
+#        #wget -q https://download.libsodium.org/libsodium/releases/libsodium-1.0.11.tar.gz
+#        #tar -zxf libsodium-1.0.11.tar.gz >> $HOME/bitcurator-install.log 2>&1
+#        wget -q https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz
+#        tar -zxf libsodium-1.0.15.tar.gz >> $HOME/bitcurator-install.log 1>&1
+#        cd libsodium-1.0.15
+#        ./configure >> $HOME/bitcurator-install.log 2>&1
+#        make >> $HOME/bitcurator-install.log 2>&1
+#        make install >> $HOME/bitcurator-install.log 2>&1
+#        ldconfig >> $HOME/bitcurator-install.log 2>&1
+#        # Now clean up
+#        cd /tmp
+#        rm libsodium-1.0.15.tar.gz
+#        rm -rf libsodium-1.0.15
 
   # Install ZeroMQ (packaged version in 16.04LTS out of date)
   #echoinfo "BitCurator environment: Building and installing ZeroMQ"
@@ -1047,13 +1048,13 @@ install_source_packages() {
   #      rbenv global 2.4.1
 
   # Install Kaitai
-  echoinfo "BitCurator environment: Installing Kaitai Struct and Visualizer"
-        cd /tmp
-        echo "deb https://dl.bintray.com/kaitai-io/debian jessie main" | sudo tee /etc/apt/sources.list.d/kaitai.list
-        sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv 379CE192D401AB61 >> $HOME/bitcurator-install.log 2>&1
-        sudo apt-get update >> $HOME/bitcurator-install.log 2>&1
-        sudo apt-get install kaitai-struct-compiler >> $HOME/bitcurator-install.log 2>&1
-        sudo gem install kaitai-struct-visualizer >> $HOME/bitcurator-install.log 2>&1
+#  echoinfo "BitCurator environment: Installing Kaitai Struct and Visualizer"
+#        cd /tmp
+#        echo "deb https://dl.bintray.com/kaitai-io/debian jessie main" | sudo tee /etc/apt/sources.list.d/kaitai.list
+#        sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv 379CE192D401AB61 >> $HOME/bitcurator-install.log 2>&1
+#        sudo apt-get update >> $HOME/bitcurator-install.log 2>&1
+#        sudo apt-get install kaitai-struct-compiler >> $HOME/bitcurator-install.log 2>&1
+#        sudo gem install kaitai-struct-visualizer >> $HOME/bitcurator-install.log 2>&1
 
 }
 
