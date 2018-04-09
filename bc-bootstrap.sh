@@ -246,6 +246,7 @@ gddrescue
 ghex
 git 
 git-svn 
+gksu
 gnome-panel 
 gnome-search-tool 
 gnome-sushi 
