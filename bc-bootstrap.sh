@@ -300,6 +300,7 @@ libnss-myhostname
 libparse-win32registry-perl 
 libpthread-stubs0-dev 
 libreadline-dev 
+libsqlite3-dev
 libssl-dev 
 libtalloc-dev
 libtool
