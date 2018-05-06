@@ -13,9 +13,9 @@ The bc-boostrap.sh shell script assists in building releases of the BitCurator e
 
 This README includes basic information on how to use the script. We recommend that it is only used by developers or community members actively contributing to or maintaining the project. You may wish to visit https://github.com/bitcurator/bitcurator-distro-main/ for additional information on getting started.
 
-Looking for the latest release? You can find it at:
+Looking for the latest release? You can find it at our release portal:
 
-https://wiki.bitcurator.net/
+https://github.com/BitCurator/bitcurator-distro/wiki/Releases
 
 ## Installation
 
