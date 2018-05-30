@@ -399,8 +399,8 @@ yad"
 }
 
 install_ubuntu_16.04_pip_packages() {
-    pip_packages="pip docopt python-evtx python-registry six configobj construct et_xmlfile jdcal pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
-    pip_pre_packages="bitstring"
+    pip_packages="docopt python-evtx python-registry six configobj construct et_xmlfile jdcal pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
+    pip_pre_packages="pip bitstring"
 
     if [ "$@" = "dev" ]; then
         pip_packages="$pip_packages"
@@ -417,6 +417,9 @@ install_ubuntu_16.04_pip_packages() {
             echoerror "Python Package Install Failure: $PACKAGE"
         fi
     done
+
+    updatedb
+    ldconfig
 
     for PACKAGE in $pip_packages; do
         CURRENT_ERROR=0
