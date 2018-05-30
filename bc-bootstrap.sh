@@ -400,13 +400,17 @@ yad"
 
 install_ubuntu_16.04_pip_packages() {
     pip_packages="docopt python-evtx python-registry six configobj construct et_xmlfile jdcal pefile analyzeMFT python-magic argparse unicodecsv matplotlib"
-    pip_pre_packages="pip bitstring"
+    pip_pre_packages="bitstring"
 
     if [ "$@" = "dev" ]; then
         pip_packages="$pip_packages"
     elif [ "$@" = "stable" ]; then
         pip_packages="$pip_packages"
     fi
+
+    # Pin pip to 9.0.3
+    echoinfo "Pinning pip to 9.0.3"
+    pip3 install --upgrade pip==9.0.3
 
     ERROR=0
     for PACKAGE in $pip_pre_packages; do
@@ -417,9 +421,6 @@ install_ubuntu_16.04_pip_packages() {
             echoerror "Python Package Install Failure: $PACKAGE"
         fi
     done
-
-    updatedb
-    ldconfig
 
     for PACKAGE in $pip_packages; do
         CURRENT_ERROR=0
