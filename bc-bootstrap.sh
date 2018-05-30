@@ -470,6 +470,9 @@ install_bitcurator_files() {
   
   echoinfo "BitCurator environment: Copying libuna-alpha-20150927.tar.gz to /tmp"
         cp /tmp/bitcurator-distro-main/externals/libuna-alpha-20150927.tar.gz /tmp
+
+  echoinfo "BitCurator environment: Copying nsrllookup-1.2.3.tar.gz to /tmp"
+        cp /tmp/bitcurator-distro-main/externals/nsrllookup-1.2.3.tar.gz /tmp
   
   echoinfo "BitCurator environment: Installing BitCurator mount policy app and mounter"
         cd /tmp/bitcurator-distro-main/mounter
@@ -1022,8 +1025,9 @@ install_source_packages() {
   echoinfo "BitCurator environment: Building and installing nsrllookup"
 	CDIR=$(pwd)
         cd /tmp
-        git clone https://github.com/rjhansen/nsrllookup >> $HOME/bitcurator-install.log 2>&1
-        cd nsrllookup
+        #git clone https://github.com/rjhansen/nsrllookup >> $HOME/bitcurator-install.log 2>&1
+        tar zxvf nsrllookup-1.2.3.tar.gz >> $HOME/bitcurator-install.log 2>&1
+        cd nsrllookup-1.2.3
         # Fix AM version
         # sed -i "s/am__api_version='1.13'/am__api_version='1.14'/g" configure
         aclocal >> $HOME/bitcurator-install.log 2>&1
@@ -1033,7 +1037,7 @@ install_source_packages() {
         make install >> $HOME/bitcurator-install.log 2>&1
 	# Now clean up
         cd /tmp
-        rm -rf nsrllookup
+        rm -rf nsrllookup-1.2.3
 
   # Install latest Ruby
   # Disregard for now - install from package
