@@ -887,7 +887,7 @@ install_source_packages() {
         sudo -u $SUDO_USER mkdir .bagger
         cd .bagger
 
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/2.8.1/bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
+        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.8.1/bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
         sudo -u $SUDO_USER unzip bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
         sudo -u $SUDO_USER mv bagger-2.8.1 bagger >> $HOME/bitcurator-install.log 2>&1
         rm bagger-2.8.1.zip
