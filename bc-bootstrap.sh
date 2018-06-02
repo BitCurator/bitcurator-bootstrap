@@ -880,20 +880,20 @@ install_source_packages() {
   # Install loc-bagger (not packaged for 16.04LTS, use author source)
   # Bagger doesn't have an installer, and is weirdly packaged. For now,
   # put it in a .bagger directory in $HOME
-  echoinfo "BitCurator environment: Building and installing bagger"
-	CDIR=$(pwd)
-
-        cd $HOME
-        sudo -u $SUDO_USER mkdir .bagger
-        cd .bagger
-
-        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.8.1/bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER unzip bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
-        sudo -u $SUDO_USER mv bagger-2.8.1 bagger >> $HOME/bitcurator-install.log 2>&1
-        rm bagger-2.8.1.zip
-
-        # No cleanup needed at this point
-        cd /tmp
+  #echoinfo "BitCurator environment: Building and installing bagger"
+	#CDIR=$(pwd)
+#
+#        cd $HOME
+#        sudo -u $SUDO_USER mkdir .bagger
+#        cd .bagger
+#
+#        sudo -u $SUDO_USER wget -q https://github.com/LibraryOfCongress/bagger/releases/download/v2.8.1/bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
+#        sudo -u $SUDO_USER unzip bagger-2.8.1.zip >> $HOME/bitcurator-install.log 2>&1
+#        sudo -u $SUDO_USER mv bagger-2.8.1 bagger >> $HOME/bitcurator-install.log 2>&1
+#        rm bagger-2.8.1.zip
+#
+#        # No cleanup needed at this point
+#        cd /tmp
 
   # Install Brunnhilde (depends on Siegfried, installed as a package in BC)
   echoinfo "BitCurator environment: Installing Brunnhilde"
