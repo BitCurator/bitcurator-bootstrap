@@ -3,7 +3,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/bitcurator/bitcurator-distro-bootstrap.svg)](https://github.com/bitcurator/bitcurator-distro-bootstrap/issues)
 [![GitHub forks](https://img.shields.io/github/forks/bitcurator/bitcurator-distro-bootstrap.svg)](https://github.com/bitcurator/bitcurator-distro-bootstrap/network)
 
-## DEPRECATION NOTICE!
+## DEPRECATION NOTICE:
 
 This repository has been deprecated, and is **no longer actively maintained**. Future releases of BitCurator will be created and maintained using SaltStack. You can find additional information in the current main repository (https://github.com/bitcurator/bitcurator-distro) and the Salt-based build tool repository (https://github.com/bitcurator/bitcurator-distro-salt).
 
